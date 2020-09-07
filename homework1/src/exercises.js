@@ -40,9 +40,15 @@ function change(centsTot){
 
 
 /*
-A function that accepts a string and returns a new string equal to the initial string with all whitespace removed and then with the ith character (1-based) repeated i times. 
+A function that accepts a string and returns a new string equal to the initial string with all 
+    whitespace removed and then with the ith character (1-based) repeated i times. 
+
+Input: string 
+Output: string with no white space and repeated characters based on position
 */
 function stretched(x){
+
+    
 
 }
 
