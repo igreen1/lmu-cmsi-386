@@ -1,0 +1,5 @@
+#IDE information 
+.vscode
+
+#npm stuff
+node_modules/*
