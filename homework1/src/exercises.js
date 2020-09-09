@@ -26,14 +26,14 @@ function change(centsTot){
     //should check programmer defined values but ehh, i'm smart
 
 
-    var counter = centsTot
-    var temp=0
+    var counter = centsTot  //holds the amount of cents we still need to make change for
+    var temp = 0            //C used to yell at me and I'm scarred now. 
     for(var i = 0 ; i < denomVal.length ; i++)
     {
-        temp = Math.floor(counter/denomVal[i])
-        counter -= temp*denomVal[i]
-        denomUsed[i] = temp
-    }
+        temp = Math.floor(counter/denomVal[i])  //holds the amount of this denom we can use
+        counter -= temp*denomVal[i]             //remove the cents since we have now 'given' change for that amount
+        denomUsed[i] = temp                     //store how much 'change' we have giving
+    }     
 
     return denomUsed
 }
@@ -48,16 +48,20 @@ Output: input string with no white space and repeated characters based on positi
 */
 function stretched(inputString){
 
-    var outputString = ""     //String to hold the manipulated string. 
-                        //  Makes indexing way easier
-    var stripped        //Holds the inputString without whitespace (to preserve input variable)
+    var outputString = ""   //String to hold the final string 
+                            //  Makes indexing way easier
+    var stripped            //Holds the inputString without whitespace (to preserve input variable)
     
-    //input validation (? tbd)
+    //input validation (? it passes the tests so .... all good!)
 
     //remove whitespace 
     //regex makes NO sense, I stole this from a program I wrote
     //  ages ago. Likely sourced from StackOverFlow
     stripped = inputString.replace(/\s+/g,'')
+
+    //could also use
+    //strippped = inputString.replace(' ', '') 
+    //but regex is cool!
 
     //add character based on location
     for(var i = 0; i < stripped.length; i++)
@@ -88,7 +92,7 @@ function scramble(inputString){
 
     var outputString = ''                       //holds the output to return
     var inputAsArray
-    inputAsArray = inputString.split("")    //protects input and makes easier to manipulate
+    inputAsArray = inputString.split("")        //protects input and makes easier to manipulate
 
     //While there are characters unassigned,
     //  1. pick a random character from input
@@ -142,13 +146,14 @@ A function that interleaves an array with a bunch of values. If the array length
 function interleave()
 {
 
+    let outputArray = [] //to append to, much easier
+
     //input validation
     if(arguments.length <=0){
         return arguments //not my problem
     }
 
-    //the first array to interweave
-    var arrayA = arguments[0]
+    var arrayA = arguments[0] //the first array to interweave
 
     //now for the other stuff to interweave into it
     var arrayB = []
@@ -159,8 +164,6 @@ function interleave()
     //i hate the ternary operator
     //find the smallest length to not go out of bounds
     let minLen = arrayA.length < arrayB.length ? arrayA.length : arrayB.length
-
-    let outputArray = [] //to append to, much easier
 
     var i = 0 //iterator, outside so I can do end appends
     for(i = 0; i < minLen; i++){
