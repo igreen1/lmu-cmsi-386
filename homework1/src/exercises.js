@@ -136,11 +136,48 @@ function say(x){
 
 }
 
-/*
+/* 7
 A function that interleaves an array with a bunch of values. If the array length is not the same as the number of values to interleave, the “extra” elements should end up at the end of the result. 
 */
-function interleave(x)
+function interleave()
 {
+
+    //input validation
+    if(arguments.length <=0){
+        return arguments //not my problem
+    }
+
+    //the first array to interweave
+    var arrayA = arguments[0]
+
+    //now for the other stuff to interweave into it
+    var arrayB = []
+    for(var i = 1; i < arguments.length; i++){
+        arrayB.push(arguments[i])
+    }
+
+    //i hate the ternary operator
+    //find the smallest length to not go out of bounds
+    let minLen = arrayA.length < arrayB.length ? arrayA.length : arrayB.length
+
+    let outputArray = [] //to append to, much easier
+
+    var i = 0 //iterator, outside so I can do end appends
+    for(i = 0; i < minLen; i++){
+        outputArray.push(arrayA[i])
+        outputArray.push(arrayB[i])
+    }
+
+    if(arrayA.length > minLen)
+    {
+        //add rest of arrayA cause it wasn't finished
+        outputArray = outputArray.concat(arrayA.slice(i))
+    }else{
+        //add rest of arrayB cause it wasn't finished
+        outputArray = outputArray.concat(arrayB.slice(i))
+    }
+
+    return outputArray
 
 }
 
@@ -158,9 +195,10 @@ function topTenScorers(x){
 }
 
 /*
-A function that returns a promise that resolves to the product of two numbers, hitting the API at https://ordinary-hazel-pink.glitch.me/multiply?x=&y=
+A function that returns a promise that resolves to the product of two numbers, 
+hitting the API at https://ordinary-hazel-pink.glitch.me/multiply?x=&y=
 */
-function multiply(x,y){
+function multiply(a,b){
 
 }
 
