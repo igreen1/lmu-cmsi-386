@@ -46,9 +46,26 @@ A function that accepts a string and returns a new string equal to the initial s
 Input: string 
 Output: string with no white space and repeated characters based on position
 */
-function stretched(x){
+function stretched(inputString){
 
+    var manipString = ""     //String to hold the manipulated string. 
+                        //  Makes indexing way easier
+    var stripped        //Holds the inputString without whitespace (to preserve input variable)
     
+    //input validation (? tbd)
+
+    //remove whitespace 
+    //regex makes NO sense, I stole this from a program I wrote
+    //  ages ago. Likely sourced from StackOverFlow
+    stripped = inputString.replace(/\s+/g,'')
+
+    //add character based on location
+    for(var i = 0; i < stripped.length; i++)
+    {
+        manipString += stripped[i].repeat(i+1)
+    }
+
+    return manipString
 
 }
 
