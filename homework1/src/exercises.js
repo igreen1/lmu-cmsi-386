@@ -155,15 +155,21 @@ function* powersGenerator(x,y){
 }
 
 /*
-A “chainable” function that accepts one string per call, but when called without arguments, returns the words previously passed, in order, separated by a single spac
+A “chainable” function that accepts one string per call, but when called without arguments, returns the words previously passed, in order, separated by a single space
 */
 
 //header might need editing, idk how to do this
-function say(x){
-
+function say(x) {
+    return function(next) {
+        if (!next) {
+            return x
+        } else {
+            return say(x + ' ' + next)
+        }
+    }
 }
 
-/* 7
+/*
 A function that interleaves an array with a bunch of values. If the array length is not the same as the number of values to interleave, the “extra” elements should end up at the end of the result. 
 */
 function interleave()
@@ -186,7 +192,7 @@ function interleave()
 
     //i hate the ternary operator
     //find the smallest length to not go out of bounds
-    let minLen = arrayA.length < arrayB.length ? arrayA.length : arrayB.length //CHANGE? could this just be Math.min(arrayA.length, arrayB.length)
+    let minLen = Math.min(arrayA.length, arrayB.length)
 
     var i = 0 //iterator, outside so I can do end appends
     for(i = 0; i < minLen; i++){
