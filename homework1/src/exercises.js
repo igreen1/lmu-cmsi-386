@@ -1,6 +1,7 @@
 /***
  * 
  */
+var crypto = require('crypto'); //I think we need this for the encryption function?
 
 /*
 A function that accepts a number of U.S. cents and returns an 
@@ -163,7 +164,7 @@ function interleave()
 
     //i hate the ternary operator
     //find the smallest length to not go out of bounds
-    let minLen = arrayA.length < arrayB.length ? arrayA.length : arrayB.length
+    let minLen = arrayA.length < arrayB.length ? arrayA.length : arrayB.length //CHANGE? could this just be Math.min(arrayA.length, arrayB.length)
 
     var i = 0 //iterator, outside so I can do end appends
     for(i = 0; i < minLen; i++){
@@ -187,8 +188,23 @@ function interleave()
 /*
 A function that accepts three arguments: a crypto key, a crypto algorithm, and an initialization vector, and returns an array of two functions. The first returned function is an encryption function that encrypts a string into a hex string, and the second is a decryption function that decrypts the hex string into a string. Use the functions createCipheriv and createDecipheriv from the built-in Node crypto module. 
 */
-function makeCryptoFunctions(x,y,z){
+function makeCryptoFunctions(x,y,z){ //x is key, y is alg, z is init. vector
+    function utf8ToHex(data) {
+        let cipher = crypto.createCipheriv(y, x, z) //creates cipher using alg, key, init. vector
+        let encrypted = cipher.update(data, 'utf8', 'hex')
+        encrypted += cipher.final('hex')
+        return encrypted
+    }
 
+    function hexToUtf8(data) {
+        let decipher = crypto.createDecipheriv(y, x, z) //creates decipher using alg, key, init. vector
+        let decrypted = decipher.update(data, 'hex', 'utf8')
+        decrypted += decipher.final('utf8')
+        return decrypted
+    }
+
+    const functArray = [utf8ToHex, hexToUtf8] //puts both functions in an array
+    return functArray
 }
 
 /*
