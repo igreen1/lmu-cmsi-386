@@ -179,7 +179,7 @@ function interleave()
 
     //input validation
     if(arguments.length <=0){
-        return arguments //not my problem
+        return undefined //not my problem
     }
 
     var arrayA = arguments[0] //the first array to interweave
@@ -189,6 +189,8 @@ function interleave()
     for(var i = 1; i < arguments.length; i++){
         arrayB.push(arguments[i])
     }
+
+    outputArray = arrayA.map( x =>  )
 
     //i hate the ternary operator
     //find the smallest length to not go out of bounds
