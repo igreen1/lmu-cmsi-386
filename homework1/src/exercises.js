@@ -203,12 +203,12 @@ function interleave()
     if(arrayA.length > minLen)
     {
         //add rest of arrayA cause it wasn't finished
-        outputArray = [...outputArray, ...arrayA]
-        //outputArray = outputArray.concat(arrayA.slice(i))
+        //outputArray = [...outputArray, ...arrayA]
+        outputArray = outputArray.concat(arrayA.slice(i))
     }else{
         //add rest of arrayB cause it wasn't finished
-        outputArray = [...outputArray, ...arrayB]
-        //outputArray = outputArray.concat(arrayB.slice(i))
+        //outputArray = [...outputArray, ...arrayB]
+        outputArray = outputArray.concat(arrayB.slice(i))
     }
 
     return outputArray
