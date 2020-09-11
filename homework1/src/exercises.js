@@ -190,8 +190,6 @@ function interleave()
         arrayB.push(arguments[i])
     }
 
-    outputArray = arrayA.map( x =>  )
-
     //i hate the ternary operator
     //find the smallest length to not go out of bounds
     let minLen = Math.min(arrayA.length, arrayB.length)
