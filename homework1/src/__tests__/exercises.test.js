@@ -1,4 +1,4 @@
-import { ok, deepEqual, match, throws, fail } from 'assert'
+import { ok, deepStrictEqual, match, throws, fail } from 'assert'
 import { randomBytes } from 'crypto'
 import {
   change,
@@ -15,20 +15,20 @@ import {
 
 describe('change', () => {
   it('handles zero', () => {
-    deepEqual(change(0), [0, 0, 0, 0])
+    deepStrictEqual(change(0), [0, 0, 0, 0])
   })
 
   it('computes answers for small integer values fine', () => {
-    deepEqual(change(97), [3, 2, 0, 2])
-    deepEqual(change(8), [0, 0, 1, 3])
-    deepEqual(change(250), [10, 0, 0, 0])
-    deepEqual(change(144), [5, 1, 1, 4])
-    deepEqual(change(97), [3, 2, 0, 2])
+    deepStrictEqual(change(97), [3, 2, 0, 2])
+    deepStrictEqual(change(8), [0, 0, 1, 3])
+    deepStrictEqual(change(250), [10, 0, 0, 0])
+    deepStrictEqual(change(144), [5, 1, 1, 4])
+    deepStrictEqual(change(97), [3, 2, 0, 2])
   })
 
   it('handles large values', () => {
     // This test only passes if the solution is efficient
-    deepEqual(change(100000000000), [4000000000, 0, 0, 0])
+    deepStrictEqual(change(100000000000), [4000000000, 0, 0, 0])
   })
 
   it('throws the proper exception for negative arguments', () => {
@@ -38,13 +38,14 @@ describe('change', () => {
 
 describe('stretched', () => {
   it('works on the empty string', () => {
-    deepEqual(stretched(''), '')
+    deepStrictEqual(stretched(''), '')
   })
 
   it('stretches non-empty strings property', () => {
-    deepEqual(stretched('H e   l\t\tlo'), 'Heelllllllooooo')
-    deepEqual(stretched('$#'), '$##')
-    deepEqual(stretched('       '), '')
+    deepStrictEqual(stretched('H e   l\t\tlo'), 'Heelllllllooooo')
+    deepStrictEqual(stretched('$#'), '$##')
+    deepStrictEqual(stretched('       '), '')
+    deepStrictEqual(stretched('A = πr²'), 'A==πππrrrr²²²²²')
   })
 })
 
@@ -64,19 +65,28 @@ describe('scramble', () => {
     for (let i = 0; i < 200; i += 1) {
       possibilities.delete(scramble('ABC'))
     }
-    deepEqual(possibilities.size, 0)
+    deepStrictEqual(possibilities.size, 0)
   })
 })
 
 describe('say', () => {
   it('works when there are no words', () => {
-    deepEqual(say(), '')
+    deepStrictEqual(say(), '')
   })
 
   it('works when there are words', () => {
-    deepEqual(say('hi')(), 'hi')
-    deepEqual(say('hi')('there')(), 'hi there')
-    deepEqual(say('hello')('my')('name')('is')('Colette')(), 'hello my name is Colette')
+    deepStrictEqual(say('hi')(), 'hi')
+    deepStrictEqual(say('hi')('there')(), 'hi there')
+    deepStrictEqual(say('hello')('my')('name')('is')('Colette')(), 'hello my name is Colette')
+  })
+
+  it('handles spaces', () => {
+    deepStrictEqual(say('h i')(), 'h i')
+    deepStrictEqual(say('hi ')('   there')(), 'hi     there')
+  })
+
+  it('handles emojis', () => {
+    deepStrictEqual(say('😄🤗')('💀👊🏾')(), '😄🤗 💀👊🏾')
   })
 })
 
@@ -88,37 +98,50 @@ describe('powers', () => {
   }
 
   it('generates sequences of powers properly', () => {
-    deepEqual(generatorToArray(powers, 2, -5), [])
-    deepEqual(generatorToArray(powers, 7, 0), [])
-    deepEqual(generatorToArray(powers, 3, 1), [1])
-    deepEqual(generatorToArray(powers, 2, 63), [1, 2, 4, 8, 16, 32])
-    deepEqual(generatorToArray(powers, 2, 64), [1, 2, 4, 8, 16, 32, 64])
+    deepStrictEqual(generatorToArray(powers, 2, -5), [])
+    deepStrictEqual(generatorToArray(powers, 7, 0), [])
+    deepStrictEqual(generatorToArray(powers, 3, 1), [1])
+    deepStrictEqual(generatorToArray(powers, 2, 63), [1, 2, 4, 8, 16, 32])
+    deepStrictEqual(generatorToArray(powers, 2, 64), [1, 2, 4, 8, 16, 32, 64])
   })
 })
 
 describe('The powers generator', () => {
   it('works as expected', () => {
     const g1 = powersGenerator(2, 1)
-    deepEqual(g1.next(), { value: 1, done: false })
-    deepEqual(g1.next(), { value: undefined, done: true })
+    deepStrictEqual(g1.next(), { value: 1, done: false })
+    deepStrictEqual(g1.next(), { value: undefined, done: true })
     const g2 = powersGenerator(3, 100)
-    deepEqual(g2.next(), { value: 1, done: false })
-    deepEqual(g2.next(), { value: 3, done: false })
-    deepEqual(g2.next(), { value: 9, done: false })
-    deepEqual(g2.next(), { value: 27, done: false })
-    deepEqual(g2.next(), { value: 81, done: false })
-    deepEqual(g2.next(), { value: undefined, done: true })
+    deepStrictEqual(g2.next(), { value: 1, done: false })
+    deepStrictEqual(g2.next(), { value: 3, done: false })
+    deepStrictEqual(g2.next(), { value: 9, done: false })
+    deepStrictEqual(g2.next(), { value: 27, done: false })
+    deepStrictEqual(g2.next(), { value: 81, done: false })
+    deepStrictEqual(g2.next(), { value: undefined, done: true })
   })
 })
 
 describe('interleave', () => {
   it('interleaves properly', () => {
-    deepEqual(interleave([]), [])
-    deepEqual(interleave([1, 4, 6]), [1, 4, 6])
-    deepEqual(interleave([], 2, 3), [2, 3])
-    deepEqual(interleave([1], 9), [1, 9])
-    deepEqual(interleave([8, 8, 3, 9], 1), [8, 1, 8, 3, 9])
-    deepEqual(interleave([2], 7, '8', {}), [2, 7, '8', {}])
+    deepStrictEqual(interleave([]), [])
+    deepStrictEqual(interleave([1, 4, 6]), [1, 4, 6])
+    deepStrictEqual(interleave([], 2, 3), [2, 3])
+    deepStrictEqual(interleave([1], 9), [1, 9])
+    deepStrictEqual(interleave([1, 2, 3, 4, 5, 6], 9), [1, 9, 2, 3, 4, 5, 6])
+    deepStrictEqual(interleave([1], 9, 8, 7, 6), [1, 9, 8, 7, 6])
+    deepStrictEqual(interleave([8, 8, 3, 9], 1, 5), [8, 1, 8, 5, 3, 9])
+    deepStrictEqual(interleave([2], 7, '8', {}), [2, 7, '8', {}])
+    deepStrictEqual(interleave([1, 3, 5], 2, 4, 6, 7, 8), [1, 2, 3, 4, 5, 6, 7, 8])
+    deepStrictEqual(interleave([3, null, null, 9, -1], undefined, 8), [
+      3,
+      undefined,
+      null,
+      8,
+      null,
+      9,
+      -1,
+    ])
+    deepStrictEqual(interleave([1, [[2]], 3], 4, 5, 6, [null]), [1, 4, [[2]], 5, 3, 6, [null]])
   })
 })
 
@@ -128,7 +151,7 @@ describe('crypto functions', () => {
     const iv = randomBytes(16)
     const [e, d] = makeCryptoFunctions(key, 'aes-256-cbc', iv)
     match(e('Hello world'), /[A-F\d]{32}/i)
-    ;['', 'abc', 'zπøj#•¶å≈’’'].forEach(s => deepEqual(d(e(s)), s))
+    ;['', 'abc', 'zπøj#•¶å≈’’'].forEach(s => deepStrictEqual(d(e(s)), s))
   })
   it('throws an error for an unknown algorithm', () => {
     const iv = 'abcdefghijklmnop'
@@ -140,15 +163,15 @@ describe('crypto functions', () => {
 
 describe('The topTenPlayers function', () => {
   it('handles an empty object', () => {
-    deepEqual(topTenScorers({}), [])
+    deepStrictEqual(topTenScorers({}), [])
   })
   it('handles a small data set', () => {
     let input = { T1: [['A', 3, 300]] }
     let expected = []
-    deepEqual(topTenScorers(input), expected)
+    deepStrictEqual(topTenScorers(input), expected)
     input = { T1: [['A', 30, 300]] }
     expected = [{ name: 'A', ppg: 10, team: 'T1' }]
-    deepEqual(topTenScorers(input), expected)
+    deepStrictEqual(topTenScorers(input), expected)
   })
   it('handles a larger data set', () => {
     let input = {
@@ -217,7 +240,7 @@ describe('The topTenPlayers function', () => {
       { name: 'Crystal Dangerfield', ppg: 15.875, team: 'MIN' },
       { name: 'Myisha Hines-Allen', ppg: 15.733333333333333, team: 'WSH' },
     ]
-    deepEqual(topTenScorers(input), expected)
+    deepStrictEqual(topTenScorers(input), expected)
   })
 })
 
@@ -229,7 +252,7 @@ describe('The multiply function', () => {
   it('produces a resolved promise with a number', done => {
     multiply(3, 5)
       .then(answer => {
-        deepEqual(answer, 15)
+        deepStrictEqual(answer, 15)
       })
       .then(done, done)
   })
@@ -237,9 +260,9 @@ describe('The multiply function', () => {
     multiply('asdf', 21)
       .then(() => fail('Should not get here'))
       .catch(error => {
-        deepEqual(error.error, 'Bad parameters')
-        deepEqual(error.status, 400)
-        deepEqual(error.x, 'asdf')
+        deepStrictEqual(error.error, 'Bad parameters')
+        deepStrictEqual(error.status, 400)
+        deepStrictEqual(error.x, 'asdf')
       })
       .then(done, done)
   })

@@ -160,6 +160,7 @@ A “chainable” function that accepts one string per call, but when called wit
 
 //header might need editing, idk how to do this
 function say(x) {
+    if (!x) { return '' }
     return function(next) {
         if (!next) {
             return x
@@ -241,6 +242,7 @@ function makeCryptoFunctions(x,y,z){ //x is key, y is alg, z is init. vector
 A function that returns the top ten players by points-per-game among the players that have been in 15 games or more. The input to your function will be an object, keyed by team, with a list of player stats. Each player stat is an array with the player name, the number of games played, and the total number of points, for example: 
 */
 function topTenScorers(x){
+    return Object.entries(x).flatMap(([team, x]) => x.map(p => [...p, team])).filter(p => p[1] >= 15).map(([name, gamesPlayed, points, team]) => ({name: name, ppg: points/gamesPlayed, team:team})).sort(function(a, b) { return b.ppg - a.ppg }).slice(0,10)
 }
 
 /*
