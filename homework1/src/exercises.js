@@ -242,6 +242,11 @@ hitting the API at https://ordinary-hazel-pink.glitch.me/multiply?x=&y=
 */
 function multiply(a,b){
 
+    //NO Input validation since the test suite ALWAYS wants a promise
+    //  so better to try the call and let it fail in its own way
+
+    //make my life easier by just doing this early
+    //if a/b have issues, it will be caught after the api call. 
     let multURL = `https://ordinary-hazel-pink.glitch.me/multiply?x=${a}&y=${b}`
 
     //taken from MY github @
@@ -250,21 +255,22 @@ function multiply(a,b){
     //moved to a global import cause I think that's better
     //let fetch = require('node-fetch')
 
+    //create a fetch promise
     return fetch(multURL).then(
         function(r){
-            return r.json()
+            return r.json()                     //return whatever we get from the url as a json object
         }
-    ).then(
+    ).then(                                     //now that we have this json object, time to de-json 
         function(json_data){
             //de-json-ify
             if(json_data.result != undefined){
-                return json_data.result
+                return json_data.result         //json_data should be a simple {result: ###} :)
             }
             else{
                 throw {
-                    error: "Bad parameters",
-                    status: 400,
-                    x:a
+                    error: "Bad parameters",    //let you know what's pu
+                    status: 400,                //this is store in json_data as well
+                    x:a                         //this may not be stored in json_data
                 }
             }
             
