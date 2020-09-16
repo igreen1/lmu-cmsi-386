@@ -266,24 +266,19 @@ function multiply(a,b){
     ).then(
         function(json_data){
             //de-json-ify
-            let res = json_data.result
-            if(res === undefined){
-                throw "ANy error"
+            if(json_data.result != undefined){
+                return json_data.result
             }
-            return res
+            else{
+                throw {
+                    error: "Bad parameters",
+                    status: 400,
+                    x:a
+                }
+            }
+            
         }
 
-    ).catch(
-        //ERROR!
-        //thanks to the documentation on node fetch :)
-        //https://www.npmjs.com/package/node-fetch
-        err => {
-            throw {
-                error: "Bad parameters",
-                status: 400,
-                x: a
-            }
-        }
     )
 }
 
