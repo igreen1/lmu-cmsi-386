@@ -253,7 +253,6 @@ hitting the API at https://ordinary-hazel-pink.glitch.me/multiply?x=&y=
 */
 function multiply(a,b){
 
-
     let multURL = `https://ordinary-hazel-pink.glitch.me/multiply?x=${a}&y=${b}`
 
     //taken from MY github @
@@ -266,13 +265,25 @@ function multiply(a,b){
         }
     ).then(
         function(json_data){
-            //ummmmmm
-            return json_data.result
+            //de-json-ify
+            let res = json_data.result
+            if(res === undefined){
+                throw "ANy error"
+            }
+            return res
         }
 
     ).catch(
-        //not yet 
-        err => rejects('Bad parameters')
+        //ERROR!
+        //thanks to the documentation on node fetch :)
+        //https://www.npmjs.com/package/node-fetch
+        err => {
+            throw {
+                error: "Bad parameters",
+                status: 400,
+                x: a
+            }
+        }
     )
 }
 
