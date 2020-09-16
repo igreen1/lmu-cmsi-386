@@ -6,6 +6,7 @@ import { Z_BLOCK } from 'zlib';
  * 
  */
 var crypto = require('crypto'); //I think we need this for the encryption function?
+var fetch = require('node-fetch')
 
 /*
 A function that accepts a number of U.S. cents and returns an 
@@ -246,7 +247,9 @@ function multiply(a,b){
     //taken from MY github @
     //https://github.com/igreen1/dangermap
 
-    let fetch = require('node-fetch')
+    //moved to a global import cause I think that's better
+    //let fetch = require('node-fetch')
+
     return fetch(multURL).then(
         function(r){
             return r.json()
@@ -254,24 +257,19 @@ function multiply(a,b){
     ).then(
         function(json_data){
             //de-json-ify
-            let res = json_data.result
-            if(res === undefined){
-                throw "ANy error"
+            if(json_data.result != undefined){
+                return json_data.result
             }
-            return res
+            else{
+                throw {
+                    error: "Bad parameters",
+                    status: 400,
+                    x:a
+                }
+            }
+            
         }
 
-    ).catch(
-        //ERROR!
-        //thanks to the documentation on node fetch :)
-        //https://www.npmjs.com/package/node-fetch
-        err => {
-            throw {
-                error: "Bad parameters",
-                status: 400,
-                x: a
-            }
-        }
     )
 }
 
