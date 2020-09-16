@@ -127,16 +127,11 @@ function scramble(inputString){
 A function that yields successive powers of a base starting at the 0th power, namely 1, and going up to some limit. Consume the values with a callback. 
 */
 function powers(x, y, z){
-
-    let i = 0
-    let currValue = 0
-
-    while (Math.pow(x, i) <= y) {
-        currValue = (Math.pow(x, i))
+    let currValue = 1
+    while (currValue <= y) {
         z(currValue)
-        i++
+        currValue *= x
     }
-
 }
 
 /*
