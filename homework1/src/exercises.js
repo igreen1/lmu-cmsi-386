@@ -1,3 +1,4 @@
+import { callbackify } from 'util';
 import { Z_BLOCK } from 'zlib';
 
 /***
@@ -251,6 +252,18 @@ hitting the API at https://ordinary-hazel-pink.glitch.me/multiply?x=&y=
 */
 function multiply(a,b){
 
+
+    let multURL = `https://ordinary-hazel-pink.glitch.me/multiply?x=${a}&y=${b}`
+
+    //taken from MY github @
+    //https://github.com/igreen1/dangermap
+
+    let fetch = require('node-fetch')
+    return fetch(multURL).then(
+        function(r){
+            return r.json()
+        }
+    )
 }
 
 export {
