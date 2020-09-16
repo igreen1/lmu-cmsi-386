@@ -1,3 +1,4 @@
+import { rejects } from 'assert';
 import { callbackify } from 'util';
 import { Z_BLOCK } from 'zlib';
 
@@ -263,6 +264,15 @@ function multiply(a,b){
         function(r){
             return r.json()
         }
+    ).then(
+        function(json_data){
+            //ummmmmm
+            return json_data.result
+        }
+
+    ).catch(
+        //not yet 
+        err => rejects('Bad parameters')
     )
 }
 
