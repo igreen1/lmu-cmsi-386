@@ -5,8 +5,8 @@ import { Z_BLOCK } from 'zlib';
 /***
  * 
  */
-var crypto = require('crypto'); //I think we need this for the encryption function?
-var fetch = require('node-fetch')
+let crypto = require('crypto'); //I think we need this for the encryption function?
+let fetch = require('node-fetch')
 
 /*
 A function that accepts a number of U.S. cents and returns an 
