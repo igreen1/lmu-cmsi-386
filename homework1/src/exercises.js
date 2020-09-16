@@ -6,6 +6,7 @@ import { Z_BLOCK } from 'zlib';
  * 
  */
 var crypto = require('crypto'); //I think we need this for the encryption function?
+var fetch = require('node-fetch')
 
 /*
 A function that accepts a number of U.S. cents and returns an 
@@ -251,7 +252,9 @@ function multiply(a,b){
     //taken from MY github @
     //https://github.com/igreen1/dangermap
 
-    let fetch = require('node-fetch')
+    //moved to a global import cause I think that's better
+    //let fetch = require('node-fetch')
+
     return fetch(multURL).then(
         function(r){
             return r.json()
