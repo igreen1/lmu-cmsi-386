@@ -132,8 +132,6 @@ function* powersGenerator(x, y) {
 /*
 A “chainable” function that accepts one string per call, but when called without arguments, returns the words previously passed, in order, separated by a single space
 */
-
-//header might need editing, idk how to do this
 function say(x) {
   if (!x) {
     return ""
