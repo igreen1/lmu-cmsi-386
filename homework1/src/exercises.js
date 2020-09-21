@@ -135,15 +135,15 @@ function interleave(...values) {
   }
 
   //find the smallest length to not go out of bounds
-  let minLength = Math.min(arrayA.length, arrayB.length)
+  let minimumLength = Math.min(arrayA.length, arrayB.length)
 
   let i = 0 //iterator, outside so I can do end appends
-  for (i = 0; i < minLength; i++) {
+  for (i = 0; i < minimumLength; i++) {
     output.push(arrayA[i])
     output.push(arrayB[i])
   }
 
-  if (arrayA.length > minLength) {
+  if (arrayA.length > minimumLength) {
     //add rest of arrayA cause it wasn't finished
     output = output.concat(arrayA.slice(i))
   } else {
@@ -165,8 +165,7 @@ function makeCryptoFunctions(key, cryptoAlgorithm, initializationVector) {
       initializationVector
     )
     let encrypted = cipher.update(data, "utf8", "hex")
-    encrypted += cipher.final("hex")
-    return encrypted
+    return (encrypted += cipher.final("hex"))
   }
 
   function hexToUtf8(data) {
@@ -176,8 +175,7 @@ function makeCryptoFunctions(key, cryptoAlgorithm, initializationVector) {
       initializationVector
     )
     let decrypted = decipher.update(data, "hex", "utf8")
-    decrypted += decipher.final("utf8")
-    return decrypted
+    return (decrypted += decipher.final("utf8"))
   }
 
   return [utf8ToHex, hexToUtf8]
