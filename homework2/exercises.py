@@ -73,7 +73,26 @@ def scramble(input):
 
 
 
-def cylinder():
+class cylinder():
+
+    radius = 1
+    height = 1
+
+    def __init__(self, r, h):
+        self.radius = r
+        self.height = h
+
+    def volume():
+        return self.height * math.pi * (self.radius ** 2)
+
+    def surface_area():
+        return (2 * math.pi * self.radius * self.height) + (2 * math.pi * (self.radius ** 2))
+
+    def widen(factor):
+        self.radius = self.radius * factor
+
+    def stretch(factor):
+        self.height = self.height * factor
 
 '''
 
@@ -82,20 +101,75 @@ A function that yields successive powers of a base starting at the 0th power, na
 
 '''
 
-def powers(base, limit, callback):
+def powers(base, limit):
+    current_value = 1
+    while current_value <= limit:
+        yield current_value
+        current_value = current_value*base
 
 
+'''
 
-def say():
+A “chainable” function that accepts one string per call, but when called without arguments, returns the words previously passed, in order, separated by a single space
 
+
+'''
+
+def say(input=None):
+    if input is None:
+        return ""
+    else:
+
+
+'''
+
+A function that interleaves an array with a bunch of values. If the array length is not the same as the number of values to interleave, the “extra” elements should end up at the end of the result. 
+
+
+'''
 
 def interleave():
 
+'''
+
+A function that accepts three arguments: a crypto key, a crypto algorithm, and an initialization vector, and returns an array of two functions. The first returned function is an encryption function that encrypts a string into a hex string, and the second is a decryption function that decrypts the hex string into a string. Use the functions createCipheriv and createDecipheriv from the built-in Node crypto module. 
+
+'''
 
 def crypto():
 
+'''
+
+A function that returns the top ten players by points-per-game among the players that have been in 15 games or more. The input to your function will be an object, keyed by team, with a list of player stats. Each player stat is an array with the player name, the number of games played, and the total number of points, for example: 
+
+'''
 
 def top_ten_scorers():
 
 
 def random_name():
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

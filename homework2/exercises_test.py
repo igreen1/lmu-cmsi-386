@@ -1,8 +1,9 @@
 import re
 import math
 import pytest
-from exercises import (change, stretched, scramble, say, powers,
-                       interleave, Cylinder, make_crypto_functions, random_name)
+from exercises import (change, stretched, scramble, Cylinder,
+                       powers, say,  interleave, make_crypto_functions,
+                       top_ten_scorers, studio_ghibli_characters)
 
 
 def test_change():
@@ -20,6 +21,10 @@ def test_change():
 
 def test_stretched():
     assert stretched('') == ''
+    assert stretched('H e   l\t\tlo') == 'Heelllllllooooo'
+    assert stretched('$#') == '$##'
+    assert stretched('       ') == ''
+    assert stretched('A = πr²') == 'A==πππrrrr²²²²²'
 
 
 def test_scramble():
@@ -94,14 +99,19 @@ def test_interleave():
 def test_crypto():
     assert isinstance(make_crypto_functions(
         b"A2qK5XG3qX1MfLrGacD9AGVG2sbZYkvFFki94qbkVhE="), tuple)
-    e, d = make_crypto_functions(
+    encrypt, decrypt = make_crypto_functions(
         b"A2qK5XG3qX1MfLrGacD9AGVG2sbZYkvFFki94qbkVhE=")
     for s in [b'', b'\xfe9iP\x05\x22\x490opXZ@1##', b'Helllllllllooooooo world']:
-        assert d(e(s)) == s
+        assert decrypt(encrypt(s)) == s
 
 
 def test_top_ten_scorers():
-    stats = {
+    assert top_ten_scorers({}) == []
+    assert top_ten_scorers({'T1': [['A', 3, 300]]}) == []
+    input = {'T1': [['A', 30, 300]]}
+    expected = [{'name': 'A', 'ppg': 10, 'team': 'T1'}]
+    assert top_ten_scorers(input) == expected
+    input = {
         'ATL': [
             ['Betnijah Laney', 16, 263],
             ['Courtney Williams', 14, 193],
@@ -157,15 +167,48 @@ def test_top_ten_scorers():
             ['Myisha Hines-Allen', 15, 236],
         ],
     }
-    assert stats
+    expected = [
+        {'name': 'Arike Ogunbowale', 'ppg': 22, 'team': 'DAL'},
+        {'name': 'A’ja Wilson', 'ppg': 20.266666666666666, 'team': 'LV'},
+        {'name': 'Breanna Stewart', 'ppg': 19.8125, 'team': 'SEA'},
+        {'name': 'DeWanna Bonner', 'ppg': 17.8125, 'team': 'CONN'},
+        {'name': 'Kelsey Mitchell', 'ppg': 17.5, 'team': 'IND'},
+        {'name': 'Betnijah Laney', 'ppg': 16.4375, 'team': 'ATL'},
+        {'name': 'Napheesa Collier', 'ppg': 16.375, 'team': 'MIN'},
+        {'name': 'Skylar Diggins-Smith', 'ppg': 16.3125, 'team': 'PHX'},
+        {'name': 'Crystal Dangerfield', 'ppg': 15.875, 'team': 'MIN'},
+        {'name': 'Myisha Hines-Allen', 'ppg': 15.733333333333333, 'team': 'WSH'},
+    ]
+    assert top_ten_scorers(input) == expected
 
 
-def test_random_name():
-    pass
-    # p = random_name(gender='female', region='canada')
-    # assert isinstance(p, str)
-    # assert len(p) > 3
-    # assert ', ' in p
-    # with pytest.raises(ValueError) as excinfo:
-    #     random_name(gender='fjweiuw', region='canada')
-    # assert re.match(r'{"error":\s*"Invalid gender"}', str(excinfo.value))
+def test_studio_ghibli_characters():
+    people = studio_ghibli_characters(gender='Male', hair_color='Purple')
+    assert people == []
+    people = studio_ghibli_characters(gender='Female', hair_color='Black')
+    assert people == [
+        {
+            "name": "Lusheeta Toel Ul Laputa",
+            "gender": "Female",
+            "age": "13",
+            "eye_color": "Black",
+            "hair_color": "Black"
+        },
+        {
+            "name": "Eboshi",
+            "gender": "Female",
+            "age": "Unspecified/Adult",
+            "eye_color": "Hazel",
+            "hair_color": "Black"
+        }
+    ]
+    people = studio_ghibli_characters(hair_color='Blue', gender='NA')
+    assert people == [
+        {
+            "name": "Chu Totoro",
+            "gender": "NA",
+            "age": "",
+            "eye_color": "Black",
+            "hair_color": "Blue"
+        }
+    ]
