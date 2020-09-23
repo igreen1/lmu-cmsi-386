@@ -1,10 +1,19 @@
 import re
 import math
 import pytest
+import random
 from exercises import (change, stretched, scramble, say, powers,
                        interleave, Cylinder, make_crypto_functions, random_name)
 
+'''
 
+A function that accepts a number of U.S. cents and returns an 
+    array containing, respectively, the smallest number of U.S. 
+    quarters, dimes, nickels, and pennies that equal the given amount. 
+Input: # of US cents 
+Return [quarters, dimes, nickels, pennies]
+
+'''
 def change(total_cents):
     if total_cents < 0:
         raise Exception("Sorry, the total number of cents must be greater than or equal to zero.")
@@ -21,56 +30,60 @@ def change(total_cents):
 
     return tuple(coins_used)
 
+'''
 
-def stretched():
+A function that accepts a string and returns a new string equal to the initial string with all 
+    whitespace removed and then with the ith character (1-based) repeated i times. 
+Input: string 
+Output: input string with no white space and repeated characters based on position
 
+'''
+def stretched(input):
+    output = ""
+    for i in range len(input):
+        if input[i] != " ":
+            output = output + input[i]
 
-def scramble():
-    for s in ['a', 'rat', 'JavaScript testing', '', 'zzz', '^*))^*>^▱ÄÈËɡɳɷ']:
-        assert sorted(s) == sorted(scramble(s))
-    possibilities = set(['ABC', 'ACB', 'BAC', 'BCA', 'CAB', 'CBA'])
-    for _ in range(200):
-        possibilities.discard(scramble('ABC'))
-    assert not possibilities
+    for i in range(len(input) - len(output)):
+        output = output + output[i]
+
+    return output
+
+'''
+
+A function that randomly permutes a string. What does random mean? It means that each time you 
+    call the function for a given argument, all possible permutations are equally likely. 
+    Random is not the same as arbitrary. 
+Input: string
+Output: input string permuted randomly
+
+'''
+
+def scramble(input):
+    if len(input) <= 0:
+        return input
+    
+    output = ""
+    while len(input) > 0:
+        i = math.floor(random.random() * len(input))
+        output = output + input[i]
+        input = input[:i] + input[i + 1:]
+
+    return output
+
 
 
 def cylinder():
-    c = Cylinder(radius=10, height=5)
-    assert c.height == 5
-    assert c.radius == 10
-    c = Cylinder(height=5)
-    assert c.height == 5
-    assert c.radius == 1
-    c = Cylinder(radius=5)
-    assert c.height == 1
-    assert c.radius == 5
-    c = Cylinder()
-    assert c.height == 1
-    assert c.radius == 1
-    c = Cylinder(radius=2, height=10)
-    assert pytest.approx(c.volume, 0.000001) == 40 * math.pi
-    assert pytest.approx(c.surface_area, 0.000001) == 48 * math.pi
-    c.widen(3)
-    assert c.radius == 6
-    c.stretch(2)
-    assert c.height == 20
-    assert pytest.approx(c.surface_area, 0.000001) == 312 * math.pi
-    assert pytest.approx(c.volume, 0.000001) == 720 * math.pi
+
+'''
+
+A function that yields successive powers of a base starting at the 0th power, namely 1, and going up to some limit. Consume the values with a callback. 
 
 
-def powers():
-    p = powers(2, 10)
-    assert next(p) == 1
-    assert next(p) == 2
-    assert next(p) == 4
-    assert next(p) == 8
-    with pytest.raises(StopIteration):
-        next(p)
-    assert list(powers(2, -5)) == []
-    assert list(powers(7, 0)) == []
-    assert list(powers(3, 1)) == [1]
-    assert list(powers(2, 63)) == [1, 2, 4, 8, 16, 32]
-    assert list(powers(2, 64)) == [1, 2, 4, 8, 16, 32, 64]
+'''
+
+def powers(base, limit, callback):
+
 
 
 def say():
