@@ -87,101 +87,15 @@ def powers(base, limit, callback):
 
 
 def say():
-    assert say() == ''
-    assert say('hi')() == 'hi'
-    assert say('hi')('there')() == 'hi there'
-    assert say('hello')('my')('name')('is')(
-        'Colette')() == 'hello my name is Colette'
 
 
 def interleave():
-    assert interleave([]) == []
-    assert interleave([1, 4, 6]) == [1, 4, 6]
-    assert interleave([], 2, 3) == [2, 3]
-    assert interleave([1], 9) == [1, 9]
-    assert interleave([8, 8, 3, 9], 1) == [8, 1, 8, 3, 9]
-    assert interleave([2], 7, '8', {}) == [2, 7, '8', {}]
-    a = [1, 2, 3, 4]
-    assert interleave(a, 10, 20, 30) == [1, 10, 2, 20, 3, 30, 4]
-    # Test input list not destroyed
-    assert a == [1, 2, 3, 4]
 
 
 def crypto():
-    assert isinstance(make_crypto_functions(
-        b"A2qK5XG3qX1MfLrGacD9AGVG2sbZYkvFFki94qbkVhE="), tuple)
-    e, d = make_crypto_functions(
-        b"A2qK5XG3qX1MfLrGacD9AGVG2sbZYkvFFki94qbkVhE=")
-    for s in [b'', b'\xfe9iP\x05\x22\x490opXZ@1##', b'Helllllllllooooooo world']:
-        assert d(e(s)) == s
 
 
 def top_ten_scorers():
-    stats = {
-        'ATL': [
-            ['Betnijah Laney', 16, 263],
-            ['Courtney Williams', 14, 193],
-        ],
-        'CHI': [
-            ['Kahleah Copper', 17, 267],
-            ['Allie Quigley', 17, 260],
-            ['Courtney Vandersloot', 17, 225],
-        ],
-        'CONN': [
-            ['DeWanna Bonner', 16, 285],
-            ['Alyssa Thomas', 16, 241],
-        ],
-        'DAL': [
-            ['Arike Ogunbowale', 16, 352],
-            ['Satou Sabally', 12, 153],
-        ],
-        'IND': [
-            ['Kelsey Mitchell', 16, 280],
-            ['Tiffany Mitchell', 13, 172],
-            ['Candice Dupree', 16, 202],
-        ],
-        'LA': [
-            ['Nneka Ogwumike', 14, 172],
-            ['Chelsea Gray', 16, 224],
-            ['Candace Parker', 16, 211],
-        ],
-        'LV': [
-            ['A’ja Wilson', 15, 304],
-            ['Dearica Hamby', 15, 188],
-            ['Angel McCoughtry', 15, 220],
-        ],
-        'MIN': [
-            ['Napheesa Collier', 16, 262],
-            ['Crystal Dangerfield', 16, 254],
-        ],
-        'NY': [
-            ['Layshia Clarendon', 15, 188]
-        ],
-        'PHX': [
-            ['Diana Taurasi', 13, 236],
-            ['Brittney Griner', 12, 212],
-            ['Skylar Diggins-Smith', 16, 261],
-            ['Bria Hartley', 13, 190],
-        ],
-        'SEA': [
-            ['Breanna Stewart', 16, 317],
-            ['Jewell Loyd', 16, 223],
-        ],
-        'WSH': [
-            ['Emma Meesseman', 13, 158],
-            ['Ariel Atkins', 15, 212],
-            ['Myisha Hines-Allen', 15, 236],
-        ],
-    }
-    assert stats
 
 
 def random_name():
-    pass
-    # p = random_name(gender='female', region='canada')
-    # assert isinstance(p, str)
-    # assert len(p) > 3
-    # assert ', ' in p
-    # with pytest.raises(ValueError) as excinfo:
-    #     random_name(gender='fjweiuw', region='canada')
-    # assert re.match(r'{"error":\s*"Invalid gender"}', str(excinfo.value))
