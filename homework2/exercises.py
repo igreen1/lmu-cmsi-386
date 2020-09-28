@@ -19,17 +19,17 @@ def change(total_cents):  # watch his javascript solution from class to fix name
         raise ValueError(
             "amount cannot be negative")
 
-    coin_values = (25, 10, 5, 1)
-    coins_used = [0, 0, 0, 0]
+    denominations = (25, 10, 5, 1)
+    denominations_used = [0, 0, 0, 0]
     remaining_cents = total_cents
-    temp = 0
+    denominationUses = 0  # HE WILL TAKE OFF POINTS FOR NAMES LIKE "TEMP"
 
-    for i in range(len(coin_values)):
-        temp = math.floor(remaining_cents/coin_values[i])
-        remaining_cents = remaining_cents - temp * coin_values[i]
-        coins_used[i] = temp
+    for i in range(len(denominations)):
+        denominationUses = math.floor(remaining_cents/denominations[i])
+        remaining_cents = remaining_cents - denominationUses * denominations[i]
+        denominations_used[i] = denominationUses
 
-    return tuple(coins_used)
+    return tuple(denominations_used)
 
 
 '''
@@ -43,13 +43,11 @@ Output: input string with no white space and repeated characters based on positi
 
 
 def stretched(input):
+    input = "".join(input.split())
     output = ""
-    for i in range(len(input)):
-        if input[i] != " ":
-            output = output + input[i]
 
-    for i in range(len(input) - len(output)):
-        output = output + output[i]
+    for i in range(0, len(input)):
+        output += input[i]*(i+1)
 
     return output
 
