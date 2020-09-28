@@ -3,6 +3,7 @@ import math
 import pytest
 import random
 from cryptography.fernet import Fernet
+import requests
 
 '''
 
@@ -87,17 +88,15 @@ as well as a widen method that mutates the radius by a given factor and a stretc
 
 
 class Cylinder():
-
-    radius = 1
-    height = 1
-
     def __init__(self, radius=1, height=1):
         self.radius = radius
         self.height = height
 
+    @property
     def volume(self):
         return self.height * math.pi * (self.radius ** 2)
 
+    @property
     def surface_area(self):
         return (2 * math.pi * self.radius * self.height) + (2 * math.pi * (self.radius ** 2))
 
@@ -208,4 +207,5 @@ A function that returns a list of people from the Studio Ghibli API. This functi
 
 
 def studio_ghibli_characters(hair_color="", gender=""):
-    return
+    characters = requests.get("https://ghibliapi.herokuapp.com/people")
+    return characters.text
