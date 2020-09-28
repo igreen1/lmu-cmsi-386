@@ -14,25 +14,20 @@ Return [quarters, dimes, nickels, pennies]
 '''
 
 
-def change(total_cents):
+def change(total_cents):  # watch his javascript solution from class to fix names & update solution
     if total_cents < 0:
-        raise Exception(
-            "Sorry, the total number of cents must be greater than or equal to zero.")
+        raise ValueError(
+            "amount cannot be negative")
 
-    # unchangeable tuple: stores the values of the denominations in decreasing order
     coin_values = (25, 10, 5, 1)
-    # stores how many of each respective denomination was used
     coins_used = [0, 0, 0, 0]
-    # holds the amount of cents we still need to make change for
     remaining_cents = total_cents
     temp = 0
 
     for i in range(len(coin_values)):
-        # holds the amount of this denom we can use
         temp = math.floor(remaining_cents/coin_values[i])
-        # remove the cents since we have now 'given' change for that amount
         remaining_cents = remaining_cents - temp * coin_values[i]
-        coins_used[i] = temp  # store how much 'change' we have used
+        coins_used[i] = temp
 
     return tuple(coins_used)
 
@@ -164,7 +159,7 @@ def interleave(toInterleave, *values):
     length1 = len(toInterleave)
     length2 = len(values)
 
-    for i in range(max(len(length1, length2))):
+    for i in range(max(length1, length2)):
         if i < length1:
             interwoven.append(toInterleave[i])
         if i < length2:
