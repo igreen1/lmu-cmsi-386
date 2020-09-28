@@ -2,6 +2,7 @@ import re
 import math
 import pytest
 import random
+from cryptography.fernet import Fernet
 
 '''
 
@@ -176,8 +177,13 @@ we are not going over this in class.
 '''
 
 
-def make_crypto_functions():
-    return
+def make_crypto_functions(key):
+    def encryption(toEncrypt):
+        return Fernet(key).encrypt(toEncrypt)
+
+    def decryption(toDecrypt):
+        return Fernet(key).decrypt(toDecrypt)
+    return(encryption, decryption)
 
 
 '''
@@ -189,7 +195,7 @@ with the player name, the number of games played, and the total number of points
 '''
 
 
-def top_ten_scorers():
+def top_ten_scorers(teamsAndPlayers):
     return
 
 
@@ -200,5 +206,5 @@ A function that returns a list of people from the Studio Ghibli API. This functi
 '''
 
 
-def studio_ghibli_characters():
+def studio_ghibli_characters(hair_color="", gender=""):
     return
