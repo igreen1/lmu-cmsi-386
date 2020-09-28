@@ -2,8 +2,6 @@ import re
 import math
 import pytest
 import random
-from exercises import (change, stretched, scramble, say, powers,
-                       interleave, Cylinder, make_crypto_functions, random_name)
 
 '''
 
@@ -14,21 +12,30 @@ Input: # of US cents
 Return [quarters, dimes, nickels, pennies]
 
 '''
+
+
 def change(total_cents):
     if total_cents < 0:
-        raise Exception("Sorry, the total number of cents must be greater than or equal to zero.")
-    
-    coin_values = (25,10,5,1) # unchangeable tuple: stores the values of the denominations in decreasing order
-    coins_used = [0,0,0,0] # stores how many of each respective denomination was used
-    remaining_cents = total_cents # holds the amount of cents we still need to make change for
+        raise Exception(
+            "Sorry, the total number of cents must be greater than or equal to zero.")
+
+    # unchangeable tuple: stores the values of the denominations in decreasing order
+    coin_values = (25, 10, 5, 1)
+    # stores how many of each respective denomination was used
+    coins_used = [0, 0, 0, 0]
+    # holds the amount of cents we still need to make change for
+    remaining_cents = total_cents
     temp = 0
-    
-    for i in range( len(coin_values) ):
-        temp = math.floor(remaining_cents/coin_values[i]) # holds the amount of this denom we can use
-        remaining_cents = remaining_cents - temp * coin_values[i] # remove the cents since we have now 'given' change for that amount
-        coins_used[i] = temp # store how much 'change' we have used
+
+    for i in range(len(coin_values)):
+        # holds the amount of this denom we can use
+        temp = math.floor(remaining_cents/coin_values[i])
+        # remove the cents since we have now 'given' change for that amount
+        remaining_cents = remaining_cents - temp * coin_values[i]
+        coins_used[i] = temp  # store how much 'change' we have used
 
     return tuple(coins_used)
+
 
 '''
 
@@ -38,9 +45,11 @@ Input: string
 Output: input string with no white space and repeated characters based on position
 
 '''
+
+
 def stretched(input):
     output = ""
-    for i in range len(input):
+    for i in range(len(input)):
         if input[i] != " ":
             output = output + input[i]
 
@@ -48,6 +57,7 @@ def stretched(input):
         output = output + output[i]
 
     return output
+
 
 '''
 
@@ -59,10 +69,11 @@ Output: input string permuted randomly
 
 '''
 
+
 def scramble(input):
     if len(input) <= 0:
         return input
-    
+
     output = ""
     while len(input) > 0:
         i = math.floor(random.random() * len(input))
@@ -72,27 +83,36 @@ def scramble(input):
     return output
 
 
+'''
 
-class cylinder():
+A traditional Python Cylinder class. The initializer should accept a radius and height as keyword arguments;
+both should default to 1 if not passed in. Include volume and surface area methods exposed as properties,
+as well as a widen method that mutates the radius by a given factor and a stretch method to grow the height.
+
+'''
+
+
+class Cylinder():
 
     radius = 1
     height = 1
 
-    def __init__(self, r, h):
-        self.radius = r
-        self.height = h
+    def __init__(self, radius=1, height=1):
+        self.radius = radius
+        self.height = height
 
-    def volume():
+    def volume(self):
         return self.height * math.pi * (self.radius ** 2)
 
-    def surface_area():
+    def surface_area(self):
         return (2 * math.pi * self.radius * self.height) + (2 * math.pi * (self.radius ** 2))
 
-    def widen(factor):
+    def widen(self, factor):
         self.radius = self.radius * factor
 
-    def stretch(factor):
+    def stretch(self, factor):
         self.height = self.height * factor
+
 
 '''
 
@@ -101,75 +121,91 @@ A function that yields successive powers of a base starting at the 0th power, na
 
 '''
 
+
 def powers(base, limit):
-    current_value = 1
-    while current_value <= limit:
-        yield current_value
-        current_value = current_value*base
+    power = 1
+    while power <= limit:
+        yield power
+        power = power*base
 
 
 '''
 
-A “chainable” function that accepts one string per call, but when called without arguments, returns the words previously passed, in order, separated by a single space
+A “chainable” function that accepts one string per call, but when called without arguments,
+returns the words previously passed, in order, separated by a single space.
 
 
 '''
+
 
 def say(input=None):
     if input is None:
         return ""
     else:
+        def connectStrings(nextInput=None):
+            if nextInput is None:
+                return input
+            else:
+                return say(input + " " + nextInput)
+        return connectStrings
 
 
 '''
 
-A function that interleaves an array with a bunch of values. If the array length is not the same as the number of values to interleave, the “extra” elements should end up at the end of the result. 
+A function that interleaves an list with a bunch of values. If the list length is not the same
+as the number of values to interleave, the “extra” elements should end up at the end of the result.
 
 
 '''
 
-def interleave():
+
+def interleave(toInterleave, *values):
+    interwoven = []
+    length1 = len(toInterleave)
+    length2 = len(values)
+
+    for i in range(max(len(length1, length2))):
+        if i < length1:
+            interwoven.append(toInterleave[i])
+        if i < length2:
+            interwoven.append(values[i])
+
+    return interwoven
+
 
 '''
 
-A function that accepts three arguments: a crypto key, a crypto algorithm, and an initialization vector, and returns an array of two functions. The first returned function is an encryption function that encrypts a string into a hex string, and the second is a decryption function that decrypts the hex string into a string. Use the functions createCipheriv and createDecipheriv from the built-in Node crypto module. 
+A function that accepts a Fernet key and returns a tuple of two functions. The first function encrypts a
+bytes object with the key. The second decrypts. Both functions accept a bytes object and return a bytes object.
+Use the cryptography package. You are responsible for reading the documentation for the package;
+we are not going over this in class.
 
 '''
 
-def crypto():
+
+def make_crypto_functions():
+    return
+
 
 '''
 
-A function that returns the top ten players by points-per-game among the players that have been in 15 games or more. The input to your function will be an object, keyed by team, with a list of player stats. Each player stat is an array with the player name, the number of games played, and the total number of points, for example: 
+A function that returns the top ten players by points-per-game among the players that have been in 15 games or more.
+The input to your function will be a dictionary, keyed by team, with a list of player stats. Each player stat is a list
+with the player name, the number of games played, and the total number of points, exactly as in Homework 1.
 
 '''
+
 
 def top_ten_scorers():
+    return
 
 
-def random_name():
+'''
+
+A function that returns a list of people from the Studio Ghibli API. This function should use the requests module and you are to fetch the data synchronously. Require exactly two search parameters hair_color and gender and require that they be passed as kwargs. Your function should return the list of people from the API search as dictionaries with the keys name, gender, age, eye_color, and hair_color.
+
+'''
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def studio_ghibli_characters():
+    return
