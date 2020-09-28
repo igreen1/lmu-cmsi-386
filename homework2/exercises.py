@@ -43,14 +43,14 @@ Output: input string with no white space and repeated characters based on positi
 '''
 
 
-def stretched(input):
-    input = "".join(input.split())
-    output = ""
+def stretched(toStretch):
+    toStretch = "".join(toStretch.split())
+    stretched = ""
 
-    for i in range(0, len(input)):
-        output += input[i]*(i+1)
+    for i in range(0, len(toStretch)):
+        stretched += toStretch[i]*(i+1)
 
-    return output
+    return stretched
 
 
 '''
@@ -64,17 +64,17 @@ Output: input string permuted randomly
 '''
 
 
-def scramble(input):
-    if len(input) <= 0:
-        return input
+def scramble(toScramble):
+    if len(toScramble) <= 0:
+        return toScramble
 
-    output = ""
-    while len(input) > 0:
-        i = math.floor(random.random() * len(input))
-        output = output + input[i]
-        input = input[:i] + input[i + 1:]
+    scrambled = ""
+    while len(toScramble) > 0:
+        i = math.floor(random.random() * len(toScramble))
+        scrambled = scrambled + toScramble[i]
+        toScramble = toScramble[:i] + toScramble[i + 1:]
 
-    return output
+    return scrambled
 
 
 '''
@@ -136,12 +136,12 @@ def say(input=None):
     if input is None:
         return ""
     else:
-        def connectStrings(nextInput=None):
+        def connect(nextInput=None):
             if nextInput is None:
                 return input
             else:
                 return say(input + " " + nextInput)
-        return connectStrings
+        return connect
 
 
 '''
@@ -183,6 +183,7 @@ def make_crypto_functions(key):
 
     def decryption(toDecrypt):
         return Fernet(key).decrypt(toDecrypt)
+
     return(encryption, decryption)
 
 
