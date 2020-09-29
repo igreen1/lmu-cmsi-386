@@ -219,6 +219,6 @@ with the keys name, gender, age, eye_color, and hair_color.
 
 # TOAL WANTS KWARGS -- DOES HE WANT DEFAULT VALUE TO BE ""??
 def studio_ghibli_characters(*, hair_color, gender):
-    request = requests.get("https://ghibliapi.herokuapp.com/people").text
-    characters = json.loads(request)
+    characters = json.loads(requests.get(
+        "https://ghibliapi.herokuapp.com/people").text)
     return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'], 'hair_color': character['hair_color']} for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
