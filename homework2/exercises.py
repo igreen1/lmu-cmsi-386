@@ -67,7 +67,7 @@ Output: input string permuted randomly
 
 def scramble(toScramble):
     if len(toScramble) <= 0:
-        return toScramble
+        return toScramble  # SHOULD WE BE RETURNING THE STRING IN THIS CASE??
 
     scrambled = ""
     while len(toScramble) > 0:
@@ -131,7 +131,7 @@ returns the words previously passed, in order, separated by a single space.
 '''
 
 
-def say(input=None):
+def say(input=None):  # improve variable names
     if input is None:
         return ""
     else:
@@ -195,8 +195,15 @@ with the player name, the number of games played, and the total number of points
 '''
 
 
-def top_ten_scorers(teamsAndPlayers):
-    return
+def top_ten_scorers(teamsAndPlayers):  # DUNNO IF THIS SHOULD BE ONE LINE??
+    topScorers = []
+    for team, players in teamsAndPlayers.items():
+        for player in players:
+            if player[1] >= 15:
+                topScorers.append(
+                    {'name': player[0], 'ppg': player[2]/player[1], 'team': team})
+
+    return sorted(topScorers, key=lambda scorer: scorer['ppg'], reverse=True)[:10]
 
 
 '''
