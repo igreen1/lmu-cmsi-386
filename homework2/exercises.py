@@ -4,6 +4,7 @@ import pytest
 import random
 from cryptography.fernet import Fernet
 import requests
+import json
 
 '''
 
@@ -213,6 +214,8 @@ A function that returns a list of people from the Studio Ghibli API. This functi
 '''
 
 
+# TOAL WANTS KWARGS -- DOES HE WANT DEFAULT VALUE TO BE ""??
 def studio_ghibli_characters(hair_color="", gender=""):
-    characters = requests.get("https://ghibliapi.herokuapp.com/people")
-    return characters.text
+    request = requests.get("https://ghibliapi.herokuapp.com/people").text
+    characters = json.loads(request)
+    return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'], 'hair_color': character['hair_color']} for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
