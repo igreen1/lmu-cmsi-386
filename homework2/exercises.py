@@ -67,9 +67,6 @@ Output: input string permuted randomly
 
 
 def scramble(toScramble):
-    if len(toScramble) <= 0:
-        return toScramble  # SHOULD WE BE RETURNING THE STRING IN THIS CASE??
-
     scrambled = ""
     while len(toScramble) > 0:
         i = math.floor(random.random() * len(toScramble))
@@ -136,12 +133,12 @@ def say(input=None):  # improve variable names
     if input is None:
         return ""
     else:
-        def connect(nextInput=None):
+        def join_with_space(nextInput=None):
             if nextInput is None:
                 return input
             else:
                 return say(input + " " + nextInput)
-        return connect
+        return join_with_space
 
 
 '''
