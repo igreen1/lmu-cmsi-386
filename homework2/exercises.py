@@ -209,13 +209,16 @@ def top_ten_scorers(teamsAndPlayers):  # DUNNO IF THIS SHOULD BE ONE LINE??
 
 '''
 
-A function that returns a list of people from the Studio Ghibli API. This function should use the requests module and you are to fetch the data synchronously. Require exactly two search parameters hair_color and gender and require that they be passed as kwargs. Your function should return the list of people from the API search as dictionaries with the keys name, gender, age, eye_color, and hair_color.
+A function that returns a list of people from the Studio Ghibli API. This function should use the requests module
+and you are to fetch the data synchronously. Require exactly two search parameters hair_color and gender and require
+that they be passed as kwargs. Your function should return the list of people from the API search as dictionaries
+with the keys name, gender, age, eye_color, and hair_color.
 
 '''
 
 
 # TOAL WANTS KWARGS -- DOES HE WANT DEFAULT VALUE TO BE ""??
-def studio_ghibli_characters(hair_color="", gender=""):
+def studio_ghibli_characters(*, hair_color, gender):
     request = requests.get("https://ghibliapi.herokuapp.com/people").text
     characters = json.loads(request)
     return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'], 'hair_color': character['hair_color']} for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
