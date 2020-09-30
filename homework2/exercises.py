@@ -150,17 +150,14 @@ as the number of values to interleave, the “extra” elements should end up at
 
 
 def interleave(a, *b):
+    minimum = min(len(a), len(b))
     interwoven = []
-    a_length = len(a)
-    b_length = len(b)
 
-    for i in range(max(a_length, b_length)):
-        if i < a_length:
-            interwoven.append(a[i])
-        if i < b_length:
-            interwoven.append(b[i])
+    for i in range(0, minimum):
+        interwoven.append(a[i])
+        interwoven.append(b[i])
 
-    return interwoven
+    return interwoven + a[minimum:] + list(b[minimum:])
 
 
 '''
