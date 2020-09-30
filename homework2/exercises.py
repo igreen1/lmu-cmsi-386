@@ -128,7 +128,7 @@ returns the words previously passed, in order, separated by a single space.
 '''
 
 
-def say(first=None):  # NOT SURE IF "" is NONE IS BEST WAY TO CHECK FOR ARGS
+def say(first=None):  # NOT SURE IF "" is None IS BEST WAY TO CHECK FOR ARGS
     if first is None:
         return ""
     else:
@@ -142,7 +142,7 @@ def say(first=None):  # NOT SURE IF "" is NONE IS BEST WAY TO CHECK FOR ARGS
 
 '''
 
-A function that interleaves an list with a bunch of values. If the list length is not the same
+A function that interleaves a list with a bunch of values. If the list length is not the same
 as the number of values to interleave, the “extra” elements should end up at the end of the result.
 
 
@@ -193,14 +193,14 @@ with the player name, the number of games played, and the total number of points
 
 
 def top_ten_scorers(stats):  # DUNNO IF THIS SHOULD BE ONE LINE??
-    topScorers = []
+    top_scorers = []
     for team, players in stats.items():
         for player in players:
             if player[1] >= 15:
-                topScorers.append(
+                top_scorers.append(
                     {'name': player[0], 'ppg': player[2]/player[1], 'team': team})
 
-    return sorted(topScorers, key=lambda scorer: scorer['ppg'], reverse=True)[:10]
+    return sorted(top_scorers, key=lambda scorer: scorer['ppg'], reverse=True)[:10]
 
 
 '''
