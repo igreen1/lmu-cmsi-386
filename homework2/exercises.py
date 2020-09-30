@@ -17,20 +17,18 @@ Return [quarters, dimes, nickels, pennies]
 '''
 
 
-def change(total_cents):  # watch his javascript solution from class to fix names & update solution
+def change(total_cents):
     if total_cents < 0:
         raise ValueError(
             "amount cannot be negative")
 
     denominations = (25, 10, 5, 1)
-    denominations_used = [0, 0, 0, 0]
-    remaining_cents = total_cents
-    denominationUses = 0  # HE WILL TAKE OFF POINTS FOR NAMES LIKE "TEMP"
+    denominations_used = []
+    remaining = total_cents
 
-    for i in range(len(denominations)):
-        denominationUses = math.floor(remaining_cents/denominations[i])
-        remaining_cents = remaining_cents - denominationUses * denominations[i]
-        denominations_used[i] = denominationUses
+    for denomination in denominations:
+        denominations_used.append(math.floor(remaining/denomination))
+        remaining %= denomination
 
     return tuple(denominations_used)
 
@@ -45,12 +43,12 @@ Output: input string with no white space and repeated characters based on positi
 '''
 
 
-def stretched(toStretch):
-    toStretch = "".join(toStretch.split())
+def stretched(s):
+    s = "".join(s.split())
     stretched = ""
 
-    for i in range(0, len(toStretch)):
-        stretched += toStretch[i]*(i+1)
+    for i in range(0, len(s)):
+        stretched += s[i]*(i+1)
 
     return stretched
 
@@ -66,12 +64,13 @@ Output: input string permuted randomly
 '''
 
 
-def scramble(toScramble):
+def scramble(s):
     scrambled = ""
-    while len(toScramble) > 0:
-        i = math.floor(random.random() * len(toScramble))
-        scrambled = scrambled + toScramble[i]
-        toScramble = toScramble[:i] + toScramble[i + 1:]
+
+    while len(s) > 0:
+        i = math.floor(random.random() * len(s))
+        scrambled = scrambled + s[i]
+        s = s[:i] + s[i + 1:]
 
     return scrambled
 
@@ -129,15 +128,15 @@ returns the words previously passed, in order, separated by a single space.
 '''
 
 
-def say(input=None):  # improve variable names
-    if input is None:
+def say(first=None):  # NOT SURE IF "" is NONE IS BEST WAY TO CHECK FOR ARGS
+    if first is None:
         return ""
     else:
-        def join_with_space(nextInput=None):
-            if nextInput is None:
-                return input
+        def join_with_space(second=None):
+            if second is None:
+                return first
             else:
-                return say(input + " " + nextInput)
+                return say(first + " " + second)
         return join_with_space
 
 
@@ -150,16 +149,16 @@ as the number of values to interleave, the “extra” elements should end up at
 '''
 
 
-def interleave(toInterleave, *values):
+def interleave(a, *b):
     interwoven = []
-    length1 = len(toInterleave)
-    length2 = len(values)
+    a_length = len(a)
+    b_length = len(b)
 
-    for i in range(max(length1, length2)):
-        if i < length1:
-            interwoven.append(toInterleave[i])
-        if i < length2:
-            interwoven.append(values[i])
+    for i in range(max(a_length, b_length)):
+        if i < a_length:
+            interwoven.append(a[i])
+        if i < b_length:
+            interwoven.append(b[i])
 
     return interwoven
 
@@ -175,11 +174,11 @@ we are not going over this in class.
 
 
 def make_crypto_functions(key):
-    def encryption(toEncrypt):
-        return Fernet(key).encrypt(toEncrypt)
+    def encryption(to_encrypt):
+        return Fernet(key).encrypt(to_encrypt)
 
-    def decryption(toDecrypt):
-        return Fernet(key).decrypt(toDecrypt)
+    def decryption(to_decrypt):
+        return Fernet(key).decrypt(to_decrypt)
 
     return(encryption, decryption)
 
@@ -193,9 +192,9 @@ with the player name, the number of games played, and the total number of points
 '''
 
 
-def top_ten_scorers(teamsAndPlayers):  # DUNNO IF THIS SHOULD BE ONE LINE??
+def top_ten_scorers(stats):  # DUNNO IF THIS SHOULD BE ONE LINE??
     topScorers = []
-    for team, players in teamsAndPlayers.items():
+    for team, players in stats.items():
         for player in players:
             if player[1] >= 15:
                 topScorers.append(
@@ -214,8 +213,8 @@ with the keys name, gender, age, eye_color, and hair_color.
 '''
 
 
-# TOAL WANTS KWARGS -- DOES HE WANT DEFAULT VALUE TO BE ""??
 def studio_ghibli_characters(*, hair_color, gender):
     characters = json.loads(requests.get(
         "https://ghibliapi.herokuapp.com/people").text)
-    return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'], 'hair_color': character['hair_color']} for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
+    return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'], 'hair_color': character['hair_color']}
+            for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
