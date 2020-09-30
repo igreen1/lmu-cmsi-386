@@ -69,7 +69,7 @@ def scramble(s):
 
     while len(s) > 0:
         i = math.floor(random.random() * len(s))
-        scrambled = scrambled + s[i]
+        scrambled += s[i]
         s = s[:i] + s[i + 1:]
 
     return scrambled
