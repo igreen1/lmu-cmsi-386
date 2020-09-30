@@ -189,15 +189,9 @@ with the player name, the number of games played, and the total number of points
 '''
 
 
-def top_ten_scorers(stats):  # DUNNO IF THIS SHOULD BE ONE LINE??
-    top_scorers = []
-    for team, players in stats.items():
-        for player in players:
-            if player[1] >= 15:
-                top_scorers.append(
-                    {'name': player[0], 'ppg': player[2]/player[1], 'team': team})
-
-    return sorted(top_scorers, key=lambda scorer: scorer['ppg'], reverse=True)[:10]
+def top_ten_scorers(stats):
+    return sorted([{'name': player[0], 'ppg': player[2]/player[1], 'team': team}
+                   for team, players in stats.items() for player in players if player[1] >= 15], key=lambda scorer: scorer['ppg'], reverse=True)[:10]
 
 
 '''
