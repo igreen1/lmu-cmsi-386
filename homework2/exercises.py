@@ -24,11 +24,11 @@ def change(total_cents):
 
     denominations = (25, 10, 5, 1)
     denominations_used = []
-    remaining = total_cents
+    remaining_cents = total_cents
 
     for denomination in denominations:
-        denominations_used.append(math.floor(remaining / denomination))
-        remaining %= denomination
+        denominations_used.append(math.floor(remaining_cents / denomination))
+        remaining_cents %= denomination
 
     return tuple(denominations_used)
 
@@ -99,10 +99,10 @@ class Cylinder():
             (2 * math.pi * (self.radius ** 2))
 
     def widen(self, factor):
-        self.radius = self.radius * factor
+        self.radius *= factor
 
     def stretch(self, factor):
-        self.height = self.height * factor
+        self.height *= factor
 
 
 '''
@@ -117,7 +117,7 @@ def powers(base, limit):
     power = 1
     while power <= limit:
         yield power
-        power = power * base
+        power *= base
 
 
 '''
@@ -129,16 +129,16 @@ returns the words previously passed, in order, separated by a single space.
 '''
 
 
-def say(first=None):  # NOT SURE IF "" is None IS BEST WAY TO CHECK FOR ARGS
-    if first is None:
+def say(first=None):
+    if first == None:
         return ""
-    else:
-        def join_with_space(second=None):
-            if second is None:
-                return first
-            else:
-                return say(first + " " + second)
-        return join_with_space
+
+    def join_with_space(second=None):
+        if second == None:
+            return first
+        return say(first + " " + second)
+
+    return join_with_space
 
 
 '''
@@ -151,14 +151,14 @@ as the number of values to interleave, the “extra” elements should end up at
 
 
 def interleave(a, *b):
-    minimum = min(len(a), len(b))
+    minimum_length = min(len(a), len(b))
     interwoven = []
 
-    for i in range(0, minimum):
+    for i in range(0, minimum_length):
         interwoven.append(a[i])
         interwoven.append(b[i])
 
-    return interwoven + a[minimum:] + list(b[minimum:])
+    return interwoven + a[minimum_length:] + list(b[minimum_length:])
 
 
 '''
