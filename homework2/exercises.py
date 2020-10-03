@@ -130,11 +130,11 @@ returns the words previously passed, in order, separated by a single space.
 
 
 def say(first=None):
-    if first == None:
+    if first is None:
         return ""
 
     def join_with_space(second=None):
-        if second == None:
+        if second is None:
             return first
         return say(first + " " + second)
 
