@@ -13,9 +13,19 @@ def test_change():
     assert change(250) == (10, 0, 0, 0)
     assert change(144) == (5, 1, 1, 4)
     assert change(97) == (3, 2, 0, 2)
+    assert change(99) == (3, 2, 0, 4)
     assert change(100000000000) == (4000000000, 0, 0, 0)
     with pytest.raises(ValueError) as excinfo:
         change(-50)
+    assert str(excinfo.value) == 'amount cannot be negative'
+    with pytest.raises(ValueError) as excinfo:
+        change(.5)
+    assert str(excinfo.value) == 'amount cannot be a decimal'
+    with pytest.raises(ValueError) as excinfo:
+        change(10000.005)
+    assert str(excinfo.value) == "amount cannot be a decimal"
+    with pytest.raises(ValueError) as excinfo:
+        change(-0.5)
     assert str(excinfo.value) == 'amount cannot be negative'
 
 
@@ -25,6 +35,9 @@ def test_stretched():
     assert stretched('$#') == '$##'
     assert stretched('       ') == ''
     assert stretched('A = πr²') == 'A==πππrrrr²²²²²'
+    assert stretched('😂😱🎃') == '😂😱😱🎃🎃🎃'
+    assert stretched('     😂  😱 🎃   ') == '😂😱😱🎃🎃🎃'
+    assert stretched('۱ ۲۳  ؀') == '۱۲۲۳۳۳؀؀؀؀'
 
 
 def test_scramble():
@@ -90,6 +103,14 @@ def test_interleave():
     assert interleave([1], 9) == [1, 9]
     assert interleave([8, 8, 3, 9], 1) == [8, 1, 8, 3, 9]
     assert interleave([2], 7, '8', {}) == [2, 7, '8', {}]
+    assert interleave([{"brand": "Ford", "model": "Mustang"},
+                        {"brand": "Honda", "model": "Ridgeline"}],
+                        {"brand": "Honda", "model": "Odyssey"} ==
+                        [
+                            {"brand": "Ford", "model": "Mustang"},
+                            {"brand": "Honda", "model": "Odyssey"},
+                            {"brand": "Honda", "model": "Ridgeline"}
+                        ])
     a = [1, 2, 3, 4]
     assert interleave(a, 10, 20, 30) == [1, 10, 2, 20, 3, 30, 4]
     # Test input list not destroyed

@@ -21,7 +21,9 @@ def change(total_cents):
     if total_cents < 0:
         raise ValueError(
             "amount cannot be negative")
-
+    if (isinstance(total_cents, float)):
+        raise ValueError(
+            "amount cannot be a decimal")
     denominations = (25, 10, 5, 1)
     denominations_used = []
     remaining_cents = total_cents
@@ -43,12 +45,12 @@ Output: input string with no white space and repeated characters based on positi
 '''
 
 
-def stretched(s):
-    s = "".join(s.split())
+def stretched(input_string):  # CHECK SLACK- Toal had bug with emojis he might want fixed for this
+    input_string = "".join(input_string.split())
     stretched = ""
 
-    for i in range(0, len(s)):
-        stretched += s[i] * (i + 1)
+    for num in range(0, len(input_string)):
+        stretched += input_string[num] * (num + 1)
 
     return stretched
 
@@ -64,13 +66,13 @@ Output: input string permuted randomly
 '''
 
 
-def scramble(s):
+def scramble(input_string):
     scrambled = ""
 
-    while len(s) > 0:
-        i = math.floor(random.random() * len(s))
-        scrambled += s[i]
-        s = s[:i] + s[i + 1:]
+    while len(input_string) > 0:
+        random_character = math.floor(random.random() * len(input_string))
+        scrambled += input_string[random_character]
+        input_string = input_string[:random_character] + input_string[random_character + 1:]
 
     return scrambled
 
@@ -150,15 +152,15 @@ as the number of values to interleave, the “extra” elements should end up at
 '''
 
 
-def interleave(a, *b):
-    minimum_length = min(len(a), len(b))
+def interleave(list_to_interleave, *values_to_interleave):
+    minimum_length = min(len(list_to_interleave), len(values_to_interleave))
     interwoven = []
 
-    for i in range(0, minimum_length):
-        interwoven.append(a[i])
-        interwoven.append(b[i])
+    for num in range(0, minimum_length):
+        interwoven.append(list_to_interleave[num])
+        interwoven.append(values_to_interleave[num])
 
-    return interwoven + a[minimum_length:] + list(b[minimum_length:])
+    return interwoven + list_to_interleave[minimum_length:] + list(values_to_interleave[minimum_length:])
 
 
 '''
