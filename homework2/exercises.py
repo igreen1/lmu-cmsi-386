@@ -43,7 +43,7 @@ Output: input string with no white space and repeated characters based on positi
 '''
 
 
-def stretched(s):  # CHECK SLACK- Toal had bug with emojis he might want fixed for this
+def stretched(s):
     s = "".join(s.split())
     stretched = ""
 
