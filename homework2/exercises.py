@@ -26,11 +26,11 @@ def change(total_cents):
             "amount cannot be a decimal")
     denominations = (25, 10, 5, 1)
     denominations_used = []
-    remaining = total_cents
+    remaining_cents = total_cents
 
     for denomination in denominations:
-        denominations_used.append(math.floor(remaining / denomination))
-        remaining %= denomination
+        denominations_used.append(math.floor(remaining_cents / denomination))
+        remaining_cents %= denomination
 
     return tuple(denominations_used)
 
@@ -101,10 +101,10 @@ class Cylinder():
             (2 * math.pi * (self.radius ** 2))
 
     def widen(self, factor):
-        self.radius = self.radius * factor
+        self.radius *= factor
 
     def stretch(self, factor):
-        self.height = self.height * factor
+        self.height *= factor
 
 
 '''
@@ -119,7 +119,7 @@ def powers(base, limit):
     power = 1
     while power <= limit:
         yield power
-        power = power * base
+        power *= base
 
 
 '''
@@ -131,16 +131,16 @@ returns the words previously passed, in order, separated by a single space.
 '''
 
 
-def say(first=None):  # NOT SURE IF "" is None IS BEST WAY TO CHECK FOR ARGS
-    if first is None:
+def say(first=None):
+    if first == None:
         return ""
-    else:
-        def join_with_space(second=None):
-            if second is None:
-                return first
-            else:
-                return say(first + " " + second)
-        return join_with_space
+
+    def join_with_space(second=None):
+        if second == None:
+            return first
+        return say(first + " " + second)
+
+    return join_with_space
 
 
 '''
@@ -153,14 +153,14 @@ as the number of values to interleave, the “extra” elements should end up at
 
 
 def interleave(list_to_interleave, *values_to_interleave):
-    minimum = min(len(list_to_interleave), len(values_to_interleave))
+    minimum_length = min(len(list_to_interleave), len(values_to_interleave))
     interwoven = []
 
-    for num in range(0, minimum):
+    for num in range(0, minimum_length):
         interwoven.append(list_to_interleave[num])
         interwoven.append(values_to_interleave[num])
 
-    return interwoven + list_to_interleave[minimum:] + list(values_to_interleave[minimum:])
+    return interwoven + list_to_interleave[minimum_length:] + list(values_to_interleave[minimum_length:])
 
 
 '''
