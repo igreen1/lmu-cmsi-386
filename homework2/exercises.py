@@ -8,10 +8,10 @@ import json
 
 '''
 
-A function that accepts a number of U.S. cents and returns an 
-    array containing, respectively, the smallest number of U.S. 
-    quarters, dimes, nickels, and pennies that equal the given amount. 
-Input: # of US cents 
+A function that accepts a number of U.S. cents and returns an
+    array containing, respectively, the smallest number of U.S.
+    quarters, dimes, nickels, and pennies that equal the given amount.
+Input: # of US cents
 Return [quarters, dimes, nickels, pennies]
 
 '''
@@ -27,7 +27,7 @@ def change(total_cents):
     remaining = total_cents
 
     for denomination in denominations:
-        denominations_used.append(math.floor(remaining/denomination))
+        denominations_used.append(math.floor(remaining / denomination))
         remaining %= denomination
 
     return tuple(denominations_used)
@@ -35,29 +35,29 @@ def change(total_cents):
 
 '''
 
-A function that accepts a string and returns a new string equal to the initial string with all 
-    whitespace removed and then with the ith character (1-based) repeated i times. 
-Input: string 
+A function that accepts a string and returns a new string equal to the initial string with all
+    whitespace removed and then with the ith character (1-based) repeated i times.
+Input: string
 Output: input string with no white space and repeated characters based on position
 
 '''
 
 
-def stretched(s):
+def stretched(s):  # CHECK SLACK- Toal had bug with emojis he might want fixed for this
     s = "".join(s.split())
     stretched = ""
 
     for i in range(0, len(s)):
-        stretched += s[i]*(i+1)
+        stretched += s[i] * (i + 1)
 
     return stretched
 
 
 '''
 
-A function that randomly permutes a string. What does random mean? It means that each time you 
-    call the function for a given argument, all possible permutations are equally likely. 
-    Random is not the same as arbitrary. 
+A function that randomly permutes a string. What does random mean? It means that each time you
+    call the function for a given argument, all possible permutations are equally likely.
+    Random is not the same as arbitrary.
 Input: string
 Output: input string permuted randomly
 
@@ -95,7 +95,8 @@ class Cylinder():
 
     @property
     def surface_area(self):
-        return (2 * math.pi * self.radius * self.height) + (2 * math.pi * (self.radius ** 2))
+        return (2 * math.pi * self.radius * self.height) + \
+            (2 * math.pi * (self.radius ** 2))
 
     def widen(self, factor):
         self.radius = self.radius * factor
@@ -106,7 +107,7 @@ class Cylinder():
 
 '''
 
-A function that yields successive powers of a base starting at the 0th power, namely 1, and going up to some limit. Consume the values with a callback. 
+A function that yields successive powers of a base starting at the 0th power, namely 1, and going up to some limit. Consume the values with a callback.
 
 
 '''
@@ -116,7 +117,7 @@ def powers(base, limit):
     power = 1
     while power <= limit:
         yield power
-        power = power*base
+        power = power * base
 
 
 '''
@@ -190,8 +191,14 @@ with the player name, the number of games played, and the total number of points
 
 
 def top_ten_scorers(stats):
-    return sorted([{'name': player[0], 'ppg': player[2]/player[1], 'team': team}
-                   for team, players in stats.items() for player in players if player[1] >= 15], key=lambda scorer: scorer['ppg'], reverse=True)[:10]
+    return sorted([{'name': name,
+                    'ppg': points / game,
+                    'team': team} for team,
+                   players in stats.items() for name,
+                   game,
+                   points in players if game >= 15],
+                  key=lambda scorer: scorer['ppg'],
+                  reverse=True)[:10]
 
 
 '''
@@ -207,5 +214,5 @@ with the keys name, gender, age, eye_color, and hair_color.
 def studio_ghibli_characters(*, hair_color, gender):
     characters = json.loads(requests.get(
         "https://ghibliapi.herokuapp.com/people").text)
-    return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'], 'hair_color': character['hair_color']}
-            for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
+    return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'],
+             'hair_color': character['hair_color']} for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
