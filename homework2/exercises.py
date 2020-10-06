@@ -72,7 +72,8 @@ def scramble(input_string):
     while len(input_string) > 0:
         random_character = math.floor(random.random() * len(input_string))
         scrambled += input_string[random_character]
-        input_string = input_string[:random_character] + input_string[random_character + 1:]
+        input_string = input_string[:random_character] + \
+            input_string[random_character + 1:]
 
     return scrambled
 
@@ -196,9 +197,9 @@ def top_ten_scorers(stats):
     return sorted([{'name': name,
                     'ppg': points / game,
                     'team': team} for team,
-                   players in stats.items() for name,
-                   game,
-                   points in players if game >= 15],
+                   players in stats.items()
+                   for name, game, points
+                   in players if game >= 15],
                   key=lambda scorer: scorer['ppg'],
                   reverse=True)[:10]
 
@@ -216,5 +217,7 @@ with the keys name, gender, age, eye_color, and hair_color.
 def studio_ghibli_characters(*, hair_color, gender):
     characters = requests.get(
         "https://ghibliapi.herokuapp.com/people").json()
-    return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'],
-             'hair_color': character['hair_color']} for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
+    return [{'name': character['name'], 'gender': character['gender'],
+             'age': character['age'], 'eye_color': character['eye_color'],
+             'hair_color': character['hair_color']} for character in characters
+            if character['hair_color'] == hair_color and character['gender'] == gender]
