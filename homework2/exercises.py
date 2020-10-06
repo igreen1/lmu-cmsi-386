@@ -214,7 +214,7 @@ with the keys name, gender, age, eye_color, and hair_color.
 
 
 def studio_ghibli_characters(*, hair_color, gender):
-    characters = json.loads(requests.get(
-        "https://ghibliapi.herokuapp.com/people").text)
+    characters = requests.get(
+        "https://ghibliapi.herokuapp.com/people").json()
     return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'],
              'hair_color': character['hair_color']} for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
