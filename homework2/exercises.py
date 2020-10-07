@@ -26,7 +26,7 @@ def change(total_cents):
     if total_cents < 0:
         raise ValueError(
             "amount cannot be negative")
-    if (isinstance(total_cents, float)):
+    if isinstance(total_cents, float):
         raise ValueError(
             "amount cannot be a decimal")
     
