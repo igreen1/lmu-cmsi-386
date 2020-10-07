@@ -221,7 +221,8 @@ with the keys name, gender, age, eye_color, and hair_color.
 
 
 def studio_ghibli_characters(*, hair_color, gender):
-    response = requests.get("https://ghibliapi.herokuapp.com/people")
+    params = {'hair_color': hair_color, 'gender': gender}
+    response = requests.get("https://ghibliapi.herokuapp.com/people", params=params)
 
     if response.status_code not in range (200, 300):
         raise ValueError(f"API says {response.status_code}")
@@ -229,5 +230,4 @@ def studio_ghibli_characters(*, hair_color, gender):
     characters = response.json()
     return [{'name': character['name'], 'gender': character['gender'],
              'age': character['age'], 'eye_color': character['eye_color'],
-             'hair_color': character['hair_color']} for character in characters
-            if character['hair_color'] == hair_color and character['gender'] == gender]
+             'hair_color': character['hair_color']} for character in characters]
