@@ -51,12 +51,12 @@ Output: input string with no white space and repeated characters based on positi
 '''
 
 
-def stretched(input_string):
-    input_string = "".join(input_string.split())
+def stretched(s):
+    s = "".join(s.split())
     stretched = ""
 
-    for num in range(0, len(input_string)):
-        stretched += input_string[num] * (num + 1)
+    for num in range(0, len(s)):
+        stretched += s[num] * (num + 1)
 
     return stretched
 
@@ -72,14 +72,14 @@ Output: input string permuted randomly
 '''
 
 
-def scramble(input_string):
+def scramble(s):
     scrambled = ""
 
-    while len(input_string) > 0:
-        random_character = math.floor(random.random() * len(input_string))
-        scrambled += input_string[random_character]
-        input_string = input_string[:random_character] + \
-            input_string[random_character + 1:]
+    while len(s) > 0:
+        random_character = math.floor(random.random() * len(s))
+        scrambled += s[random_character]
+        s = s[:random_character] + \
+            s[random_character + 1:]
 
     return scrambled
 
