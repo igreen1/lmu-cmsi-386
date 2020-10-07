@@ -55,8 +55,8 @@ def stretched(s):
     s = "".join(s.split())
     stretched = ""
 
-    for num in range(0, len(s)):
-        stretched += s[num] * (num + 1)
+    for i in range(0, len(s)):
+        stretched += s[i] * (i + 1)
 
     return stretched
 
@@ -76,10 +76,10 @@ def scramble(s):
     scrambled = ""
 
     while len(s) > 0:
-        random_character = math.floor(random.random() * len(s))
-        scrambled += s[random_character]
-        s = s[:random_character] + \
-            s[random_character + 1:]
+        i = math.floor(random.random() * len(s))
+        scrambled += s[i]
+        s = s[:i] + \
+            s[i + 1:]
 
     return scrambled
 
@@ -159,15 +159,15 @@ as the number of values to interleave, the “extra” elements should end up at
 '''
 
 
-def interleave(list_to_interleave, *values_to_interleave):
-    minimum_length = min(len(list_to_interleave), len(values_to_interleave))
+def interleave(a, *b):
+    minimum_length = min(len(a), len(b))
     interwoven = []
 
-    for num in range(0, minimum_length):
-        interwoven.append(list_to_interleave[num])
-        interwoven.append(values_to_interleave[num])
+    for i in range(0, minimum_length):
+        interwoven.append(a[i])
+        interwoven.append(b[i])
 
-    return interwoven + list_to_interleave[minimum_length:] + list(values_to_interleave[minimum_length:])
+    return interwoven + a[minimum_length:] + list(b[minimum_length:])
 
 
 '''
