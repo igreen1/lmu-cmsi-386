@@ -1,3 +1,8 @@
+'''
+Homework 2 by Andrew Seaman, Booker Martin, Ian Green, Veronica Backer-Peral
+'''
+
+
 import re
 import math
 import pytest
