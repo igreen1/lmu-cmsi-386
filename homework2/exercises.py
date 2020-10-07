@@ -29,7 +29,7 @@ def change(total_cents):
     if total_cents % 1 != 0:
         raise ValueError(
             "amount cannot be a decimal")
-    
+
     denominations = (25, 10, 5, 1)
     denominations_used = []
     remaining_cents = total_cents
@@ -37,7 +37,7 @@ def change(total_cents):
     for denomination in denominations:
         denominations_used.append(math.floor(remaining_cents / denomination))
         remaining_cents %= denomination
-        
+
     return tuple(denominations_used)
 
 
