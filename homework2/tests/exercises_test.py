@@ -16,7 +16,6 @@ def test_change():
     assert change(99) == (3, 2, 0, 4)
     assert change(99.0) == (3, 2, 0, 4)
     assert change(100000000000) == (4000000000, 0, 0, 0)
-    assert change(33.3) == (1, 0, 1, 3.3)
     with pytest.raises(ValueError) as excinfo:
         change(-50)
     assert str(excinfo.value) == 'amount cannot be negative'
