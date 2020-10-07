@@ -29,6 +29,7 @@ def change(total_cents):
     if (isinstance(total_cents, float)):
         raise ValueError(
             "amount cannot be a decimal")
+    
     denominations = (25, 10, 5, 1)
     denominations_used = []
     remaining_cents = total_cents
@@ -36,7 +37,7 @@ def change(total_cents):
     for denomination in denominations:
         denominations_used.append(math.floor(remaining_cents / denomination))
         remaining_cents %= denomination
-
+        
     return tuple(denominations_used)
 
 
@@ -220,8 +221,12 @@ with the keys name, gender, age, eye_color, and hair_color.
 
 
 def studio_ghibli_characters(*, hair_color, gender):
-    characters = requests.get(
-        "https://ghibliapi.herokuapp.com/people").json()
+    response = requests.get("https://ghibliapi.herokuapp.com/people")
+
+    if response.status_code not in range (200, 300):
+        raise ValueError(f"API says {response.status_code}")
+
+    characters = response.json()
     return [{'name': character['name'], 'gender': character['gender'],
              'age': character['age'], 'eye_color': character['eye_color'],
              'hair_color': character['hair_color']} for character in characters
