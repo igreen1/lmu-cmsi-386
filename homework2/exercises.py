@@ -1,3 +1,8 @@
+'''
+Homework 2 by Andrew Seaman, Booker Martin, Ian Green, Veronica Backer-Peral
+'''
+
+
 import re
 import math
 import pytest
@@ -43,12 +48,12 @@ Output: input string with no white space and repeated characters based on positi
 '''
 
 
-def stretched(input_string):  # CHECK SLACK- Toal had bug with emojis he might want fixed for this
-    input_string = "".join(input_string.split())
+def stretched(s):
+    s = "".join(s.split())
     stretched = ""
 
-    for num in range(0, len(input_string)):
-        stretched += input_string[num] * (num + 1)
+    for num in range(0, len(s)):
+        stretched += s[num] * (num + 1)
 
     return stretched
 
@@ -64,13 +69,14 @@ Output: input string permuted randomly
 '''
 
 
-def scramble(input_string):
+def scramble(s):
     scrambled = ""
 
-    while len(input_string) > 0:
-        random_character = math.floor(random.random() * len(input_string))
-        scrambled += input_string[random_character]
-        input_string = input_string[:random_character] + input_string[random_character + 1:]
+    while len(s) > 0:
+        random_character = math.floor(random.random() * len(s))
+        scrambled += s[random_character]
+        s = s[:random_character] + \
+            s[random_character + 1:]
 
     return scrambled
 
@@ -130,11 +136,11 @@ returns the words previously passed, in order, separated by a single space.
 
 
 def say(first=None):
-    if first == None:
+    if first is None:
         return ""
 
     def join_with_space(second=None):
-        if second == None:
+        if second is None:
             return first
         return say(first + " " + second)
 
@@ -192,9 +198,9 @@ def top_ten_scorers(stats):
     return sorted([{'name': name,
                     'ppg': points / game,
                     'team': team} for team,
-                   players in stats.items() for name,
-                   game,
-                   points in players if game >= 15],
+                   players in stats.items()
+                   for name, game, points
+                   in players if game >= 15],
                   key=lambda scorer: scorer['ppg'],
                   reverse=True)[:10]
 
@@ -210,7 +216,13 @@ with the keys name, gender, age, eye_color, and hair_color.
 
 
 def studio_ghibli_characters(*, hair_color, gender):
-    characters = json.loads(requests.get(
-        "https://ghibliapi.herokuapp.com/people").text)
-    return [{'name': character['name'], 'gender': character['gender'], 'age': character['age'], 'eye_color': character['eye_color'],
-             'hair_color': character['hair_color']} for character in characters if character['hair_color'] == hair_color and character['gender'] == gender]
+    params = {'hair_color': hair_color, 'gender': gender}
+    response = requests.get("https://ghibliapi.herokuapp.com/people", params=params)
+
+    if response.status_code not in range (200, 300):
+        raise ValueError(f"API says {response.status_code}")
+
+    characters = response.json()
+    return [{'name': character['name'], 'gender': character['gender'],
+             'age': character['age'], 'eye_color': character['eye_color'],
+             'hair_color': character['hair_color']} for character in characters]
