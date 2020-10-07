@@ -26,6 +26,9 @@ def change(total_cents):
     if total_cents < 0:
         raise ValueError(
             "amount cannot be negative")
+    if total_cents % 1 != 0:
+        raise ValueError(
+            "amount cannot be a decimal")
     total_cents_decimal = 0
     denominations = (25, 10, 5, 1)
     denominations_used = []
