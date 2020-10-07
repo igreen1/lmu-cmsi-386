@@ -21,9 +21,7 @@ def change(total_cents):
     if total_cents < 0:
         raise ValueError(
             "amount cannot be negative")
-    if (isinstance(total_cents, float)):
-        raise ValueError(
-            "amount cannot be a decimal")
+    total_cents_decimal = 0
     denominations = (25, 10, 5, 1)
     denominations_used = []
     remaining_cents = total_cents
@@ -164,12 +162,10 @@ def interleave(list_to_interleave, *values_to_interleave):
 
 
 '''
-
 A function that accepts a Fernet key and returns a tuple of two functions. The first function encrypts a
 bytes object with the key. The second decrypts. Both functions accept a bytes object and return a bytes object.
 Use the cryptography package. You are responsible for reading the documentation for the package;
 we are not going over this in class.
-
 '''
 
 
