@@ -167,7 +167,7 @@ def interleave(a, *b):
         interwoven.append(a[i])
         interwoven.append(b[i])
 
-    return interwoven + a[minimum_length:] + list(b[minimum_length:])
+    return [*interwoven, *a[minimum_length:], *b[minimum_length:]]
 
 
 '''
