@@ -1,4 +1,7 @@
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Exercises {
 
@@ -16,6 +19,15 @@ public class Exercises {
     }
 
     public static String stretched(String s) {
-        return "";
+        var codePoints = s.replaceAll("\\s","").codePoints().toArray();
+        String result = "";
+        for(int i = 0; i < codePoints.length; i++){
+            result += Character.toChars(codePoints[i]).toString().repeat(i);
+        }
+        return result;
     }
+
+
+
+
 }
