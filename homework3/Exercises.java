@@ -3,7 +3,7 @@ import java.util.stream.*;
 import java.util.function.*;
 import java.util.Optional;
 import java.util.Map;
-import java.math.BigDecimal;
+import java.math.*;
 
 public class Exercises {
 
@@ -88,11 +88,13 @@ public class Exercises {
         //     .
 
         var stream = statistics.entrySet().stream()
-            .flatMap( team -> team.getValue().stream().map( player -> player += "|" + team.getKey()))
+            .flatMap( team -> team.getValue().stream().map( player -> player += "," + team.getKey()))
             .filter(player -> Integer.parseInt(player.split(",")[1]) >= 15)
-            .map(x -> {String[] y = x.split(",");
+            .map(player -> {String[] y = player.split(",");
                 BigDecimal ppg = BigDecimal.valueOf(Double.parseDouble(y[2]) / Double.parseDouble(y[1])).round(new MathContext(4));
-                return y[0] + "|" + ppg + "|" + y[3];} )
+                return y[0] + "," + ppg + "," + y[3];} )
+            .sorted(Comparator.comparingDouble(player -> Double.parseDouble(player.split(",")[1])))
+            .sorted(Comparator.reverseOrder())
             .limit(10);
 
         // entrySet.stream()
@@ -104,7 +106,10 @@ public class Exercises {
             // .map( ([name, games, points, team]) -> ({ name, ppg: points / games, tean}))
             // .sort( (p1,p2) -> p2.ppg - p1.ppg)
             // .slice(0,10);
-        return List.of();
+
+        // stream.forEach(y -> System.out.println(y));
+        // System.out.println("\nStream length:" + stream.count());
+        return stream.collect(Collectors.toList());
     } 
 
 }
