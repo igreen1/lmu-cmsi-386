@@ -19,17 +19,16 @@ public class Exercises {
     }
 
     public static String stretched(String s) {
-        var characters = s.replaceAll("\\s","");
+        var codePoints = s.replaceAll("\\s","").codePoints().toArray();
         String result = "";
-        for(int i = 0; i < characters.length(); i++){
-            result += String.valueOf(characters.charAt(i)).repeat(i+1);
+        for(int i = 0; i < codePoints.length; i++){
+            result += String.copyValueOf(Character.toChars(codePoints[i])).repeat(i+1);
         }
         return result;
-
     }
 
     public static <T,U> Set<U> mapThenUnique(List<T> source, Function<T,U> mapper) {
-        return source.stream()
+        return source.stream() //Toal's example started with return Set.of(), not sure if it matters
             .map( (s) -> mapper.apply(s))
             .collect(Collectors.toSet());
     }
