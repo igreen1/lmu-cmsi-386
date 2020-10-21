@@ -79,7 +79,14 @@ public class Exercises {
     }
 
     public static List<String> topTenScorers(Map<String, List<String>> statistics) {
-        return List.of(); //THIS IS WRONG, JUST FILLER
+        Stream<String> stream = statistics.stream()
+            // JS CODE TO TRANSLATE:
+            // .flatMap( ([team, players]) -> players.map( player -> [...player,team]))
+            // .filter( ([, games, ,]) -> games >= 15)
+            // .map( ([name, games, points, team]) -> ({ name, ppg: points / games, tean}))
+            // .sort( (p1,p2) -> p2.ppg - p1.ppg)
+            // .slice(0,10);
+        return List.of(stream);
     } 
 
 }
