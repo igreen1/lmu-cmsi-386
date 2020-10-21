@@ -73,46 +73,25 @@ public class Exercises {
     }
 
     public static Optional<String> firstLongStringUppercased(int length, List<String> Strings) {
-        Optional<String> upperCaseString = Strings.stream()
+        Optional<String> upperCase = Strings.stream()
             .filter( (s) -> s.length() > length)
             .findFirst()
             .map( (s) -> s.toUpperCase());
-        return upperCaseString;
+        return upperCase;
     }
 
     public static List<String> topTenScorers(Map<String, List<String>> statistics) {
-
         var stream = statistics.entrySet().stream()
-        .flatMap(x -> x.getValue().stream().map(y -> y += ","+x.getKey()))
+        .flatMap(team -> team.getValue().stream().map(player -> player += "," + team.getKey()))
         .filter(player->Integer.parseInt(player.split(",")[1])>=15)
-        .map(x -> {String[] y = x.split(","); BigDecimal ppg = BigDecimal.valueOf(Double.parseDouble(y[2]) / Double.parseDouble(y[1])).round(new MathContext(4)); return y[0] + "|" + ppg + "|" + y[3];} )
+        .map(player -> {var playerStats = player.split(","); var ppg = Double.parseDouble(playerStats[2]) / Double.parseDouble(playerStats[1]); return playerStats[0] + "|" + String.format("%.2f", ppg) + "|" + playerStats[3];} )
         .sorted(new Comparator<String>(){
             @Override
-            public int compare(String s1, String s2){
-                return (int)(100*(Double.parseDouble(s2.split("\\|")[1])-Double.parseDouble(s1.split("\\|")[1])));
+            public int compare(String player1, String player2){
+                return (int)(100*(Double.parseDouble(player2.split("\\|")[1])-Double.parseDouble(player1.split("\\|")[1])));
             }
         }).limit(10).collect(Collectors.toList());
         return stream;
-
-        // var stream = statistics.entrySet().stream()
-        //     .flatMap( team -> team.getValue().stream().map( player -> player += "," + team.getKey()))
-        //     .filter(player -> Integer.parseInt(player.split(",")[1]) >= 15)
-        //     .map(player -> {String[] y = player.split(",");
-        //         BigDecimal ppg = BigDecimal.valueOf(Double.parseDouble(y[2]) / Double.parseDouble(y[1])).round(new MathContext(4));
-        //         return y[0] + "," + ppg + "," + y[3];} )
-        //     .sorted(Comparator.comparingDouble(player -> Double.parseDouble(player.split(",")[1])))
-        //     .sorted(Comparator.reverseOrder())
-        //     .limit(10);
-
-        // entrySet.stream()
-        //     .flatMap(e -> e.getValue().stream()
-        //                    .map(s -> new SimpleImmutableEntry(e.getKey(), s)));
-
-            // .flatMap( ([team, players]) -> players.map( player -> [...player,team]))
-            // .filter( ([, games, ,]) -> games >= 15)
-            // .map( ([name, games, points, team]) -> ({ name, ppg: points / games, tean}))
-            // .sort( (p1,p2) -> p2.ppg - p1.ppg)
-            // .slice(0,10);
     } 
 
 }
