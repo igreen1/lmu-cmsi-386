@@ -89,7 +89,7 @@ public class Exercises {
             return playerStats[0] + "|" + String.format("%.2f", ppg) + "|" + playerStats[3];} )
         .sorted(new Comparator<String>(){
             @Override
-            public int compare(String player1, String player2){
+            public int compare(String player1, String player2) {
                 return Double.compare(Double.parseDouble(player2.split("\\|")[1]), Double.parseDouble(player1.split("\\|")[1]));
             }
         }).limit(10).collect(Collectors.toList());
