@@ -51,19 +51,20 @@ public class Exercises {
     }
 
     static class Sayer {
-        Sayer(String text) {
-
-        }
+        String currentText;
+        Sayer(String text) {    //constructor
+            currentText = text;
+        } 
         String ok() {
-            return "";
+            return this.currentText;
         }
         Sayer and(String text) {
-            return null;
+            return new Sayer(this.currentText + " " + text);
         }
     }
 
     public static Sayer say(String text) {
-        return null; //THIS IS WRONG, JUST FILLER
+        return new Sayer(text);
     }
 
     public static <T> T twice(Function<T, T> f, T x) {
