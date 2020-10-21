@@ -28,8 +28,10 @@ public class Exercises {
     }
 
     public static <T,U> Set<U> mapThenUnique(List<T> source, Function<T,U> mapper) {
-        return null;
-        // return Stream.of(source.forEach( (s) -> mapper(s))).collect(Collectors.toSet());
+        List<U> convertedSource = new ArrayList<U>();
+        source.forEach( (s) -> convertedSource.add(mapper.apply(s)));
+        Stream<U> stream = convertedSource.stream();
+        return stream.collect(Collectors.toSet());
     }
 
     public static void powers(int base, int limit, Consumer<Integer> consumer) {
@@ -61,7 +63,7 @@ public class Exercises {
     }
 
     public static Sayer say(String text) {
-        return null;
+        return null; //THIS IS WRONG, JUST FILLER
     }
 
     public static <T> T twice(Function<T, T> f, T x) {
@@ -69,11 +71,11 @@ public class Exercises {
     }
 
     public static Optional<String> firstLongStringUppercased(int length, List<String> Strings) {
-        return Optional.empty();
+        return Optional.empty(); //THIS IS WRONG, JUST FILLER
     }
 
     public static List<String> topTenScorers(Map<String, List<String>> statistics) {
-        return List.of();
-    }
+        return List.of(); //THIS IS WRONG, JUST FILLER
+    } 
 
 }
