@@ -42,7 +42,7 @@ public class Exercises {
     }
 
     public static IntStream powers(int base) {
-        return IntStream.range(1,10); //THIS IS WRONG, JUST FILLER
+        return IntStream.iterate(1, i -> i * base);
     }
 
     public static String say() {
