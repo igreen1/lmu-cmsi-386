@@ -28,10 +28,9 @@ public class Exercises {
     }
 
     public static <T,U> Set<U> mapThenUnique(List<T> source, Function<T,U> mapper) {
-        List<U> convertedSource = new ArrayList<U>();
-        source.forEach( (s) -> convertedSource.add(mapper.apply(s)));
-        Stream<U> stream = convertedSource.stream();
-        return stream.collect(Collectors.toSet());
+        return source.stream()
+            .map( (s) -> mapper.apply(s))
+            .collect(Collectors.toSet());
     }
 
     public static void powers(int base, int limit, Consumer<Integer> consumer) {
@@ -72,7 +71,11 @@ public class Exercises {
     }
 
     public static Optional<String> firstLongStringUppercased(int length, List<String> Strings) {
-        return Optional.empty(); //THIS IS WRONG, JUST FILLER
+        Optional<String> upperCaseString = Strings.stream()
+            .filter( (s) -> s.length() > length)
+            .findFirst()
+            .map( (s) -> s.toUpperCase());
+        return upperCaseString;
     }
 
     public static List<String> topTenScorers(Map<String, List<String>> statistics) {
