@@ -110,11 +110,11 @@ public class ExercisesTest extends TestSuite {
                 expectEqual(Exercises.stretched("hello world"),
                     "heelllllllooooowwwwwwooooooorrrrrrrrllllllllldddddddddd");
 
-            }), new Test("Map-then-unique works as expected", () -> {
-                expectEqual(Exercises.mapThenUnique(List.of(2, 9, -9, 3), x -> x * x), Set.of(4, 9, 81));
-                expectEqual(Exercises.mapThenUnique(List.of("abc", "Hi", "AbC"), String::toLowerCase),
-                        Set.of("hi", "abc"));
-                expectEqual(Exercises.mapThenUnique(List.of(), Math::sqrt), Set.of());
+            // }), new Test("Map-then-unique works as expected", () -> {
+            //     expectEqual(Exercises.mapThenUnique(List.of(2, 9, -9, 3), x -> x * x), Set.of(4, 9, 81));
+            //     expectEqual(Exercises.mapThenUnique(List.of("abc", "Hi", "AbC"), String::toLowerCase),
+            //             Set.of("hi", "abc"));
+            //     expectEqual(Exercises.mapThenUnique(List.of(), Math::sqrt), Set.of());
 
             }), new Test("Powers-with-consumer works as expected", () -> {
                 var scratchPad = new ArrayList<Integer>();
