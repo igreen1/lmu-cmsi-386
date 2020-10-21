@@ -81,9 +81,9 @@ public class Exercises {
     }
 
     public static List<String> topTenScorers(Map<String, List<String>> statistics) {
-        var stream = statistics.entrySet().stream()
+        return statistics.entrySet().stream()
         .flatMap(team -> team.getValue().stream().map(player -> player += "," + team.getKey()))
-        .filter(player->Integer.parseInt(player.split(",")[1])>=15)
+        .filter(player -> Integer.parseInt(player.split(",")[1])>=15)
         .map(player -> {var playerStats = player.split(","); var ppg = Double.parseDouble(playerStats[2]) / Double.parseDouble(playerStats[1]); return playerStats[0] + "|" + String.format("%.2f", ppg) + "|" + playerStats[3];} )
         .sorted(new Comparator<String>(){
             @Override
@@ -91,7 +91,6 @@ public class Exercises {
                 return (int)(100*(Double.parseDouble(player2.split("\\|")[1])-Double.parseDouble(player1.split("\\|")[1])));
             }
         }).limit(10).collect(Collectors.toList());
-        return stream;
     } 
 
 }
