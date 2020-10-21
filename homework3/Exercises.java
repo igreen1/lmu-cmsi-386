@@ -84,11 +84,14 @@ public class Exercises {
         return statistics.entrySet().stream()
         .flatMap(team -> team.getValue().stream().map(player -> player += "," + team.getKey()))
         .filter(player -> Integer.parseInt(player.split(",")[1])>=15)
-        .map(player -> {var playerStats = player.split(","); var ppg = Double.parseDouble(playerStats[2]) / Double.parseDouble(playerStats[1]); return playerStats[0] + "|" + String.format("%.2f", ppg) + "|" + playerStats[3];} )
+        .map(player -> {var playerStats = player.split(",");
+            var ppg = Double.parseDouble(playerStats[2]) / Double.parseDouble(playerStats[1]);
+            return playerStats[0] + "|" + String.format("%.2f", ppg) + "|" + playerStats[3];} )
         .sorted(new Comparator<String>(){
             @Override
             public int compare(String player1, String player2){
-                return (int)(100*(Double.parseDouble(player2.split("\\|")[1])-Double.parseDouble(player1.split("\\|")[1])));
+                return (int)(100*(Double.parseDouble(player2.split("\\|")[1])
+                 - Double.parseDouble(player1.split("\\|")[1])));
             }
         }).limit(10).collect(Collectors.toList());
     } 
