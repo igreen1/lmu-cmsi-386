@@ -2,6 +2,8 @@ import java.util.*;
 import java.util.stream.*;
 import java.util.function.*;
 import java.util.Optional;
+import java.util.Map;
+import java.math.BigDecimal;
 
 public class Exercises {
 
@@ -79,14 +81,29 @@ public class Exercises {
     }
 
     public static List<String> topTenScorers(Map<String, List<String>> statistics) {
-        // Stream<String> stream = statistics.stream();
-            // JS CODE TO TRANSLATE:
+        // statistics.entrySet().stream()
+        //     .forEach(x -> x.getValue().forEach(y -> {
+        //         y += "|" +  x.getKey();
+        //     }))
+        //     .
+
+        var stream = statistics.entrySet().stream()
+            .flatMap( team -> team.getValue().stream().map( player -> player += "|" + team.getKey()))
+            .filter(player -> Integer.parseInt(player.split(",")[1]) >= 15)
+            .map(x -> {String[] y = x.split(",");
+                BigDecimal ppg = BigDecimal.valueOf(Double.parseDouble(y[2]) / Double.parseDouble(y[1])).round(new MathContext(4));
+                return y[0] + "|" + ppg + "|" + y[3];} )
+            .limit(10);
+
+        // entrySet.stream()
+        //     .flatMap(e -> e.getValue().stream()
+        //                    .map(s -> new SimpleImmutableEntry(e.getKey(), s)));
+
             // .flatMap( ([team, players]) -> players.map( player -> [...player,team]))
             // .filter( ([, games, ,]) -> games >= 15)
             // .map( ([name, games, points, team]) -> ({ name, ppg: points / games, tean}))
             // .sort( (p1,p2) -> p2.ppg - p1.ppg)
             // .slice(0,10);
-        // return List.of(stream);
         return List.of();
     } 
 
