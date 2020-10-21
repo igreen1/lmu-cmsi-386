@@ -19,12 +19,13 @@ public class Exercises {
     }
 
     public static String stretched(String s) {
-        var codePoints = s.replaceAll("\\s","").codePoints().toArray();
+        var characters = s.replaceAll("\\s","");
         String result = "";
-        for(int i = 0; i < codePoints.length; i++){
-            result += Character.toChars(codePoints[i]).toString().repeat(i);
+        for(int i = 0; i < characters.length(); i++){
+            result += String.valueOf(characters.charAt(i)).repeat(i+1);
         }
         return result;
+
     }
 
     public static <T,U> Set<U> mapThenUnique(List<T> source, Function<T,U> mapper) {
@@ -79,14 +80,15 @@ public class Exercises {
     }
 
     public static List<String> topTenScorers(Map<String, List<String>> statistics) {
-        Stream<String> stream = statistics.stream()
+        // Stream<String> stream = statistics.stream();
             // JS CODE TO TRANSLATE:
             // .flatMap( ([team, players]) -> players.map( player -> [...player,team]))
             // .filter( ([, games, ,]) -> games >= 15)
             // .map( ([name, games, points, team]) -> ({ name, ppg: points / games, tean}))
             // .sort( (p1,p2) -> p2.ppg - p1.ppg)
             // .slice(0,10);
-        return List.of(stream);
+        // return List.of(stream);
+        return List.of();
     } 
 
 }
