@@ -30,7 +30,7 @@ public class Exercises {
     }
 
     public static <T,U> Set<U> mapThenUnique(List<T> source, Function<T,U> mapper) {
-        return source.stream() //Toal's example started with return Set.of(), not sure if it matters
+        return source.stream()
             .map( (s) -> mapper.apply(s))
             .collect(Collectors.toSet());
     }
@@ -53,7 +53,7 @@ public class Exercises {
 
     static class Sayer {
         String text;
-        Sayer(String text) {    //constructor
+        Sayer(String text) {
             this.text = text;
         } 
         String ok() {
