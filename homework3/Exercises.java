@@ -50,15 +50,15 @@ public class Exercises {
     }
 
     static class Sayer {
-        String currentText;
+        String text;
         Sayer(String text) {    //constructor
-            currentText = text;
+            this.text = text;
         } 
         String ok() {
-            return this.currentText;
+            return this.text;
         }
-        Sayer and(String text) {
-            return new Sayer(this.currentText + " " + text);
+        Sayer and(String s) {
+            return new Sayer(this.text + " " + s);
         }
     }
 
