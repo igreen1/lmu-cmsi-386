@@ -82,11 +82,9 @@ public class Exercises {
 
     public static List<String> topTenScorers(Map<String, List<String>> statistics) {
         return statistics.entrySet().stream()
-        .flatMap(team -> team.getValue().stream().map(player -> player += "," + team.getKey()))
-        .filter(player -> Integer.parseInt(player.split(",")[1]) >= 15)
-        .map(player -> {var playerStats = player.split(",");
-            var ppg = Double.parseDouble(playerStats[2]) / Double.parseDouble(playerStats[1]);
-            return playerStats[0] + "|" + String.format("%.2f", ppg) + "|" + playerStats[3];} )
+        .flatMap(team -> team.getValue().stream().map(player -> (player += "," + team.getKey()).split(",")))
+        .filter(player -> Integer.parseInt(player[1]) >= 15)
+        .map(player -> player[0] + "|" + String.format("%.2f", Double.parseDouble(player[2]) / Double.parseDouble(player[1])) + "|" + player[3])
         .sorted(new Comparator<String>(){
             @Override
             public int compare(String player1, String player2) {
