@@ -85,7 +85,7 @@ public class Exercises {
         .flatMap(team -> team.getValue().stream().map(player -> (player += "," + team.getKey()).split(",")))
         .filter(player -> Integer.parseInt(player[1]) >= 15)
         .map(player -> player[0] + "|" + String.format("%.2f", Double.parseDouble(player[2]) / Double.parseDouble(player[1])) + "|" + player[3])
-        .sorted((String player1, String player2) -> Double.compare(Double.parseDouble(player2.split("\\|")[1]), (Double.parseDouble(player1.split("\\|")[1]))))
+        .sorted((player1, player2) -> Double.compare(Double.parseDouble(player2.split("\\|")[1]), (Double.parseDouble(player1.split("\\|")[1]))))
         .limit(10).collect(Collectors.toList());
     }
 
