@@ -31,7 +31,7 @@ public class Exercises {
 
     public static <T,U> Set<U> mapThenUnique(List<T> source, Function<T,U> mapper) {
         return source.stream()
-            .map( (s) -> mapper.apply(s))
+            .map(s -> mapper.apply(s))
             .collect(Collectors.toSet());
     }
 
@@ -74,9 +74,9 @@ public class Exercises {
 
     public static Optional<String> firstLongStringUppercased(int length, List<String> Strings) {
         Optional<String> upperCase = Strings.stream()
-            .filter( (s) -> s.length() > length)
+            .filter(s -> s.length() > length)
             .findFirst()
-            .map( (s) -> s.toUpperCase());
+            .map(s -> s.toUpperCase());
         return upperCase;
     }
 
@@ -93,6 +93,6 @@ public class Exercises {
                 return Double.compare(Double.parseDouble(player2.split("\\|")[1]), Double.parseDouble(player1.split("\\|")[1]));
             }
         }).limit(10).collect(Collectors.toList());
-    } 
+    }
 
 }
