@@ -72,8 +72,8 @@ public class Exercises {
         return f.apply(f.apply(x));
     }
 
-    public static Optional<String> firstLongStringUppercased(int length, List<String> Strings) {
-        Optional<String> upperCase = Strings.stream()
+    public static Optional<String> firstLongStringUppercased(int length, List<String> strings) {
+        Optional<String> upperCase = strings.stream()
             .filter(s -> s.length() > length)
             .findFirst()
             .map(s -> s.toUpperCase());
