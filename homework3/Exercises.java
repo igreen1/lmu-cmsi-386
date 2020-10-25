@@ -44,7 +44,7 @@ public class Exercises {
     }
 
     public static IntStream powers(int base) {
-        return IntStream.iterate(1, i -> i * base);
+        return IntStream.iterate(1, power -> power * base);
     }
 
     public static String say() {
