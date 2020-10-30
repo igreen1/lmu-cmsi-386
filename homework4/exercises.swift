@@ -3,6 +3,9 @@ struct Result {
 }
 
 func change(amount: Int) -> Result {
+    guard amount <= 0 else {
+        return nil
+    }
     var result: Result()
     return result
 }
