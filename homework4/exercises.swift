@@ -3,16 +3,36 @@ that can indicate (1) for success, a 4-tuple containing the smallest number of U
 quarters, dimes, nickels, and pennies that equal the given amount, or (2) a failure 
 whenever a negative amount was supplied. See the unit test for information on how you 
 are to craft the result type. Implmentation restriction: use the Int method quotientAndRemainder. */
+struct Result {
+
+}
+
+func change(amount: Int) -> Result {
+    guard amount <= 0 else {
+        return nil
+    }
+    var result: Result()
+    return result
+}
 
 /* A String computed property that computes a new string equal to the receiver but with all whitespace 
 removed and then with the i-th grapheme (1-based) repeated i times. Note that you are to repeat graphemes, 
 not code units. Good news: Swift does this automatically. */
+func stretched(s: String) -> String {
+    return
+}
 
 /* A method on Array that maps a function over the receiver then returns the unique values after mapping. */
+func mapThenUnique () -> {
+
+}
 
 /* A function that generates powers of a given (integer) base, starting at the 0th power (namely, 1) 
 through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 “through” here means including the limit value. */
+func powers() -> {
+
+}
 
 /* An idiomatic Swift solution to the Animal-Cow-Sheep-Horse example that appears in the middle of the 
 course notes on JavaScript. Not that in JavaScript, Python, C++, or Java, you have an Animal superclass 
@@ -26,12 +46,21 @@ test script does. */
 "Hello"
 > say("Hello").and("my").and("name").and("is").and("Colette").phrase
 "Hello my name is Colette" */
+func say(text: String) -> Sayer {
+    return
+}
 
 /* A function that accepts a function f and a value x> and returns f(f(x)). Remember you are doing Swift, 
 not Java, so you can use functions directly (no need for objects with apply methods). */
+func twice() -> {
+
+}
 
 /* A function that returns the uppercased version of the first string in a list that has a length greater 
 than a given value, wrapped in an Optional, since there might not be any such string in the list. 
 Implementation restriction: Your solution must find the first such value using the first method, then 
 since that returns an optional, use the optional chaining operator ?. when you invoke the uppercasing 
 method. This is so cool, right? */
+func uppercasedFirst() -> {
+    
+}
