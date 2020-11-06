@@ -52,8 +52,8 @@ func say(text: String) -> Sayer {
 
 /* A function that accepts a function f and a value x> and returns f(f(x)). Remember you are doing Swift, 
 not Java, so you can use functions directly (no need for objects with apply methods). */
-func twice() -> {
-
+func twice<T>(_ f: (T) -> T, on x: T) -> {
+    return f(f(x))
 }
 
 /* A function that returns the uppercased version of the first string in a list that has a length greater 
