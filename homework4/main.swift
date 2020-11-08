@@ -47,9 +47,9 @@ struct Rat: Animal {
 }
 assert(Rat(name:"Oreo").speak() == "Oreo says squeak")
 
-// assert(say("A").phrase == "A")
-// assert(say("A").and("B").phrase == "A B")
-// assert(say("🐤🦇").and("$🦊👏🏽").and("!").phrase == "🐤🦇 $🦊👏🏽 !")
+assert(say("A").phrase == "A")
+assert(say("A").and("B").phrase == "A B")
+assert(say("🐤🦇").and("$🦊👏🏽").and("!").phrase == "🐤🦇 $🦊👏🏽 !")
 
 assert(twice({$0 * 2}, appliedTo: 5.0) == 20.0)
 assert(twice({s in s + "ee"}, appliedTo: "b") == "beeee")

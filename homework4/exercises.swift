@@ -38,9 +38,14 @@ extension Array {
 /* A function that generates powers of a given (integer) base, starting at the 0th power (namely, 1) 
 through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 “through” here means including the limit value. */
-func powers(of base: Int, through limit: Int) -> [Int] {
-  return []
-}
+// func powers(of base: Int, through limit: Int) -> ??? {
+//   var power = 1
+//   var powers = [Int]()
+//   while power <= limit {
+//     powers.append(power)
+//     power *= base
+//   }
+// }
 
 /* An idiomatic Swift solution to the Animal-Cow-Sheep-Horse example that appears in the middle of the 
 course notes on JavaScript. Not that in JavaScript, Python, C++, or Java, you have an Animal superclass 
@@ -51,9 +56,7 @@ test script does. */
 protocol Animal {
   var name: String { get }
   var sound: String { get }
-  // func speak() -> String {
-  //   return self.name + " says " + self.sound
-  // }
+  func speak() -> String
 }
 
 extension Animal {
@@ -82,16 +85,16 @@ struct Horse: Animal {
 "Hello"
 > say("Hello").and("my").and("name").and("is").and("Colette").phrase
 "Hello my name is Colette" */
-// struct Sayer {
-//   var phrase: String { get }
-//   func and(_ word: String) -> Sayer {
-//     return Sayer(self.phrase + word)
-//   }
-// }
+struct Sayer {
+  var phrase: String
+  func and(_ word: String) -> Sayer {
+    return Sayer(phrase: self.phrase + " " + word)
+  }
+}
 
-// func say(_ word: String) -> Sayer {
-//     return Sayer(word)
-// }
+func say(_ word: String) -> Sayer {
+    return Sayer(phrase: word)
+}
 
 /* A function that accepts a function f and a value x> and returns f(f(x)). Remember you are doing Swift, 
 not Java, so you can use functions directly (no need for objects with apply methods). */
