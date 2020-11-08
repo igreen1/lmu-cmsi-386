@@ -1,15 +1,15 @@
 import Foundation
 
 // First check ensures you defined your own struct NegativeAmountError
-// assert(change(200) is Result<(Int, Int, Int, Int), NegativeAmountError>)
-// assert(try! change(0).get() == (0, 0, 0, 0))
-// assert(try! change(97).get() == (3, 2, 0, 2))
-// assert(try! change(8).get() == (0, 0, 1, 3))
-// assert(try! change(250).get() == (10, 0, 0, 0))
-// assert(try! change(144).get() == (5, 1, 1, 4))
-// assert(try! change(97).get() == (3, 2, 0, 2))
-// assert(try! change(100000000000).get() == (4000000000, 0, 0, 0))
-// assert((try? change(-50).get()) == nil)
+assert(change(200) is Result<(Int, Int, Int, Int), NegativeAmountError>)
+assert(try! change(0).get() == (0, 0, 0, 0))
+assert(try! change(97).get() == (3, 2, 0, 2))
+assert(try! change(8).get() == (0, 0, 1, 3))
+assert(try! change(250).get() == (10, 0, 0, 0))
+assert(try! change(144).get() == (5, 1, 1, 4))
+assert(try! change(97).get() == (3, 2, 0, 2))
+assert(try! change(100000000000).get() == (4000000000, 0, 0, 0))
+assert((try? change(-50).get()) == nil)
 
 assert("".stretched == "")
 assert("  ".stretched == "")

@@ -7,13 +7,28 @@ are to craft the result type. Implmentation restriction: use the Int method quot
 // struct Result {
 
 // }
+struct NegativeAmountError: Error { }
+func change(_ amount: Int) -> Result<(Int, Int, Int, Int), NegativeAmountError> {
+    if amount < 0 {
+      return .failure(NegativeAmountError())
+    }
 
-// func change(_ amount: Int) -> Result<(Int, Int, Int, Int), NegativeAmountError> {
-//     if amount < 0 {
-//       return .failure(NegativeAmountError())
-//     }
-//     return .success(quarters, dimes, nickels, pennies)
-// }
+    let denominations = [25, 10, 5, 1]
+
+    var amountLeft = amount
+    var coinCounts = [Int]()
+
+    for denomination in denominations {
+      coinCounts.append(amountLeft/denomination)
+      amountLeft %= denomination
+    }
+    
+    var quarters = coinCounts[0]
+    var dimes = coinCounts[1]
+    var nickels = coinCounts[2]
+    var pennies = coinCounts[3]
+    return .success(quarters, dimes, nickels, pennies)
+}
 
 /* A String computed property that computes a new string equal to the receiver but with all whitespace 
 removed and then with the i-th grapheme (1-based) repeated i times. Note that you are to repeat graphemes, 
