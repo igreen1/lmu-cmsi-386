@@ -3,18 +3,14 @@ that can indicate (1) for success, a 4-tuple containing the smallest number of U
 quarters, dimes, nickels, and pennies that equal the given amount, or (2) a failure 
 whenever a negative amount was supplied. See the unit test for information on how you 
 are to craft the result type. Implmentation restriction: use the Int method quotientAndRemainder. */
-// struct NegativeAmountError: Error { }
-// struct Result {
-
-// }
 struct NegativeAmountError: Error { }
+
 func change(_ amount: Int) -> Result<(Int, Int, Int, Int), NegativeAmountError> {
     if amount < 0 {
       return .failure(NegativeAmountError())
     }
 
     let denominations = [25, 10, 5, 1]
-
     var amountLeft = amount
     var coinCounts = [Int]()
 
@@ -22,12 +18,12 @@ func change(_ amount: Int) -> Result<(Int, Int, Int, Int), NegativeAmountError> 
       coinCounts.append(amountLeft/denomination)
       amountLeft %= denomination
     }
-    
-    var quarters = coinCounts[0]
-    var dimes = coinCounts[1]
-    var nickels = coinCounts[2]
-    var pennies = coinCounts[3]
-    return .success(quarters, dimes, nickels, pennies)
+
+    let quarters = coinCounts[0]
+    let dimes = coinCounts[1]
+    let nickels = coinCounts[2]
+    let pennies = coinCounts[3]
+    return .success((quarters, dimes, nickels, pennies))
 }
 
 /* A String computed property that computes a new string equal to the receiver but with all whitespace 
@@ -53,15 +49,13 @@ extension Array {
 /* A function that generates powers of a given (integer) base, starting at the 0th power (namely, 1) 
 through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 “through” here means including the limit value. */
-func powers(of base: Int, through limit: Int) -> [Int] {
-  var power = 1
-  var powers = [Int]()
-  while power <= limit {
-    powers.append(power)
-    power *= base
-  }
-  return powers
-}
+// func powers(of base: Int, through limit: Int, then f: (Int) -> Int) -> Int {
+//   var power = 1
+//   while power <= limit {
+//     power *= base
+//     return f(power)
+//   }
+// }
 
 /* An idiomatic Swift solution to the Animal-Cow-Sheep-Horse example that appears in the middle of the 
 course notes on JavaScript. Not that in JavaScript, Python, C++, or Java, you have an Animal superclass 
