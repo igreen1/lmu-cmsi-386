@@ -39,7 +39,13 @@ extension Array {
 through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 “through” here means including the limit value. */
 func powers(of base: Int, through limit: Int) -> [Int] {
-  return []
+  var power = 1
+  var powers = [Int]()
+  while power <= limit {
+    powers.append(power)
+    power *= base
+  }
+  return powers
 }
 
 /* An idiomatic Swift solution to the Animal-Cow-Sheep-Horse example that appears in the middle of the 
