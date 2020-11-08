@@ -28,18 +28,17 @@
 // }
 
 // /* A method on Array that maps a function over the receiver then returns the unique values after mapping. */
-// extension Array {
-//   func mapThenUnique<T>(_ f: (T)) -> [T] {
-//     var result = [T]()
-//     for element in self.map(f) {
-//       if result.contains(element) == false {
-//         result.append(element)
-//       }
-//     }
-//     return result
-//   }
-// }
-
+extension Array {
+  func mapThenUnique<T>(mapper: (Element) -> T) -> Set<T> {
+    var result = Set<T>()
+    for element in self.map(mapper) {
+      if result.contains(element) == false {
+        result.insert(element)
+      }
+    }
+    return result
+  }
+}
 // /* A function that generates powers of a given (integer) base, starting at the 0th power (namely, 1) 
 // through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 // “through” here means including the limit value. */
@@ -75,6 +74,7 @@ Implementation restriction: Your solution must find the first such value using t
 since that returns an optional, use the optional chaining operator ?. when you invoke the uppercasing 
 method. This is so cool, right? */
 func uppercasedFirst(of a: [String], longerThan n: Int) -> String? {
+  // return a.first(where: {} )?.uppercased()
   for string in a {
     if string.count > n {
       return string.uppercased()

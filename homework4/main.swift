@@ -19,10 +19,10 @@ import Foundation
 // assert("hello world".stretched ==
 //     "heelllllllooooowwwwwwooooooorrrrrrrrllllllllldddddddddd")
 
-// assert([].mapThenUnique { Int($0) * $0 } == Set([]))
-// assert([2, 9, -9, 3].mapThenUnique { Int($0) * $0 } == Set([4, 9, 81]))
-// assert(["abc", "Hi", "AbC"].mapThenUnique { $0.lowercased() } == Set(["hi", "abc"]))
-// assert(["33", "21", "33"].mapThenUnique { Int($0) } == Set([21, 33]))
+assert([].mapThenUnique { Int($0) * $0 } == Set([]))
+assert([2, 9, -9, 3].mapThenUnique { Int($0) * $0 } == Set([4, 9, 81]))
+assert(["abc", "Hi", "AbC"].mapThenUnique { $0.lowercased() } == Set(["hi", "abc"]))
+assert(["33", "21", "33"].mapThenUnique { Int($0) } == Set([21, 33]))
 
 // var scratch = [Int]()
 // powers(of: 2, through: 64) { scratch.append($0) }
