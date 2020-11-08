@@ -38,14 +38,15 @@ extension Array {
 /* A function that generates powers of a given (integer) base, starting at the 0th power (namely, 1) 
 through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 “through” here means including the limit value. */
-// func powers(of base: Int, through limit: Int) -> ??? {
-//   var power = 1
-//   var powers = [Int]()
-//   while power <= limit {
-//     powers.append(power)
-//     power *= base
-//   }
-// }
+func powers(of base: Int, through limit: Int) -> [Int] {
+  var power = 1
+  var powers = [Int]()
+  while power <= limit {
+    powers.append(power)
+    power *= base
+  }
+  return powers
+}
 
 /* An idiomatic Swift solution to the Animal-Cow-Sheep-Horse example that appears in the middle of the 
 course notes on JavaScript. Not that in JavaScript, Python, C++, or Java, you have an Animal superclass 
