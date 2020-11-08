@@ -19,23 +19,31 @@ func change(amount: Int) -> Result {
 removed and then with the i-th grapheme (1-based) repeated i times. Note that you are to repeat graphemes, 
 not code units. Good news: Swift does this automatically. */
 func stretched(s: String) -> String {
-  var graphemes = Array(s)
+  // var graphemes = Array(s)
   var result = ""
-  for i in 0..<graphemes.count {
-    result += String(repeating: graphemes[i], count: i + 1)
-  }
+  // for i in 0..<graphemes.count {
+  //   result += String(repeating: graphemes[i], count: i + 1)
+  // }
   return result
 }
 
 /* A method on Array that maps a function over the receiver then returns the unique values after mapping. */
-func mapThenUnique () -> {
-
+extension Array {
+  func mapThenUnique<T>(_ f: (T)) -> [T] {
+    var result = [T]()
+    for element in self.map(f) {
+      if result.contains(element) == false {
+        result.append(element)
+      }
+    }
+    return result
+  }
 }
 
 /* A function that generates powers of a given (integer) base, starting at the 0th power (namely, 1) 
 through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 “through” here means including the limit value. */
-func powers() -> {
+func powers(of base: Int, through limit: Int) -> {
 
 }
 
