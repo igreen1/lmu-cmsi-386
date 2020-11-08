@@ -19,7 +19,12 @@ func change(amount: Int) -> Result {
 removed and then with the i-th grapheme (1-based) repeated i times. Note that you are to repeat graphemes, 
 not code units. Good news: Swift does this automatically. */
 func stretched(s: String) -> String {
-    return
+  var graphemes = Array(s)
+  var result = ""
+  for i in 0..<graphemes.count {
+    result += String(repeating: graphemes[i], count: i + 1)
+  }
+  return result
 }
 
 /* A method on Array that maps a function over the receiver then returns the unique values after mapping. */
@@ -52,7 +57,7 @@ func say(text: String) -> Sayer {
 
 /* A function that accepts a function f and a value x> and returns f(f(x)). Remember you are doing Swift, 
 not Java, so you can use functions directly (no need for objects with apply methods). */
-func twice<T>(_ f: (T) -> T, on x: T) -> {
+func twice<T>(_ f: (T) -> T, on x: T) -> T {
     return f(f(x))
 }
 
