@@ -49,7 +49,7 @@ extension Array {
 /* A function that generates powers of a given (integer) base, starting at the 0th power (namely, 1) 
 through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 “through” here means including the limit value. */
-func powers(of base: Int, through limit: Int, _ f: (Int) -> ()) {
+func powers(of base: Int, through limit: Int, f: (Int) -> ()) {
   var power = 1
   while power <= limit {
     f(power)
