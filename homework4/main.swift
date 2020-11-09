@@ -24,15 +24,15 @@ assert([2, 9, -9, 3].mapThenUnique { Int($0) * $0 } == Set([4, 9, 81]))
 assert(["abc", "Hi", "AbC"].mapThenUnique { $0.lowercased() } == Set(["hi", "abc"]))
 assert(["33", "21", "33"].mapThenUnique { Int($0) } == Set([21, 33]))
 
-// var scratch = [Int]()
-// powers(of: 2, through: 64) { scratch.append($0) }
-// assert(scratch == [1, 2, 4, 8, 16, 32, 64])
-// scratch.removeAll()
-// powers(of: 2, through: 63) { scratch.append($0) }
-// assert(scratch == [1, 2, 4, 8, 16, 32])
-// scratch.removeAll()
-// powers(of: -3, through: 300) { scratch.append($0) }
-// assert(scratch == [1, -3, 9, -27, 81, -243])
+var scratch = [Int]()
+powers(of: 2, through: 64) { scratch.append($0) }
+assert(scratch == [1, 2, 4, 8, 16, 32, 64])
+scratch.removeAll()
+powers(of: 2, through: 63) { scratch.append($0) }
+assert(scratch == [1, 2, 4, 8, 16, 32])
+scratch.removeAll()
+powers(of: -3, through: 300) { scratch.append($0) }
+assert(scratch == [1, -3, 9, -27, 81, -243])
 
 let h: Animal = Horse(name: "CJ")
 assert(h.speak() == "CJ says neigh")

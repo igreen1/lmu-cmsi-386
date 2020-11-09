@@ -49,13 +49,13 @@ extension Array {
 /* A function that generates powers of a given (integer) base, starting at the 0th power (namely, 1) 
 through a given limit, consuming each with a closure. Note that consistent with Swift terminology, 
 “through” here means including the limit value. */
-// func powers(of base: Int, through limit: Int, then f: (Int) -> Int) -> Int {
-//   var power = 1
-//   while power <= limit {
-//     power *= base
-//     return f(power)
-//   }
-// }
+func powers(of base: Int, through limit: Int, _ f: (Int) -> ()) {
+  var power = 1
+  while power <= limit {
+    f(power)
+    power *= base
+  }
+}
 
 /* An idiomatic Swift solution to the Animal-Cow-Sheep-Horse example that appears in the middle of the 
 course notes on JavaScript. Not that in JavaScript, Python, C++, or Java, you have an Animal superclass 
