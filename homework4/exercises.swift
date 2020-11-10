@@ -19,11 +19,7 @@ func change(_ amount: Int) -> Result<(Int, Int, Int, Int), NegativeAmountError> 
       amountLeft %= denomination
     }
 
-    let quarters = coinCounts[0]
-    let dimes = coinCounts[1]
-    let nickels = coinCounts[2]
-    let pennies = coinCounts[3]
-    return .success((quarters, dimes, nickels, pennies))
+    return .success((coinCounts[0], coinCounts[1], coinCounts[2], coinCounts[3]))
 }
 
 /* A String computed property that computes a new string equal to the receiver but with all whitespace 
@@ -42,7 +38,7 @@ extension String {
 /* A method on Array that maps a function over the receiver then returns the unique values after mapping. */
 extension Array {
   func mapThenUnique<T>(mapper: (Element) -> T) -> Set<T> {
-    return Set( self.map {mapper($0)})
+    return Set(self.map {mapper($0)})
   }
 }
 
