@@ -1,4 +1,3 @@
-#include "./exercises.h"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -6,6 +5,10 @@
 #include <string>
 
 using namespace std;
+
+struct Sayer {
+	
+}
 
 Sayer say(string s) {
 
@@ -18,14 +21,14 @@ vector<pair<list<string>, vector<pair<string, int>>>> sorted_word_counts(list<st
 class Queue {
 
 	public:
-		void enqueue(String s) {
+		void enqueue(string s) {
 
 		}
-	public:
+
 		string dequeue() {
-
+			
 		}
-	public:
+
 		int get_size() {
 
 		}
