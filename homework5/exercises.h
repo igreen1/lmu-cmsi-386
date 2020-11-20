@@ -6,8 +6,8 @@
 
 using namespace std;
 
-struct Sayer {
-	
+class Sayer {
+	operater() // YOU CAN OVERLOAD THIS OPERATOR IN C++
 }
 
 Sayer say(string s) {
