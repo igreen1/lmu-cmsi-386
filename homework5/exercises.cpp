@@ -1,80 +1,52 @@
-#include "exercises.h" 
+//Put sorted word count and sayer declarations here :)
 
-#include <iostream>
 
-// YO
-// I THINK NODE* MIGHT NEED TO BE THIS->NODE*
-// DON'T HAVE TIME TO CHECK, ITS GAME NIGHT
+//Problem 1:
+/*
+Write a C++ function that accepts a list of strings and returns a vector of 
+(word, count) pairs, sorted by the number of occurrences descending. 
+See the unit test file for examples of what is expected. 
+Use whatever wonderful functions you can find from the standard library. 
+(In fact, one of the learning objectives for this problem is that you gain
+experience by looking through the standard library.) 
+*/
+
+#include <vector>
+#include <string>
+#include <list>
+#include "exercises.h"
 
 using namespace std;
 
-template <class T>
-Queue<T>::Queue(){
-    this->size = 0;
-    this->tail = nullptr;
-    this->head = nullptr;
-}
+vector<pair<string, int>> sorted_word_counts(list<string> words){
 
-template <class T>
-void Queue<T>::enqueue(T item){
+  //for each words, count :)
 
-    if(this->tail != nullptr)
-    {
-        // size > 1
-        this->tail->next = new node(item);
-        this->tail = this->tail->next;
-        this->size++;
-        return;
-    } else if (this-> head == nullptr) {
-        // size == 0
-        this->head = new node(item);
-        this->tail = this->head->next;
-        this->size++;
-        return;
-    } else { 
-        // size == 1
-        this->head->next = new node(item);
-        this->tail = this->head->next;
-        size++;
-        return;
-    }
+  //use List<T>::findAll !
+  //then List<T>::removeAll
 
-}
+  vector<pair<string, int>> result = new vector<pair<string, int>>();
 
-template <class T>
-T Queue<T>::dequeue(){
+  auto it = words.begin();
 
-    if(this->head != nullptr){
+  list<string> givenWordOccurences;
+  pair<string, int> wordResults;
 
-        T result = this->head->data; 
-        node* previousHead; = this->head;
-        this->head = this->head->next;
-        delete previousHead;
-        return result;
-
-    } else {
-        // might do some library of optionals of something
-        // but for now, we'll do what C++ std does :)
-        return -1;
-    }
+  //for loops try to do some fancy compilation optimization
+  // but the resizing of words makes that bad... so while loop!
+  while(it != words.end()){
+    givenWordOccurences = words.FindAll(*it);
+    wordResults = new pair<string, int>{word, givenWordOccurences.size()};
+    result.push_back(wordResults);
+    words.removeAll(*it):
+  }
 
 }
 
 
-template <class T>
-int Queue<T>::get_size(){
-    // Dr. Toal's specs requests we store int size, so no calculations
-    return this->size;
-}
-
-template <class T>
-ostream& operator<<(ostream&, const Queue<T>&){
-	// Come up with new name for current, Toal will hate it
-	node *current = this->head;
-	while(current != nullptr){
-		os << current->data << ", ";
-		current = current->data;
-	}
-    os << endl;
-    return os;
-}
+//Problem 2:
+/*
+Implement the famous say function from the previous assignment. 
+Hint: consider writing say as a struct with an overloaded function call 
+operator. 
+*/

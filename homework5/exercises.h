@@ -1,7 +1,23 @@
+#ifndef FUNCTIONS_H_INCLUDED
+#define FUNCTIONS_H_INCLUDED
+
+#include <vector>
+#include <list>
+#include <string>
+
+std::vector<std::pair<std::string, int>> sorted_word_counts(std::list<std::string>);
+
+#endif
+
+
 #ifndef Queue_H
 #define Queue_H
 
-
+//Two notes for grading @ Dr. Toal
+// 1. Defined in .h because there are issues on the linking stage of compilation
+//		these issues come from using templates. Ian can explain if you want
+// 2. Using namespace is highly frowned upon in .h hence the std:: in this .h :)
+//		We can change if you want ,,, but not really an issue imo
 #include <iostream>
 
 template <typename T>
@@ -81,6 +97,12 @@ class Queue{
 
 #endif
 
+#ifndef say_H
+#define say_H
+
+
+
+#endif
 
 
 // #ifndef say_H
