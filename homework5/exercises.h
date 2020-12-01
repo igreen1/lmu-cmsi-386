@@ -24,6 +24,63 @@ template <typename T>
 class Queue{
 	public:
 
+		~Queue(){
+			//deconstructor for memory leaks
+			while(head != nullptr){
+				node* old = head;
+				head = head->next;
+				delete old;
+			}
+		}
+
+		Queue(){
+			head = nullptr;
+			tail = nullptr;
+			size = 0;
+		}
+
+		Queue(Queue&) = delete;
+		Queue& operator=(Queue&) = delete;
+
+		//Move is okay :)
+		Queue(Queue&& other){
+			// to stop deconstruction from destroying stuff
+			this->head = nullptr;
+			this->tail = nullptr;
+			this->size = 0;
+			if(other.head != nullptr){
+				this->head = new node(other.head->data);
+				this->size++;
+				node *otherCurrNode = other.head;
+				node *thisCurrNode = this->head;
+				while(otherCurrNode->next != nullptr){
+					otherCurrNode = otherCurrNode->next;
+					thisCurrNode->next = new node(otherCurrNode->data);
+					this->size++;
+					thisCurrNode = thisCurrNode->next;
+				}
+			}
+		}
+		Queue& operator=(Queue&& other){
+			//to stop deconstruction from destroying stuff
+			this->head = nullptr;
+			this->tail = nullptr;
+			this->size = 0;
+			if(other.head != nullptr){
+				this->head = new node(other.head->data);
+				this->size++;
+				node *otherCurrNode = other.head,
+						 *thisCurrNode = this->head;
+				while(otherCurrNode->next != nullptr){
+					otherCurrNode = otherCurrNode->next;
+					thisCurrNode->next = new node(otherCurrNode->data);
+					this->size++;
+					thisCurrNode = thisCurrNode->next;
+				}
+			}
+			return *this;
+		}
+
 		void enqueue(T item){
 			if(this->tail != nullptr)
 			{
@@ -55,6 +112,21 @@ class Queue{
 		}
 		int get_size(){return this->size;}
 
+		int count_size(){
+			//If we weren't storing size 
+			//@Dr. Toal
+			//	your specs ask us to store size buuuttt, just to prove we know what we're doing
+			int count = 0;
+			node* currNode = head;
+			while(currNode != nullptr)
+			{
+				count++;
+				currNode = currNode->next;
+			}
+
+			return count;
+		}
+
 		friend std::ostream& operator<<(std::ostream& os, const Queue<T>& q){
 				// Come up with new name for current, Toal will hate it
 			auto currNode = q->head;
@@ -66,6 +138,8 @@ class Queue{
 			return os;
 		}
 
+
+	private:
 		struct node{
 			node(T val){
 				this->data = val;
@@ -79,12 +153,9 @@ class Queue{
 			T data;
 		};
 
-	private:
-		// @ Dr. Toal, I prefer explictly adding private and placing at bottom
-		//	you could just copy everything below and add it above the 'public' and default to private
-		node *head = nullptr, 
-					*tail = nullptr;
-		int size = 0;
+		node *head,
+					*tail;
+		int size;
 };
 
 #endif
@@ -94,19 +165,23 @@ class Queue{
 
 #include <string>
 
-struct say{
+// struct say{
 
-	auto operator() (std::string s1){
-		return [s1](auto s2){return (s1+s2);};
-	}
+// 	auto operator() (std::string s1){
+// 		return [s1](auto s2){
+// 				return [s1, s2](auto... args){
+// 					return s1(a, args);
+// 				}
+// 		}
+// 	}
 
-	//say()
-	std::string operator()(){
-		return "";
-	}
+// 	//say()
+// 	std::string operator()(){
+// 		return "";
+// 	}
 
 
-};
+// };
 
 
 #endif

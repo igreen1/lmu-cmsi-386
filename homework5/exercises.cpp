@@ -21,6 +21,8 @@ using namespace std;
 
 vector<pair<string, int>> sorted_word_counts(list<string> words){
 
+  // Time complexity = N + NlogN :)
+
   vector<pair<string, int>> result;
 
   words.sort();
@@ -33,7 +35,7 @@ vector<pair<string, int>> sorted_word_counts(list<string> words){
     word = *it;
     wordCount = 0;
 
-    while(*it == word && it != words.end()){
+    while(*it == word){
       wordCount++;
       it++;
     }
@@ -42,7 +44,7 @@ vector<pair<string, int>> sorted_word_counts(list<string> words){
 
   }
 
-  sort(result.begin(), result.end(), [](auto x, auto y){return x.second < y.second;} );
+  sort(result.begin(), result.end(), [](auto x, auto y){return x.second > y.second;} );
 
   return result;
 }
