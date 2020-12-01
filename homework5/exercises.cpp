@@ -20,27 +20,25 @@ using namespace std;
 
 vector<pair<string, int>> sorted_word_counts(list<string> words){
 
-  //for each words, count :)
+  vector<pair<string, int>> result;
 
-  //use List<T>::findAll !
-  //then List<T>::removeAll
-
-  vector<pair<string, int>> result = new vector<pair<string, int>>();
-
+  words.sort();
   auto it = words.begin();
-
-  list<string> givenWordOccurences;
-  pair<string, int> wordResults;
-
-  //for loops try to do some fancy compilation optimization
-  // but the resizing of words makes that bad... so while loop!
+  int wordCount = 0;
+  string word;
   while(it != words.end()){
-    givenWordOccurences = words.FindAll(*it);
-    wordResults = new pair<string, int>{word, givenWordOccurences.size()};
-    result.push_back(wordResults);
-    words.removeAll(*it):
+    word = *it;
+    wordCount = 0;
+    while(*it == word && it != words.end()){
+      wordCount++;
+      it++;
+    }
+
+    result.push_back(make_pair(word, wordCount));
+
   }
 
+  return result;
 }
 
 
