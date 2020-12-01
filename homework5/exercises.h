@@ -23,32 +23,23 @@ std::vector<std::pair<std::string, int>> sorted_word_counts(std::list<std::strin
 template <typename T>
 class Queue{
 	public:
-		Queue(){
-			this->size = 0;
-			this->tail = nullptr;
-			this->head = nullptr;
-		}
+
 		void enqueue(T item){
 			if(this->tail != nullptr)
 			{
 					// size > 1
 					this->tail->next = new node(item);
 					this->tail = this->tail->next;
-					this->size++;
-					return;
 			} else if (this-> head == nullptr) {
 					// size == 0
 					this->head = new node(item);
 					this->tail = this->head->next;
-					this->size++;
-					return;
 			} else { 
 					// size == 1
 					this->head->next = new node(item);
 					this->tail = this->head->next;
-					this->size++;
-					return;
 			}
+			this->size++;
 		}
 		T dequeue(){
 			if(this->head == nullptr){
@@ -91,8 +82,9 @@ class Queue{
 	private:
 		// @ Dr. Toal, I prefer explictly adding private and placing at bottom
 		//	you could just copy everything below and add it above the 'public' and default to private
-		node *head, *tail;
-		int size;
+		node *head = nullptr, 
+					*tail = nullptr;
+		int size = 0;
 };
 
 #endif
@@ -100,110 +92,22 @@ class Queue{
 #ifndef say_H
 #define say_H
 
+#include <string>
+
+struct say{
+
+	auto operator() (std::string s1){
+		return [s1](auto s2){return (s1+s2);};
+	}
+
+	//say()
+	std::string operator()(){
+		return "";
+	}
+
+
+};
 
 
 #endif
 
-
-// #ifndef say_H
-// #define say_H
-
-// #include <iostream>
-// #include <cstring>
-// #include <string>
-// //Never 'use' a namespace in header files :(
-
-// struct Sayer {
-
-// 	public:
-// 	//Dr. Toal passed in C-Strings smh so beware, not std::string
-
-// 	std::string operator()(){
-// 		return "";
-// 	}
-
-// 	std::string operator()(std::string c){
-// 		std::string s = "";
-// 		int len = c.length();
-// 		for(int i = 0; i < len; i++){
-// 			s = s + c[i];
-// 		}
-// 		return s;
-// 	}
-
-// 	std::string operator()(std::string s, char c[]){
-// 		int len = strlen(c);
-// 		for(int i = 0; i < len; i++){
-// 			s = s + c[i];
-// 		}// #ifndef Queue_H
-// #define Queue_H
-
-
-// #include <iostream>
-
-// template <class T>
-// class Queue{
-// 	public:
-// 		Queue();
-// 		void enqueue(T);
-// 		T dequeue();
-// 		int get_size();
-// 		friend std::ostream& operator<< <T>(std::ostream& os, const Queue<T>& q);
-// 		node* makeNode(){return node}
-// 		struct node<T>{
-// 			node(T val){
-// 				this.data = val;
-// 				this.next = nullptr;
-// 			}
-// 			node(T val, node* next){
-// 				this->data = val;
-// 				this->next;
-// 			}
-// 			node* next; 
-// 			T data;
-// 		};
-// 	private:
-// 		// @ Dr. Toal, I prefer explictly adding private and placing at bottom
-// 		//	you could just copy everything below and add it above the 'public' and default to private
-
-		
-// 		node<T>* head, tail;
-// 		int size;
-// };
-
-// #endif
-
-// 		return s;
-// 	}
-
-// };
-
-// #endif
-
-
-// #ifndef say_H
-// #define say_H
-
-// // #include <algorithm>
-// // #include <cassert>
-// // #include <iostream>
-// #include <map>
-// #include <string>
-// #include <vector>
-
-// using namespace std;
-
-// class Sayer {
-// 	operater() // YOU CAN OVERLOAD THIS OPERATOR IN C++
-// }
-
-// Sayer say(string s) {
-
-// }
-
-// vector<pair<list<string>, vector<pair<string, int>>>> sorted_word_counts(list<string>) {
-
-//  }
-
-// // #endif 
-// //Start problem 3: queue definition

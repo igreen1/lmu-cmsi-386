@@ -11,9 +11,10 @@ Use whatever wonderful functions you can find from the standard library.
 experience by looking through the standard library.) 
 */
 
-#include <vector>
+#include <map>
 #include <string>
 #include <list>
+#include <algorithm>
 #include "exercises.h"
 
 using namespace std;
@@ -23,12 +24,15 @@ vector<pair<string, int>> sorted_word_counts(list<string> words){
   vector<pair<string, int>> result;
 
   words.sort();
+
   auto it = words.begin();
   int wordCount = 0;
   string word;
+
   while(it != words.end()){
     word = *it;
     wordCount = 0;
+
     while(*it == word && it != words.end()){
       wordCount++;
       it++;
@@ -37,6 +41,8 @@ vector<pair<string, int>> sorted_word_counts(list<string> words){
     result.push_back(make_pair(word, wordCount));
 
   }
+
+  sort(result.begin(), result.end(), [](auto x, auto y){return x.second < y.second;} );
 
   return result;
 }
@@ -48,3 +54,4 @@ Implement the famous say function from the previous assignment.
 Hint: consider writing say as a struct with an overloaded function call 
 operator. 
 */
+
