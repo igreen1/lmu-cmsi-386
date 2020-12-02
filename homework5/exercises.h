@@ -27,9 +27,9 @@ class Queue{
 		~Queue(){
 			//deconstructor for memory leaks
 			while(head != nullptr){
-				node* old = head;
+				node* previous = head;
 				head = head->next;
-				delete old;
+				delete previous;
 			}
 		}
 
@@ -51,16 +51,17 @@ class Queue{
 			if(other.head != nullptr){
 				this->head = new node(other.head->data);
 				this->size++;
-				node *otherCurrNode = other.head;
-				node *thisCurrNode = this->head;
-				while(otherCurrNode->next != nullptr){
-					otherCurrNode = otherCurrNode->next;
-					thisCurrNode->next = new node(otherCurrNode->data);
+				node *otherNode = other.head;
+				node *node = this->head;
+				while(otherNode->next != nullptr){
+					otherNode = otherNode->next;
+					node->next = new node(otherNode->data);
 					this->size++;
-					thisCurrNode = thisCurrNode->next;
+					node = node->next;
 				}
 			}
 		}
+
 		Queue& operator=(Queue&& other){
 			//to stop deconstruction from destroying stuff
 			this->head = nullptr;
@@ -69,31 +70,30 @@ class Queue{
 			if(other.head != nullptr){
 				this->head = new node(other.head->data);
 				this->size++;
-				node *otherCurrNode = other.head,
-						 *thisCurrNode = this->head;
-				while(otherCurrNode->next != nullptr){
-					otherCurrNode = otherCurrNode->next;
-					thisCurrNode->next = new node(otherCurrNode->data);
+				node *otherNode = other.head,
+						 *node = this->head;
+				while(otherNode->next != nullptr){
+					node = otherNode->next;
+					node->next = new node(otherNode->data);
 					this->size++;
-					thisCurrNode = thisCurrNode->next;
+					node = node->next;
 				}
 			}
 			return *this;
 		}
 
-		void enqueue(T item){
-			if(this->tail != nullptr)
-			{
+		void enqueue(T data){
+			if(this->tail != nullptr) {
 					// size > 1
-					this->tail->next = new node(item);
+					this->tail->next = new node(data);
 					this->tail = this->tail->next;
 			} else if (this-> head == nullptr) {
 					// size == 0
-					this->head = new node(item);
+					this->head = new node(data);
 					this->tail = this->head->next;
 			} else { 
 					// size == 1
-					this->head->next = new node(item);
+					this->head->next = new node(data);
 					this->tail = this->head->next;
 			}
 			this->size++;
@@ -116,23 +116,22 @@ class Queue{
 			//If we weren't storing size 
 			//@Dr. Toal
 			//	your specs ask us to store size buuuttt, just to prove we know what we're doing
-			int count = 0;
-			node* currNode = head;
-			while(currNode != nullptr)
-			{
-				count++;
-				currNode = currNode->next;
+			int queueSize = 0;
+			node* node = head;
+			while(node != nullptr) {
+				queueSize++;
+				node = node->next;
 			}
 
-			return count;
+			return queueSize;
 		}
 
 		friend std::ostream& operator<<(std::ostream& os, const Queue<T>& q){
 				// Come up with new name for current, Toal will hate it
-			auto currNode = q->head;
-			while(currNode != nullptr){
-				os << currNode->data << ", ";
-				currNode = currNode->next;
+			auto node = q->head;
+			while(node != nullptr){
+				os << node->data << ", ";
+				node = node->next;
 			}
 				os << std::endl;
 			return os;
@@ -141,12 +140,12 @@ class Queue{
 
 	private:
 		struct node{
-			node(T val){
-				this->data = val;
+			node(T data){
+				this->data = data;
 				this->next = nullptr;
 			}
-			node(T val, node* next){
-				this->data = val;
+			node(T data, node* next){
+				this->data = data;
 				this->next;
 			}
 			node* next; 
