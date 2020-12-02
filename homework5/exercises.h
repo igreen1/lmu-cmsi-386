@@ -165,23 +165,16 @@ class Queue{
 
 #include <string>
 
-// struct say{
+struct Sayer {
+	std::string toSay = "";
+	auto operator()() {
+		return toSay;
+	}
 
-// 	auto operator() (std::string s1){
-// 		return [s1](auto s2){
-// 				return [s1, s2](auto... args){
-// 					return s1(a, args);
-// 				}
-// 		}
-// 	}
-
-// 	//say()
-// 	std::string operator()(){
-// 		return "";
-// 	}
-
-
-// };
+	Sayer operator()(std::string s) {
+		return { (toSay == "" ? "" : toSay + " ") + s };
+	}
+} say;
 
 
 #endif
