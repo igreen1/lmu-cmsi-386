@@ -1,15 +1,44 @@
 #ifndef FUNCTIONS_H_INCLUDED
 #define FUNCTIONS_H_INCLUDED
 
-//@Dr. Toal: about grading this formatting
-//More C++-like code would have use put this include in the test file
-// but because we can't edit exericssies this will force the linker 
-// to properly connect our files and run correctly
-//could also just add the code here but doing so would 
-// require 'using namespace' which is frownded up on in .h
+#include <map>
+#include <string>
+#include <list>
+#include <algorithm>
+#include <vector>
 
-#include "exercises.cpp"
+// Yes this is bad convention in a .h file
+// but because we don't know the compiler / command used
+// we kinda have to
+// only used in this problem because there are TONS of stds here
+using namespace std; 
 
+vector<pair<string, int>> sorted_word_counts(list<string> words) {
+
+  vector<pair<string, int>> result;
+
+    // words.sort(); //do we need this?
+
+	auto iterator = words.begin();
+	int wordCount = 0;
+	std::string word;
+
+	while (iterator != words.end()) {
+		word = *iterator;
+		wordCount = 0;
+
+		while (*iterator == word) {
+			wordCount++;
+			iterator++;
+		}
+
+		result.push_back(make_pair(word, wordCount));
+	}
+
+    sort(result.begin(), result.end(), [](auto x, auto y) { return x.second > y.second; });
+
+    return result;
+}
 #endif
 
 
