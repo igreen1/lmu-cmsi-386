@@ -2,7 +2,6 @@
 #include <string>
 #include <list>
 #include <algorithm>
-#include "exercises.h"
 
 using namespace std;
 
