@@ -10,17 +10,17 @@ std::vector<std::pair<std::string, int>> sorted_word_counts(std::list<std::strin
 
 	// words.sort(); //do we need this?
 
-	auto it = words.begin();
+	auto iterator = words.begin();
 	int wordCount = 0;
 	std::string word;
 
-	while (it != words.end()) {
-		word = *it;
+	while (iterator != words.end()) {
+		word = *iterator;
 		wordCount = 0;
 
-		while (*it == word) {
+		while (*iterator == word) {
 			wordCount++;
-			it++;
+			iterator++;
 		}
 
 		result.push_back(make_pair(word, wordCount));
