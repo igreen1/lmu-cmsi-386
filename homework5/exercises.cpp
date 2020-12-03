@@ -12,22 +12,22 @@ vector<pair<string, int>> sorted_word_counts(list<string> words) {
 
     // words.sort(); //do we need this?
 
-    auto it = words.begin();
-    int wordCount = 0;
-    string word;
+	auto iterator = words.begin();
+	int wordCount = 0;
+	std::string word;
 
-    while (it != words.end()) {
-        word = *it;
-        wordCount = 0;
+	while (iterator != words.end()) {
+		word = *iterator;
+		wordCount = 0;
 
-        while (*it == word) {
-            wordCount++;
-            it++;
-        }
+		while (*iterator == word) {
+			wordCount++;
+			iterator++;
+		}
 
-        result.push_back(make_pair(word, wordCount));
+		result.push_back(make_pair(word, wordCount));
 
-    }
+	}
 
     sort(result.begin(), result.end(), [](auto x, auto y) { return x.second > y.second; });
 
