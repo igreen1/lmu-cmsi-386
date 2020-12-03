@@ -32,6 +32,3 @@ vector<pair<string, int>> sorted_word_counts(list<string> words) {
 
     return result;
 }
-
-
-Sayer say;

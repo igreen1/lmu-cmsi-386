@@ -1,11 +1,11 @@
 #ifndef FUNCTIONS_H_INCLUDED
 #define FUNCTIONS_H_INCLUDED
 
-#include <vector>
-#include <list>
-#include <string>
 
-std::vector<std::pair<std::string, int>> sorted_word_counts(std::list<std::string>);
+//More C++-like code would have use put this include in the test file
+// but because we can't edit exericssies this will force the linker 
+//to properly connect our files and run correctly 
+#include "exercises.cpp"
 
 #endif
 
@@ -155,6 +155,6 @@ struct Sayer {
 	Sayer operator()(std::string s) {
 		return { (toSay == "" ? "" : toSay + " ") + s };
 	}
-};
+} say;
 
 #endif

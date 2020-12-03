@@ -7,7 +7,6 @@
 
 using namespace std;
 
-extern Sayer say; //we added this since we have a .cpp
 void test_say() {
     assert(say() == "");
     assert(say("")() == "");
