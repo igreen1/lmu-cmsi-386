@@ -26,7 +26,6 @@ vector<pair<string, int>> sorted_word_counts(list<string> words) {
 		}
 
 		result.push_back(make_pair(word, wordCount));
-
 	}
 
     sort(result.begin(), result.end(), [](auto x, auto y) { return x.second > y.second; });
