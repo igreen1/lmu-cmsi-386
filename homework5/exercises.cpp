@@ -2,7 +2,11 @@
 #include <string>
 #include <list>
 #include <algorithm>
-#include "exercises.h"
+// #include "exercises.h"
+
+#include <vector> //added these three here
+#include <list>
+#include <string>
 
 using namespace std;
 
