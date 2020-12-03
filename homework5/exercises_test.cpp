@@ -6,7 +6,7 @@
 #include <string>
 
 using namespace std;
-extern Sayer say;
+
 void test_say() {
     assert(say() == "");
     assert(say("")() == "");

@@ -1,19 +1,37 @@
-#ifndef FUNCTIONS_H_INCLUDED
-#define FUNCTIONS_H_INCLUDED
-
 #include <vector>
 #include <list>
 #include <string>
-
-std::vector<std::pair<std::string, int>> sorted_word_counts(std::list<std::string>);
-
-#endif
-
-
-#ifndef Queue_H
-#define Queue_H
-
+#include <algorithm>
 #include <iostream>
+
+std::vector<std::pair<std::string, int>> sorted_word_counts(std::list<std::string> words) {
+
+	std::vector<std::pair<std::string, int>> result;
+
+	// words.sort(); //do we need this?
+
+	auto it = words.begin();
+	int wordCount = 0;
+	std::string word;
+
+	while (it != words.end()) {
+		word = *it;
+		wordCount = 0;
+
+		while (*it == word) {
+			wordCount++;
+			it++;
+		}
+
+		result.push_back(make_pair(word, wordCount));
+
+	}
+
+	sort(result.begin(), result.end(), [](auto x, auto y) { return x.second > y.second; });
+
+	return result;
+}
+
 
 template <typename T>
 class Queue {
@@ -38,45 +56,6 @@ public:
 
 	Queue(Queue&&) = default;
 	Queue& operator=(Queue&&) = default;
-
-	//Queue(Queue&& other) {
-	//	// to stop deconstruction from destroying stuff
-	//	this->head = nullptr;
-	//	this->tail = nullptr;
-	//	this->size = 0;
-	//	if (other.head != nullptr) {
-	//		this->head = new node(other.head->data);
-	//		this->size++;
-	//		node* otherNode = other.head;
-	//		node* node = this->head;
-	//		while (otherNode->next != nullptr) {
-	//			otherNode = otherNode->next;
-	//			node->next = new node(otherNode->data);
-	//			this->size++;
-	//			node = node->next;
-	//		}
-	//	}
-	//}
-
-	//Queue& operator=(Queue&& other) {
-	//	//to stop deconstruction from destroying stuff
-	//	this->head = nullptr;
-	//	this->tail = nullptr;
-	//	this->size = 0;
-	//	if (other.head != nullptr) {
-	//		this->head = new node(other.head->data);
-	//		this->size++;
-	//		node* otherNode = other.head,
-	//			* node = this->head;
-	//		while (otherNode->next != nullptr) {
-	//			node = otherNode->next;
-	//			node->next = new node(otherNode->data);
-	//			this->size++;
-	//			node = node->next;
-	//		}
-	//	}
-	//	return *this;
-	//}
 
 	void enqueue(T data) {
 		if (this->tail != nullptr) { // size > 1
@@ -109,17 +88,6 @@ public:
 
 	int get_size() { return this->size; }
 
-	/*int count_size() {
-		int queueSize = 0;
-		node* node = head;
-		while (node != nullptr) {
-			queueSize++;
-			node = node->next;
-		}
-
-		return queueSize;
-	}*/
-
 	friend std::ostream& operator<<(std::ostream& os, const Queue<T>& q) {
 		auto node = q->head;
 		while (node != nullptr) {
@@ -145,13 +113,6 @@ private:
 	int size;
 };
 
-#endif
-
-
-#ifndef say_H
-#define say_H
-
-#include <string>
 
 struct Sayer {
 	std::string toSay = "";
@@ -160,6 +121,4 @@ struct Sayer {
 	Sayer operator()(std::string s) {
 		return { (toSay == "" ? "" : toSay + " ") + s };
 	}
-};
-
-#endif
+} say;
