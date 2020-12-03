@@ -36,47 +36,42 @@ public:
 	Queue(Queue&) = delete;
 	Queue& operator=(Queue&) = delete;
 
-	Queue(Queue&&) = default;
-	Queue& operator=(Queue&&) = default;
+	Queue(Queue&& other) {
+		this->head = nullptr;
+		this->tail = nullptr;
+		this->size = 0;
+		if (other.head != nullptr) {
+			this->head = new Node(other.head->data);
+			this->size++;
+			Node* otherNode = other.head;
+			Node* node = this->head;
+			while (otherNode->next != nullptr) {
+				otherNode = otherNode->next;
+				node->next = new Node(otherNode->data);
+				this->size++;
+				node = node->next;
+			}
+		}
+	}
 
-	//Queue(Queue&& other) {
-	//	// to stop deconstruction from destroying stuff
-	//	this->head = nullptr;
-	//	this->tail = nullptr;
-	//	this->size = 0;
-	//	if (other.head != nullptr) {
-	//		this->head = new node(other.head->data);
-	//		this->size++;
-	//		node* otherNode = other.head;
-	//		node* node = this->head;
-	//		while (otherNode->next != nullptr) {
-	//			otherNode = otherNode->next;
-	//			node->next = new node(otherNode->data);
-	//			this->size++;
-	//			node = node->next;
-	//		}
-	//	}
-	//}
-
-	//Queue& operator=(Queue&& other) {
-	//	//to stop deconstruction from destroying stuff
-	//	this->head = nullptr;
-	//	this->tail = nullptr;
-	//	this->size = 0;
-	//	if (other.head != nullptr) {
-	//		this->head = new node(other.head->data);
-	//		this->size++;
-	//		node* otherNode = other.head,
-	//			* node = this->head;
-	//		while (otherNode->next != nullptr) {
-	//			node = otherNode->next;
-	//			node->next = new node(otherNode->data);
-	//			this->size++;
-	//			node = node->next;
-	//		}
-	//	}
-	//	return *this;
-	//}
+	Queue& operator=(Queue&& other) {
+		this->head = nullptr;
+		this->tail = nullptr;
+		this->size = 0;
+		if (other.head != nullptr) {
+			this->head = new Node(other.head->data);
+			this->size++;
+			Node* otherNode = other.head,
+				* node = this->head;
+			while (otherNode->next != nullptr) {
+				otherNode = otherNode->next;
+				node->next = new Node(otherNode->data);
+				this->size++;
+				node = node->next;
+			}
+		}
+		return *this;
+	}
 
 	void enqueue(T data) {
 		if (this->tail != nullptr) { // size > 1
