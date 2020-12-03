@@ -13,11 +13,6 @@ std::vector<std::pair<std::string, int>> sorted_word_counts(std::list<std::strin
 #ifndef Queue_H
 #define Queue_H
 
-//Two notes for grading @ Dr. Toal
-// 1. Defined in .h because there are issues on the linking stage of compilation
-//		these issues come from using templates. Ian can explain if you want
-// 2. Using namespace is highly frowned upon in .h hence the std:: in this .h
-//		We can change if you want
 #include <iostream>
 
 template <typename T>
@@ -25,7 +20,6 @@ class Queue {
 public:
 
 	~Queue() {
-		//deconstructor for memory leaks
 		while (head != nullptr) {
 			Node* previous = head;
 			head = head->next;
@@ -44,6 +38,45 @@ public:
 
 	Queue(Queue&&) = default;
 	Queue& operator=(Queue&&) = default;
+
+	//Queue(Queue&& other) {
+	//	// to stop deconstruction from destroying stuff
+	//	this->head = nullptr;
+	//	this->tail = nullptr;
+	//	this->size = 0;
+	//	if (other.head != nullptr) {
+	//		this->head = new node(other.head->data);
+	//		this->size++;
+	//		node* otherNode = other.head;
+	//		node* node = this->head;
+	//		while (otherNode->next != nullptr) {
+	//			otherNode = otherNode->next;
+	//			node->next = new node(otherNode->data);
+	//			this->size++;
+	//			node = node->next;
+	//		}
+	//	}
+	//}
+
+	//Queue& operator=(Queue&& other) {
+	//	//to stop deconstruction from destroying stuff
+	//	this->head = nullptr;
+	//	this->tail = nullptr;
+	//	this->size = 0;
+	//	if (other.head != nullptr) {
+	//		this->head = new node(other.head->data);
+	//		this->size++;
+	//		node* otherNode = other.head,
+	//			* node = this->head;
+	//		while (otherNode->next != nullptr) {
+	//			node = otherNode->next;
+	//			node->next = new node(otherNode->data);
+	//			this->size++;
+	//			node = node->next;
+	//		}
+	//	}
+	//	return *this;
+	//}
 
 	void enqueue(T data) {
 		if (this->tail != nullptr) { // size > 1
@@ -76,6 +109,17 @@ public:
 
 	int get_size() { return this->size; }
 
+	/*int count_size() {
+		int queueSize = 0;
+		node* node = head;
+		while (node != nullptr) {
+			queueSize++;
+			node = node->next;
+		}
+
+		return queueSize;
+	}*/
+
 	friend std::ostream& operator<<(std::ostream& os, const Queue<T>& q) {
 		auto node = q->head;
 		while (node != nullptr) {
@@ -107,13 +151,6 @@ private:
 #ifndef say_H
 #define say_H
 
-//Problem 2:
-/*
-Implement the famous say function from the previous assignment.
-Hint: consider writing say as a struct with an overloaded function call
-operator.
-*/
-
 #include <string>
 
 struct Sayer {
@@ -123,8 +160,6 @@ struct Sayer {
 	Sayer operator()(std::string s) {
 		return { (toSay == "" ? "" : toSay + " ") + s };
 	}
-} say;
-
+};
 
 #endif
-

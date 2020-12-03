@@ -2,31 +2,15 @@
 #include <string>
 #include <list>
 #include <algorithm>
-// #include "exercises.h"
-
-#include <vector> //added these three here
-#include <list>
-#include <string>
+#include "exercises.h"
 
 using namespace std;
 
-//Problem 1:
-/*
-Write a C++ function that accepts a list of strings and returns a vector of
-(word, count) pairs, sorted by the number of occurrences descending.
-See the unit test file for examples of what is expected.
-Use whatever wonderful functions you can find from the standard library.
-(In fact, one of the learning objectives for this problem is that you gain
-experience by looking through the standard library.)
-*/
-
 vector<pair<string, int>> sorted_word_counts(list<string> words) {
-
-    // Time complexity = N + NlogN :)
 
     vector<pair<string, int>> result;
 
-    words.sort();
+    // words.sort(); //do we need this?
 
     auto it = words.begin();
     int wordCount = 0;
@@ -49,3 +33,6 @@ vector<pair<string, int>> sorted_word_counts(list<string> words) {
 
     return result;
 }
+
+
+Sayer say;
