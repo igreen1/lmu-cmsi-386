@@ -2,6 +2,7 @@
 #include <string>
 #include <list>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
