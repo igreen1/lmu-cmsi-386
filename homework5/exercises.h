@@ -75,60 +75,54 @@ public:
 	Queue& operator=(Queue&& other) {
 		if(this != &other){
 
-			while(this->head != nullptr){
-				this->dequeue();
+			while(head != nullptr){
+				dequeue();
 			}
 
-			if (other.head != nullptr) {
-				this->head = new Node(other.head->data);
-				this->size++;
-				Node* otherNode = other.head,
-					* node = this->head;
-				while (otherNode->next != nullptr) {
-					otherNode = otherNode->next;
-					node->next = new Node(otherNode->data);
-					this->size++;
-					node = node->next;
-				}
-			}
+			head = other.head;
+			tail = other.tail;
+			size = other.get_size();
+			other.head = nullptr;
+			other.tail = nullptr;
 		}
 		return *this;
 	}
 
 	void enqueue(T data) {
-		if (this->tail != nullptr) { // size > 1
-			this->tail->next = new Node(data);
-			this->tail = this->tail->next;
+		if (tail != nullptr) { // size > 1
+			tail->next = new Node(data);
+			tail = tail->next;
 		}
-		else if (this->head == nullptr) { // size == 0
-			this->head = new Node(data);
-			this->tail = this->head->next;
+		else if (head == nullptr) { // size == 0
+			head = new Node(data);
+			tail = head->next;
 		}
 		else { // size == 1
-			this->head->next = new Node(data);
-			this->tail = this->head->next;
+			head->next = new Node(data);
+			tail = head->next;
 		}
-		this->size++;
+		size++;
 	}
 
 	T dequeue() {
-		if (this->head == nullptr) {
+		if (head == nullptr) {
 			throw std::underflow_error("No data in queue");
 		}
 
-		T result = this->head->data;
-		Node* previousHead = this->head;
-		this->head = this->head->next;
+		T result = head->data;
+		Node* previousHead = head;
+		head = head->next;
 		delete previousHead;
-		this->size--;
+		size--;
 
-		if(this->head == this->tail)
-			this->tail = nullptr
+		if(head == tail){
+			tail = nullptr;
+		}
 
 		return result;
 	}
 
-	int get_size() { return this->size; }
+	int get_size() { return size; }
 
 	//This is purely to show you we know how @ Dr. Toal
 	int count_size() {
