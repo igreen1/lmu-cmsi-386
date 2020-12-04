@@ -69,25 +69,10 @@ public:
 	Queue& operator=(Queue&) = delete;
 
 	Queue(Queue&& other) {
-		this->head = nullptr;
-		this->tail = nullptr;
-		this->size = 0;
-		if (other.head != nullptr) {
-			this->head = new Node(other.head->data);
-			this->size++;
-			Node* otherNode = other.head;
-			Node* node = this->head;
-			while (otherNode->next != nullptr) {
-				otherNode = otherNode->next;
-				node->next = new Node(otherNode->data);
-				this->size++;
-				node = node->next;
-			}
-		}
+		*this = std::move(other);
 	}
 
 	Queue& operator=(Queue&& other) {
-
 		if(this != &other){
 			this->head = nullptr;
 			this->tail = nullptr;
