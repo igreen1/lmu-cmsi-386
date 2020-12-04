@@ -74,6 +74,9 @@ public:
 
 	Queue& operator=(Queue&& other) {
 		if(this != &other){
+			while(this->head != nullptr){
+				this->dequeue();
+			}
 			this->head = nullptr;
 			this->tail = nullptr;
 			this->size = 0;
