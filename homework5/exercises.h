@@ -12,12 +12,13 @@
 // Yes this is bad convention in a .h file
 // but because we don't know the compiler / command used
 // we kinda have to
-// only used in this problem because there are TONS of stds here
+// Only used in this problem because there are TONS of stds here
 using namespace std; 
 
 vector<pair<string, int>> sorted_word_counts(list<string> words) {
 
   vector<pair<string, int>> result;
+	
   words.sort();
 
 	auto iterator = words.begin();
@@ -123,17 +124,17 @@ public:
 
 	int get_size() { return this->size; }
 
-	/* This is purely to show you we know how @ Dr. Toal
+	//This is purely to show you we know how @ Dr. Toal
 	int count_size() {
 		int queueSize = 0;
-		node* node = head;
+		Node* node = head;
 		while (node != nullptr) {
 			queueSize++;
 			node = node->next;
 		}
 
 		return queueSize;
-	}*/
+	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Queue<T>& q) {
 		auto node = q->head;
