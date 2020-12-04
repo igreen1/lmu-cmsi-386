@@ -75,9 +75,11 @@ public:
 	Queue& operator=(Queue&& other) {
 		if(this != &other){
 
-			while(head != nullptr){
-				dequeue();
-			}
+			while (head != nullptr) {
+				Node* previous = head;
+				head = head->next;
+				delete previous;
+		}
 
 			head = other.head;
 			tail = other.tail;
