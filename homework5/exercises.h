@@ -17,13 +17,13 @@ using namespace std;
 
 vector<pair<string, int>> sorted_word_counts(list<string> words) {
 
-  vector<pair<string, int>> result;
+	vector<pair<string, int>> result;
 	
-  words.sort();
+	words.sort();
 
 	auto iterator = words.begin();
 	int wordCount;
-	std::string word;
+	string word;
 	while (iterator != words.end()) {
 		word = *iterator;
 		wordCount = 0;
@@ -36,8 +36,8 @@ vector<pair<string, int>> sorted_word_counts(list<string> words) {
 		result.push_back(make_pair(word, wordCount));
 	}
 
-  sort(result.begin(), result.end(), [](auto x, auto y) { return x.second > y.second; });
-  return result;
+	sort(result.begin(), result.end(), [](auto x, auto y) { return x.second > y.second; });
+	return result;
 }
 #endif
 
