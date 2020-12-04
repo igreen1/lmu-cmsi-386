@@ -74,12 +74,11 @@ public:
 
 	Queue& operator=(Queue&& other) {
 		if(this != &other){
+
 			while(this->head != nullptr){
 				this->dequeue();
 			}
-			this->head = nullptr;
-			this->tail = nullptr;
-			this->size = 0;
+
 			if (other.head != nullptr) {
 				this->head = new Node(other.head->data);
 				this->size++;
@@ -120,8 +119,12 @@ public:
 		T result = this->head->data;
 		Node* previousHead = this->head;
 		this->head = this->head->next;
-		this->size--;
 		delete previousHead;
+		this->size--;
+
+		if(this->head == this->tail)
+			this->tail = nullptr
+
 		return result;
 	}
 
