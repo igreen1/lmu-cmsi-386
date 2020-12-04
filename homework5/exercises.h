@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <vector>
 
+#include <iostream>
+
 // Yes this is bad convention in a .h file
 // but because we don't know the compiler / command used
 // we kinda have to
@@ -16,13 +18,11 @@ using namespace std;
 vector<pair<string, int>> sorted_word_counts(list<string> words) {
 
   vector<pair<string, int>> result;
-
-    // words.sort(); //do we need this?
+  words.sort();
 
 	auto iterator = words.begin();
-	int wordCount = 0;
+	int wordCount;
 	std::string word;
-
 	while (iterator != words.end()) {
 		word = *iterator;
 		wordCount = 0;
@@ -35,9 +35,8 @@ vector<pair<string, int>> sorted_word_counts(list<string> words) {
 		result.push_back(make_pair(word, wordCount));
 	}
 
-    sort(result.begin(), result.end(), [](auto x, auto y) { return x.second > y.second; });
-
-    return result;
+  sort(result.begin(), result.end(), [](auto x, auto y) { return x.second > y.second; });
+  return result;
 }
 #endif
 
