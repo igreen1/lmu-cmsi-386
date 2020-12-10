@@ -23,6 +23,9 @@ double (*f(int (*)(int, int[]), int)) (int, ...);
 ```
 
 ### Solution:
+```
+var a *[]float64
+```
 
 ## Problem 3
 What does this script print under (a) static scope rules and (b) dynamic scope rules?
@@ -35,6 +38,10 @@ print f() * h() - x
 ```
 
 ### Solution:
+A) Under static scope, this program returns `0` because h(). f(), and g() all use var x = 1.
+
+B) Under dynamic scope, this program returns `2` because f() still returns 1, but h() and g() both return 3.
+
 
 ## Problem 4
 Show the output of the following, assuming dynamic scope and (a) deep binding, and (b) shallow binding.
@@ -56,6 +63,9 @@ main()
 ```
 
 ### Solution:
+A) Using deep binding, this program outputs `8` because the binding occurs in the outer main function.
+
+B) Using shallow binding, this program outputs `5` because the binding occurs inside the g(h) function.
 
 ## Problem 5
 Show the output of the following code fragment under the following four conditions: (a) pass by value, (b) pass by reference, (c) pass by value-result, and (d) pass-by-name.
