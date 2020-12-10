@@ -120,3 +120,12 @@ Python doesn't have the billion dollar mistake because the `NoneType` is it's ow
 Remember that old powers function you were asked to write so many times before? Here’s your chance to write it in either Go or Elixir. You’ll need to do some research because we have not covered these languages in much detail, but since you did the assigned readings, you now have enough background.
 
 ### Solution:
+```
+func powers(base int, limit int, c chan int) {
+  var power = 1
+  for power < limit {
+    c <- power
+    power = power * base
+  }
+}
+```
