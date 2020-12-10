@@ -78,6 +78,13 @@ print x, y[0], y[1], y[2]
 ```
 
 ### Solution:
+A) 1, 2, 3, 4
+
+B) 2, 2, 3, 4
+
+C) 2, 2, 2, 4
+
+D) 2, 2, 2, 4
 
 ## Problem 6
 Rewrite the following JavaScript function so that it uses only arrow functions with simple expressions, that is, no local variables and no statements and no side-effects. In other words, rewrite it into a more pure functional style. Note that this means you will replace error throwing with returning Swift-style result objects.
@@ -109,6 +116,6 @@ Describe, in good English, and precise, erudite, and accurate language, why Pyth
 ### Solution:
 
 ## Problem 8
-Remember that old powers function you were asked to write so many times before? Here’s your chance to write it in either Go or Elixir. You’ll need to do some research because we have not covered these languages in much detail, but since you did the assigned readings, you now have enough background. If you choose Go, simply give a small goroutine that writes, to a supplied channel, successive powers of a base starting at 1 (the power at exponent 0) and going up to some limit, e.g.
+Remember that old powers function you were asked to write so many times before? Here’s your chance to write it in either Go or Elixir. You’ll need to do some research because we have not covered these languages in much detail, but since you did the assigned readings, you now have enough background.
 
 ### Solution:
