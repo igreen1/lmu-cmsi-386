@@ -114,6 +114,7 @@ function isPrime(n) {
 Describe, in good English, and precise, erudite, and accurate language, why Python doesn't suffer from the billion-dollar mistake. Show me you understand the billion-dollar mistake. If you are working on a team, every single team member better contribute to or validate this answer. You need to understand this to pass the course, right?
 
 ### Solution:
+Python doesn't have the billion dollar mistake because the `NoneType` is it's own type. That means that you can never have a string or object of type `None`. But in Java, every reference type defaults to `Null` so you can have `String s = ""` which is an empty string, but you can also have `String s = null` which is a string with value null. This is just confusing and contradicts Java's mission to be a strong statically typed language.
 
 ## Problem 8
 Remember that old powers function you were asked to write so many times before? Here’s your chance to write it in either Go or Elixir. You’ll need to do some research because we have not covered these languages in much detail, but since you did the assigned readings, you now have enough background.
