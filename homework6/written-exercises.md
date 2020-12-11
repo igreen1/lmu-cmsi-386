@@ -11,7 +11,7 @@ struct {
 On your machine, find the addresses of `A[0][0]` and `A[3][7]`. Explain why these values are what you found them to be.
 
 ### Solution:
-
+HINT: Look up word 'alignment'
 ## Problem 2
 Rewrite these C++ declarations in Go
 ```
