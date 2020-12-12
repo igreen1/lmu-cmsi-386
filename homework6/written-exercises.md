@@ -135,6 +135,8 @@ D) 2, 2, 2, 4
 
 ## Problem 6
 Rewrite the following JavaScript function so that it uses only arrow functions with simple expressions, that is, no local variables and no statements and no side-effects. In other words, rewrite it into a more pure functional style. Note that this means you will replace error throwing with returning Swift-style result objects.
+
+|||EITHER ADD RESULT OBJECT EQUIV. TO JS OR KEEP SWIFT CODE|||
 ```
 function isPrime(n) {
   if (isNaN(n) || !Number.isInteger(n)) {
@@ -155,8 +157,36 @@ function isPrime(n) {
 }
 ```
 
+In Swift (with Result<> object):
+```
+struct InputSizeError: Error { }
+
+func isPrime(_ n: Int, _ k: Int = 5, _ w: Int = 2) -> Result<Bool, InputSizeError> {
+  //because Swift parameters require ab exokucut type,
+  //already throws an error if input is not an integer 
+  if (n < 2 || n > UInt8.max) {
+    return .failure(InputSizeError())
+  } else if (n == 2 || n == 3) {
+    return .success(true)
+  } else if (n % 2 == 0 || n % 3 == 0) {
+    return .success(false)
+  } 
+
+  if(k * k > n) { return .success(true) }
+  else if(n % k == 0) { return .success(false) }
+  else { return isPrime(n, k+w, 6-w) }
+}
+```
+
 ### Solution:
 ```
+enum Errors: Error {
+  case NotAnIntegerError
+  case NotAnIntegerError
+}
+struct NotAnIntegerError: Error { }
+struct IntegerSizeError: Error { }
+
 function isPrime(n, k = 5, w = 2){
   if (isNaN(n) || !Number.isInteger(n)) {
     throw 'Not an integer'
