@@ -155,7 +155,7 @@ function isPrime(n) {
 ```
 
 ### Solution:
-
+```
 function isPrime(n, k = 5, w = 2){
   if (isNaN(n) || !Number.isInteger(n)) {
     throw 'Not an integer'
@@ -172,6 +172,7 @@ function isPrime(n, k = 5, w = 2){
   else return isPrime(n, k+w, 6-w)
 
 }
+```
 
 ## Problem 7
 Describe, in good English, and precise, erudite, and accurate language, why Python doesn't suffer from the billion-dollar mistake. Show me you understand the billion-dollar mistake. If you are working on a team, every single team member better contribute to or validate this answer. You need to understand this to pass the course, right?
