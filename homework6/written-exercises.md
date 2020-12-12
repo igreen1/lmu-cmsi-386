@@ -63,6 +63,8 @@ double (*f(int (*)(int, int[]), int)) (int, ...);
 ```
 var a [n]*float64   // array of pointers
 var b *[n]float64   // pointer to an array
+func c() *[n]float64 // function that returns a pointer to an array of doubles
+var d [n]func() float64 //d is an array of functions that return a double
 ```
 
 ## Problem 3
@@ -154,14 +156,14 @@ struct InputSizeError: Error { }
 
 func isPrime(_ n: Int, _ k: Int = 5, _ w: Int = 2) -> Result<Bool, InputSizeError> {
   //because Swift parameters require an explicit type,
-  //already throws an error if input is not an integer 
+  //already throws an error if input is not an integer
   if (n < 2 || n > UInt8.max) {
     return .failure(InputSizeError())
   } else if (n == 2 || n == 3) {
     return .success(true)
   } else if (n % 2 == 0 || n % 3 == 0) {
     return .success(false)
-  } 
+  }
 
   if(k * k > n) { return .success(true) }
   else if(n % k == 0) { return .success(false) }
