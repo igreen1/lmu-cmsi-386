@@ -24,6 +24,10 @@ Prints:
 
 //WHY?
 Expressed as the numeric address modulo 2.
+The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle). 
+  So, the initial value of the struct is stored at 0x601190. The next value [0][1] is held at 0x601190 + 8 because int is 4 bytes and char is 1 byte. But,
+    the OS will asign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
+    
 
 ## Problem 2
 Rewrite these C++ declarations in Go
