@@ -71,6 +71,7 @@ double (*f(int (*)(int, int[]), int)) (int, ...);
 ### Solution:
 ```
 var a *[]float64
+var b *[]float64
 ```
 
 ## Problem 3
