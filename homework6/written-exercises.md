@@ -1,6 +1,6 @@
 # Homework 6
 
-## Problem 1 
+## Problem 1
 Given the C++ declaration:
 ```
 struct {
@@ -14,7 +14,7 @@ On your machine, find the addresses of `A[0][0]` and `A[3][7]`. Explain why thes
 The addresses are outputted as the numeric address modulo 2 and depend on the individual system and the code written.
 In our case, &A[0][0] was 0x601190, or 6295952 as an int, and &A[3][7] was 0x6012a0, or 6296224 as an int.
 
-The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle). 
+The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle).
 So, the initial value of the struct is stored at 0x601190. The next value [0][1] is held at 0x601190 + 8 because int is 4 bytes and char is 1 byte. But,
 the OS will assign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
 
@@ -52,7 +52,7 @@ Prints:
 
 //WHY?
 Expressed as the numeric address modulo 2.
-The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle). 
+The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle).
   So, the initial value of the struct is stored at 0x601190. The next value [0][1] is held at 0x601190 + 8 because int is 4 bytes and char is 1 byte. But,
     the OS will asign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
   The start value is determined by the machine code compiled. The data stored for a progarm is relative to the beginning of the machine program (and data is usually at the end). Adding more lines of code should (and does) increase the address as a result of that
@@ -70,8 +70,8 @@ double (*f(int (*)(int, int[]), int)) (int, ...);
 
 ### Solution:
 ```
-var a *[]float64
-var b *[]float64
+var a [n]*float64   // array of pointers
+var b *[n]float64   // pointer to an array
 ```
 
 ## Problem 3
@@ -148,7 +148,7 @@ function isPrime(n) {
   } else if (n % 2 === 0 || n % 3 === 0) {
     return false
   }
-  for (let k = 5, w = 2; k * k <= n; k += w, w = 6-w) { 
+  for (let k = 5, w = 2; k * k <= n; k += w, w = 6-w) {
     if (n % k === 0) {
       return false
     }
@@ -196,7 +196,7 @@ function isPrime(n, k = 5, w = 2){
     return true
   } else if (n % 2 === 0 || n % 3 === 0) {
     return false
-  } 
+  }
 
   if(k * k > n) return true
   else if(n % k === 0) return false
