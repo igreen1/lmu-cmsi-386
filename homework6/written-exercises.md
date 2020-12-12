@@ -46,7 +46,6 @@ int main() {
 //Addresses will be different depending on the system or changes to the code
 ```
 
-<<<<<<< HEAD
 Prints:
 0x601190
 0x6012a0
@@ -58,8 +57,6 @@ The two outputs print the byte address of the struct held at location [0][0] (th
     the OS will asign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
   The start value is determined by the machine code compiled. The data stored for a progarm is relative to the beginning of the machine program (and data is usually at the end). Adding more lines of code should (and does) increase the address as a result of that
 
-=======
->>>>>>> 7c1d91da6e59ef7ca95f3d77ad8bcf8c3f02c878
 
 ## Problem 2
 Rewrite these C++ declarations in Go
