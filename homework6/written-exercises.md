@@ -61,11 +61,11 @@ double (*f(int (*)(int, int[]), int)) (int, ...);
 
 ### Solution:
 ```
-var a [n]*float64   // array of pointers
-var b *[n]float64   // pointer to an array
-func c() *[n]float64 // function that returns a pointer to an array of doubles
-var d [n]func() float64 //d is an array of functions that return a double
-```
+var a [n]*float64          // a is an array of pointers
+var b *[n]float64          // b is a pointer to an array
+var c func() *[n]float64   // c is a function that returns a pointer to an array of doubles
+var d [n]func() float64    // d is an array of functions that return a double
+var f func(func(int, func(int, []int) int), int, ... ) float64 
 
 ## Problem 3
 What does this script print under (a) static scope rules and (b) dynamic scope rules?
