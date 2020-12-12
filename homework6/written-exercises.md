@@ -4,14 +4,27 @@
 Given the C++ declaration:
 ```
 struct {
-	int n;
-	char c;
-} A[9][9]
+	int n; //4 bytes
+	char c; //1 byte
+} A[9][9];
 ```
 On your machine, find the addresses of `A[0][0]` and `A[3][7]`. Explain why these values are what you found them to be.
 
 ### Solution:
 HINT: Look up word 'alignment'
+
+int main() {
+  std::cout << &A[0][0] << '\n' ;
+  std::cout << &A[3][7] << '\n' ;
+}
+
+Prints:
+0x601190
+0x6012a0
+
+//WHY?
+Expressed as the numeric address modulo 2.
+
 ## Problem 2
 Rewrite these C++ declarations in Go
 ```
