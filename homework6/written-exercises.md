@@ -16,7 +16,9 @@ In our case, &A[0][0] was 0x601190, or 6295952 as an int, and &A[3][7] was 0x601
 
 The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle).
 So, the initial value of the struct is stored at 0x601190. The next value [0][1] is held at 0x601190 + 8 because int is 4 bytes and char is 1 byte. But,
-the OS will assign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
+the OS will assign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex).
+The start value is determined by the machine code compiled. The data stored for a program is relative to the beginning of the machine program (and data is usually at the end).
+Adding more lines of code should (and does) increase the address as a result of that
 
 Example of code used to demonstrate this:
 ```
@@ -45,17 +47,6 @@ int main() {
 }
 //Addresses will be different depending on the system or changes to the code
 ```
-
-Prints:
-0x601190
-0x6012a0
-
-//WHY?
-Expressed as the numeric address modulo 2.
-The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle).
-  So, the initial value of the struct is stored at 0x601190. The next value [0][1] is held at 0x601190 + 8 because int is 4 bytes and char is 1 byte. But,
-    the OS will asign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
-  The start value is determined by the machine code compiled. The data stored for a progarm is relative to the beginning of the machine program (and data is usually at the end). Adding more lines of code should (and does) increase the address as a result of that
 
 
 ## Problem 2
@@ -162,7 +153,7 @@ In Swift (with Result<> object):
 struct InputSizeError: Error { }
 
 func isPrime(_ n: Int, _ k: Int = 5, _ w: Int = 2) -> Result<Bool, InputSizeError> {
-  //because Swift parameters require ab exokucut type,
+  //because Swift parameters require an explicit type,
   //already throws an error if input is not an integer 
   if (n < 2 || n > UInt8.max) {
     return .failure(InputSizeError())
