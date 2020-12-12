@@ -11,23 +11,41 @@ struct {
 On your machine, find the addresses of `A[0][0]` and `A[3][7]`. Explain why these values are what you found them to be.
 
 ### Solution:
-HINT: Look up word 'alignment'
+The addresses are outputted as the numeric address modulo 2 and depend on the individual system and the code written.
+In our case, &A[0][0] was 0x601190, or 6295952 as an int, and &A[3][7] was 0x6012a0, or 6296224 as an int.
+
+The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle). 
+So, the initial value of the struct is stored at 0x601190. The next value [0][1] is held at 0x601190 + 8 because int is 4 bytes and char is 1 byte. But,
+the OS will asign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
+
+Example of code used to demonstrate this:
+```
+#include <iostream>
+#include <stdint.h>
+
+struct test {
+  int n; //4 bytes
+  char c; //1 byte
+} A[9][9];
 
 int main() {
-  std::cout << &A[0][0] << '\n' ;
-  std::cout << &A[3][7] << '\n' ;
+  std::cout << "struct size: " << sizeof(test) << '\n' ;
+  //Outputs: 8 (can't have a 5 byte structure, rounds out to 8 bytes)
+  std::cout << "&A[0][0]: " << &A[0][0] << '\n' ;
+  std::cout << reinterpret_cast<uintptr_t>(&A[0][0]) << '\n' ;
+  //Outputs: 6295952
+  std::cout << "&A[0][1]: " << &A[0][1] << '\n' ;
+  std::cout << reinterpret_cast<uintptr_t>(&A[0][1]) << '\n' ;
+  //Outputs: 6295960 (&A[0][0], 6295952, + 8 bytes)
+  std::cout << "&A[3][7]: " << &A[3][7] << '\n' ;
+  std::cout << reinterpret_cast<uintptr_t>(&A[3][7]) << '\n' ;
+  //Outputs: 6296224
+  std::cout << (reinterpret_cast<uintptr_t>(&A[3][7]) - reinterpret_cast<uintptr_t>(&A[0][0])) << '\n' ;
+  //Outputs: 272 (because it is &A[0][0], 6295952 as an int + 3*9*8 + 7*8 bytes)
 }
+//Addresses will be different depending on the system or changes to the code
+```
 
-Prints:
-0x601190
-0x6012a0
-
-//WHY?
-Expressed as the numeric address modulo 2.
-The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle). 
-  So, the initial value of the struct is stored at 0x601190. The next value [0][1] is held at 0x601190 + 8 because int is 4 bytes and char is 1 byte. But,
-    the OS will asign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
-    
 
 ## Problem 2
 Rewrite these C++ declarations in Go
