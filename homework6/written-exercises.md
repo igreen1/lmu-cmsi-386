@@ -27,7 +27,8 @@ Expressed as the numeric address modulo 2.
 The two outputs print the byte address of the struct held at location [0][0] (the beginning of the array) and at [3][7] (somewhere in the middle). 
   So, the initial value of the struct is stored at 0x601190. The next value [0][1] is held at 0x601190 + 8 because int is 4 bytes and char is 1 byte. But,
     the OS will asign memory in 8 byte chunks so the next value is at 0x601198. This continues until [0][8]. Then, [1][0] is just stored at &A[0][8] + 8 (in hex)
-    
+  The start value is determined by the machine code compiled. The data stored for a progarm is relative to the beginning of the machine program (and data is usually at the end). Adding more lines of code should (and does) increase the address as a result of that
+
 
 ## Problem 2
 Rewrite these C++ declarations in Go
@@ -116,7 +117,7 @@ function isPrime(n) {
   } else if (n % 2 === 0 || n % 3 === 0) {
     return false
   }
-  for (let k = 5, w = 2; k * k <= n; k += w, w = 6-w) {
+  for (let k = 5, w = 2; k * k <= n; k += w, w = 6-w) { 
     if (n % k === 0) {
       return false
     }
@@ -126,6 +127,23 @@ function isPrime(n) {
 ```
 
 ### Solution:
+
+function isPrime(n, k = 5, w = 2){
+  if (isNaN(n) || !Number.isInteger(n)) {
+    throw 'Not an integer'
+  } else if (n < 2 || n > Number.MAX_SAFE_INTEGER) {
+    throw 'Number too big or too small'
+  } else if (n === 2 || n === 3) {
+    return true
+  } else if (n % 2 === 0 || n % 3 === 0) {
+    return false
+  } 
+
+  if(k * k > n) return true
+  else if(n % k === 0) return false
+  else return isPrime(n, k+w, 6-w)
+
+}
 
 ## Problem 7
 Describe, in good English, and precise, erudite, and accurate language, why Python doesn't suffer from the billion-dollar mistake. Show me you understand the billion-dollar mistake. If you are working on a team, every single team member better contribute to or validate this answer. You need to understand this to pass the course, right?
