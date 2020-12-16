@@ -63,10 +63,11 @@ double (*f(int (*)(int, int[]), int)) (int, ...);
 ```
 var a [n]*float64          // a is an array of pointers
 var b *[n]float64          // b is a pointer to an array
-var c func() *[n]float64   // c is a function that returns a pointer to an array of doubles
-var d [n]func()float64    // d is an array of functions that return a double
-var f func(func(int, []int) int, int)*func(int, ...interface{})float64 
+var c func()*[n]float64   // c is a function that returns a pointer to an array of doubles
+var d [n]*func()float64    // d is an array of functions that return a double
+var f func(func(int, []int)int, int)*func(int, ...interface{})float64 
 ```
+
 
 ## Problem 3
 What does this script print under (a) static scope rules and (b) dynamic scope rules?
@@ -108,6 +109,7 @@ A) Using deep binding, this program outputs `8` because the binding occurs in th
 
 B) Using shallow binding, this program outputs `5` because the binding occurs inside the g(h) function.
 
+
 ## Problem 5
 Show the output of the following code fragment under the following four conditions: (a) pass by value, (b) pass by reference, (c) pass by value-result, and (d) pass-by-name.
 ```
@@ -126,6 +128,7 @@ B) 2, 2, 3, 4
 C) 2, 2, 2, 4
 
 D) 2, 2, 2, 4
+
 
 ## Problem 6
 Rewrite the following JavaScript function so that it uses only arrow functions with simple expressions, that is, no local variables and no statements and no side-effects. In other words, rewrite it into a more pure functional style. Note that this means you will replace error throwing with returning Swift-style result objects.
@@ -178,6 +181,7 @@ Describe, in good English, and precise, erudite, and accurate language, why Pyth
 
 ### Solution:
 Python doesn't have the billion dollar mistake because the `NoneType` is it's own type. That means that you can never have a string or object of type `None`. But in Java, every reference type defaults to `Null` so you can have `String s = ""` which is an empty string, but you can also have `String s = null` which is a string with value null. This is just confusing and contradicts Java's mission to be a strong statically typed language.
+
 
 ## Problem 8
 Remember that old powers function you were asked to write so many times before? Here’s your chance to write it in either Go or Elixir. You’ll need to do some research because we have not covered these languages in much detail, but since you did the assigned readings, you now have enough background.
