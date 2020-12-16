@@ -64,8 +64,9 @@ double (*f(int (*)(int, int[]), int)) (int, ...);
 var a [n]*float64          // a is an array of pointers
 var b *[n]float64          // b is a pointer to an array
 var c func() *[n]float64   // c is a function that returns a pointer to an array of doubles
-var d [n]func() float64    // d is an array of functions that return a double
-var f func(func(int, func(int, []int) int), int, ... ) float64 
+var d [n]func()float64    // d is an array of functions that return a double
+var f func(func(int, []int) int, int) func(int, ...interface{})float64 
+```
 
 ## Problem 3
 What does this script print under (a) static scope rules and (b) dynamic scope rules?
@@ -170,6 +171,7 @@ func isPrime(_ n: Int, _ k: Int = 5, _ w: Int = 2) -> Result<Bool, InputSizeErro
   else { return isPrime(n, k+w, 6-w) }
 }
 ```
+
 
 ## Problem 7
 Describe, in good English, and precise, erudite, and accurate language, why Python doesn't suffer from the billion-dollar mistake. Show me you understand the billion-dollar mistake. If you are working on a team, every single team member better contribute to or validate this answer. You need to understand this to pass the course, right?
