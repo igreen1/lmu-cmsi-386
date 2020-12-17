@@ -80,9 +80,9 @@ print f() * h() - x
 ```
 
 ### Solution:
-A) Under static scope, this program returns `0` because h(). f(), and g() all use var x = 1.
+A) Under static scope, this program prints `0` because h(). f(), and g() all use var x = 1.
 
-B) Under dynamic scope, this program returns `2` because f() still returns 1, but h() and g() both return 3.
+B) Under dynamic scope, this program prints `2` because f() still returns 1, but h() and g() both return 3.
 
 
 ## Problem 4
